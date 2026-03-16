@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediTriage — Nurse Station</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#fff;--g50:#f7f8fa;--g100:#eef0f4;--g200:#dde1e9;--g300:#c4cad6;
+  --g400:#9aa3b2;--g500:#6b7484;--g600:#4a5163;--g700:#333a4a;--g900:#111827;
+  --navy:#0f2044;--blue:#1d4ed8;--blue-lt:#eff4ff;--blue-mid:#bfdbfe;
+  --red:#c0152c;--red-bg:#fff1f2;--red-bd:#fecdd3;
+  --orange:#b84500;--orange-bg:#fff7ed;--orange-bd:#fed7aa;
+  --yellow:#92620a;--yellow-bg:#fffbeb;--yellow-bd:#fde68a;
+  --green:#166534;--green-bg:#f0fdf4;--green-bd:#bbf7d0;
+  --teal:#0e7490;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:var(--font);background:var(--g50);color:var(--g700);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+/* TOPBAR */
+.topbar{height:52px;background:var(--navy);display:flex;align-items:center;padding:0 18px;z-index:200;position:relative;}
+.logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#fff;letter-spacing:-.2px;text-decoration:none;margin-right:24px;}
+.logo-m{width:26px;height:26px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:13px;font-weight:700;}
+.tnav{display:flex;align-items:center;height:100%;flex:1;}
+.tni{height:100%;display:flex;align-items:center;padding:0 14px;font-size:13px;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:.15s;text-decoration:none;}
+.tni:hover{color:rgba(255,255,255,.9);}
+.tni.on{color:#fff;border-bottom-color:#60a5fa;}
+.tright{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.chip{display:flex;align-items:center;gap:5px;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:500;background:rgba(255,255,255,.09);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.12);}
+.sdot{width:6px;height:6px;border-radius:50%;}
+.dot-g{background:#4ade80;}.dot-r{background:#f87171;}
+.tbtn{padding:5px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.6);font-family:var(--font);font-size:12px;cursor:pointer;}
+.tbtn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.tclock{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.35);}
+
+/* LAYOUT: left | centre | right */
+.layout{height:calc(100vh - 52px);display:grid;grid-template-columns:256px 1fr 380px;}
+
+/* ── LEFT ── */
+.left{background:var(--white);border-right:1px solid var(--g200);display:flex;flex-direction:column;overflow:hidden;}
+.lhead{padding:12px 14px 10px;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.lhead-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g500);}
+.lhead-s{font-size:11px;color:var(--g400);margin-top:2px;font-family:var(--font);}
+.lsrch{padding:8px 12px;border-bottom:1px solid var(--g100);flex-shrink:0;position:relative;}
+.lsrch input{width:100%;padding:6px 10px 6px 28px;border:1px solid var(--g200);border-radius:5px;font-family:var(--font);font-size:12px;color:var(--g700);background:var(--g50);outline:none;}
+.lsrch input:focus{border-color:var(--blue-mid);background:var(--white);}
+.lsrch-ico{position:absolute;left:21px;top:50%;transform:translateY(-50%);color:var(--g400);font-size:12px;}
+.llist{flex:1;overflow-y:auto;padding:6px;}
+.llist::-webkit-scrollbar{width:3px;}
+.llist::-webkit-scrollbar-thumb{background:var(--g200);}
+.pitem{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:6px;border:1px solid transparent;margin-bottom:2px;cursor:pointer;transition:.12s;}
+.pitem:hover{background:var(--g50);border-color:var(--g100);}
+.pitem.sel{background:var(--blue-lt);border-color:var(--blue-mid);}
+.pav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1px solid;flex-shrink:0;}
+.pb{flex:1;min-width:0;}
+.pn{font-size:12px;font-weight:600;color:var(--g900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pm{font-size:10px;color:var(--g400);margin-top:1px;}
+.psev{font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;border:1px solid;margin-top:3px;display:inline-block;}
+.lfoot{padding:10px 14px;border-top:1px solid var(--g100);flex-shrink:0;}
+.add-btn{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;}
+.add-btn:hover{background:#1e40af;}
+
+/* ── CENTRE ── */
+.centre{overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:18px;}
+.centre::-webkit-scrollbar{width:4px;}
+.centre::-webkit-scrollbar-thumb{background:var(--g200);}
+
+.scard{background:var(--white);border:1px solid var(--g200);border-radius:12px;overflow:hidden;}
+.sch{padding:13px 18px;border-bottom:1px solid var(--g100);display:flex;align-items:center;gap:10px;}
+.sch-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.sch-title{font-size:13px;font-weight:600;color:var(--g900);}
+.scb{padding:18px;}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg.span2{grid-column:1/-1;}
+label.fl{font-size:10.5px;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.4px;}
+input.fi,select.fs{padding:9px 12px;border:1px solid var(--g200);border-radius:7px;font-family:var(--font);font-size:13px;color:var(--g700);background:var(--white);outline:none;transition:.15s;width:100%;}
+input.fi:focus,select.fs:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(147,197,253,.15);}
+input.fi::placeholder{color:var(--g300);}
+
+.btn-p{width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-p:hover{background:#1e40af;}
+.btn-p:disabled{background:var(--g300);cursor:not-allowed;}
+.btn-teal{background:var(--teal) !important;}
+.btn-teal:hover{background:#0c6280 !important;}
+
+.alert{padding:10px 14px;border-radius:7px;font-size:13px;display:none;border:1px solid;margin-top:8px;}
+.a-ok{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+.a-err{background:var(--red-bg);border-color:var(--red-bd);color:var(--red);}
+.a-warn{background:var(--yellow-bg);border-color:var(--yellow-bd);color:var(--yellow);}
+
+/* Lookup */
+.divider-or{display:flex;align-items:center;gap:12px;color:var(--g400);font-size:12px;font-weight:600;}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:1px;background:var(--g200);}
+.lookup{background:var(--g50);border:1.5px dashed var(--g300);border-radius:10px;padding:18px;}
+.lookup-title{font-size:12px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.lookup-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;}
+
+/* ── RIGHT PANEL ── */
+.right{background:var(--white);border-left:1px solid var(--g200);display:flex;flex-direction:column;overflow:hidden;}
+.rtabs{display:flex;border-bottom:1px solid var(--g200);flex-shrink:0;}
+.rt{padding:12px 18px;font-size:13px;font-weight:500;color:var(--g500);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:var(--font);transition:.15s;}
+.rt:hover{color:var(--g700);}
+.rt.on{color:var(--blue);border-bottom-color:var(--blue);}
+.rbody{flex:1;overflow-y:auto;padding:16px;}
+.rbody::-webkit-scrollbar{width:3px;}
+.rbody::-webkit-scrollbar-thumb{background:var(--g200);}
+
+/* Empty state */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--g300);text-align:center;padding:30px;}
+.empty p{font-size:13px;color:var(--g400);line-height:1.6;}
+
+/* Profile */
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:12px;background:var(--g50);border-radius:10px;border:1px solid var(--g100);}
+.phav{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;}
+.phname{font-size:15px;font-weight:600;color:var(--g900);}
+.phmeta{font-size:12px;color:var(--g400);margin-top:2px;}
+.phuid{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:3px;}
+.info-t{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px;}
+.info-t td{padding:5px 0;vertical-align:top;border-bottom:1px solid var(--g50);}
+.info-t td:first-child{color:var(--g400);font-size:11px;font-weight:600;text-transform:uppercase;width:110px;}
+.pvcard{background:var(--g50);border:1px solid var(--g100);border-radius:8px;padding:12px;margin-bottom:10px;}
+.pvhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.pvsev{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.pvtime{font-size:10px;color:var(--g400);font-family:var(--mono);}
+.pvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.pvi{text-align:center;background:var(--white);border-radius:6px;padding:6px;}
+.pvv{font-family:var(--mono);font-size:13px;font-weight:500;}
+.pvl{font-size:9px;color:var(--g400);margin-top:1px;text-transform:uppercase;}
+
+/* Vitals form */
+.vtitle{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g500);margin-bottom:8px;margin-top:14px;}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
+.vbox{background:var(--g50);border:1.5px solid var(--g100);border-radius:8px;padding:10px 12px;transition:.2s;}
+.vbox label{font-size:10px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:5px;}
+.vbox input{width:100%;border:none;background:transparent;font-family:var(--mono);font-size:18px;font-weight:500;color:var(--g900);outline:none;}
+.vbox .vu{font-size:10px;color:var(--g400);margin-top:3px;}
+.vbox .vr{font-size:9px;color:var(--g300);margin-top:2px;}
+.vbox.ok{border-color:#86efac;background:#f0fdf4;}
+.vbox.warn{border-color:#fca5a5;background:#fff1f2;}
+
+/* Checkboxes */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.cc{display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid var(--g200);border-radius:10px;cursor:pointer;transition:.15s;font-size:13px;color:var(--g600);user-select:none;background:var(--white);}
+.cc:hover{border-color:var(--blue-mid);background:var(--blue-lt);}
+.cc input{display:none;}
+.cc.on{background:var(--blue-lt);border-color:var(--blue);color:var(--blue);font-weight:600;}
+.cdot{width:22px;height:22px;border:2px solid var(--g300);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:transparent;transition:.15s;background:var(--white);}
+.cc:hover .cdot{border-color:var(--blue);}
+.cc.on .cdot{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+/* Result */
+.res-card{border-radius:12px;padding:16px;display:none;margin-bottom:12px;}
+.res-sev{font-size:28px;font-weight:800;}
+.res-risk{font-size:36px;font-weight:900;}
+
+/* Critical banner */
+.crit{background:var(--red-bg);border:2px solid var(--red-bd);border-radius:8px;padding:12px;text-align:center;font-weight:700;font-size:13px;color:var(--red);animation:pu 1.5s infinite;display:none;margin-bottom:10px;}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* Doctor note box */
+.dnote{background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:8px;padding:12px;font-size:13px;color:var(--g700);margin-top:10px;}
+
+/* Spinner */
+.spin{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.spd{width:12px;height:12px;border:2px solid var(--g200);border-top-color:var(--blue);border-radius:50%;animation:sp .7s linear infinite;display:inline-block;}
+
+/* Sev colors */
+.sR{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);}
+.sO{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd);}
+.sY{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-bd);}
+.sG{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-m">M</div>MediTriage</a>
+  <nav class="tnav">
+    <a class="tni" href="index.html">Portal</a>
+    <a class="tni on" href="nurse.html">Nurse Station</a>
+  </nav>
+  <div class="tright">
+    <div class="chip"><div class="sdot dot-g"></div><span id="t_pts">0</span>&nbsp;Patients</div>
+    <div class="chip"><div class="sdot dot-r"></div><span id="t_crit">0</span>&nbsp;Critical</div>
+    <span class="tclock" id="clk">--:--</span>
+    <button class="tbtn" onclick="location.href='doctor.html'">Doctor →</button>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- ══ LEFT ══ -->
+<div class="left">
+  <div class="lhead">
+    <div class="lhead-t">Registered Patients</div>
+    <div class="lhead-s" id="lsub">Loading…</div>
+  </div>
+  <div class="lsrch">
+    <span class="lsrch-ico">🔍</span>
+    <input type="text" id="srch" placeholder="Search name, phone, UID…" oninput="filterList()">
+  </div>
+  <div class="llist" id="patList">
+    <div style="padding:20px;text-align:center;color:var(--g400);font-size:12px">
+      <div class="spd" style="margin:0 auto 8px"></div>Loading…
+    </div>
+  </div>
+  <div class="lfoot">
+    <button class="add-btn" onclick="clearForm()">+ New Patient</button>
+  </div>
+</div>
+
+<!-- ══ CENTRE ══ -->
+<div class="centre">
+
+  <!-- REGISTRATION FORM -->
+  <div class="scard">
+    <div class="sch">
+      <div class="sch-ico" style="background:#eff6ff">👤</div>
+      <div class="sch-title">Register New Patient</div>
+    </div>
+    <div class="scb">
+      <div class="g2">
+        <div class="fg"><label class="fl">Full Name *</label><input class="fi" id="r_name" placeholder="e.g. Rahul Sharma"></div>
+        <div class="fg"><label class="fl">Phone Number *</label><input class="fi" id="r_phone" type="tel" placeholder="+91-9876543210"></div>
+      </div>
+      <div class="g3">
+        <div class="fg"><label class="fl">Age *</label><input class="fi" id="r_age" type="number" placeholder="35" min="1"></div>
+        <div class="fg">
+          <label class="fl">Gender *</label>
+          <select class="fs" id="r_gender">
+            <option value="">Select gender</option>
+            <option>Male</option><option>Female</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">Blood Group</label>
+          <select class="fs" id="r_blood">
+            <option value="">Unknown</option>
+            <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+          </select>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Emergency Contact</label><input class="fi" id="r_emg" placeholder="Family member phone"></div>
+        <div class="fg"><label class="fl">Address</label><input class="fi" id="r_addr" placeholder="City, State"></div>
+      </div>
+      <div class="g2" style="margin-bottom:0">
+        <div class="fg"><label class="fl">Known Allergies</label><input class="fi" id="r_allergy" placeholder="e.g. Penicillin"></div>
+        <div class="fg"><label class="fl">Existing Conditions</label><input class="fi" id="r_conditions" placeholder="e.g. Diabetes"></div>
+      </div>
+      <div class="alert a-err" id="reg_err"></div>
+      <div class="alert a-ok"  id="reg_ok"></div>
+      <button class="btn-p" id="reg_btn" onclick="registerPatient()" style="margin-top:14px">Register Patient →</button>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="divider-or">Already Registered?</div>
+
+  <!-- FIND PATIENT -->
+  <div class="lookup">
+    <div class="lookup-title">🔍 Find Existing Patient</div>
+    <div class="lookup-row">
+      <div class="fg">
+        <label class="fl">Phone Number</label>
+        <input class="fi" id="f_phone" type="tel" placeholder="9876543210" onkeydown="if(event.key==='Enter')findPatient()">
+      </div>
+      <div class="fg">
+        <label class="fl">or Patient Name</label>
+        <input class="fi" id="f_name" type="text" placeholder="e.g. Rahul" onkeydown="if(event.key==='Enter')findPatient()">
+      </div>
+      <div class="fg">
+        <label class="fl" style="visibility:hidden">Go</label>
+        <button class="btn-p btn-teal" onclick="findPatient()" style="width:auto;padding:9px 20px">Find →</button>
+      </div>
+    </div>
+    <div class="alert a-err" id="find_err"></div>
+  </div>
+
+</div><!-- /centre -->
+
+<!-- ══ RIGHT ══ -->
+<div class="right">
+  <div class="rtabs">
+    <button class="rt on" onclick="rTab('profile',this)">Patient Profile</button>
+    <button class="rt"    onclick="rTab('vitals',this)">Enter Vitals</button>
+  </div>
+
+  <!-- PROFILE TAB -->
+  <div id="rt-profile" class="rbody">
+    <div class="empty" id="profile_empty">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.25">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+      </svg>
+      <p><strong style="color:var(--g600)">No patient selected</strong><br>
+      Register a new patient above,<br>or find an existing one below.</p>
+    </div>
+    <div id="profile_body" style="display:none"></div>
+  </div>
+
+  <!-- VITALS TAB -->
+  <div id="rt-vitals" class="rbody" style="display:none">
+    <div class="empty" id="vitals_empty">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.25">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+      <p style="font-size:13px;color:var(--g400)">Select or register a patient first,<br>then enter vitals here.</p>
+    </div>
+    <div id="vitals_body" style="display:none">
+      <!-- Patient banner -->
+      <div style="padding:10px 14px;background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:8px;margin-bottom:12px;font-size:13px;">
+        <strong id="v_pname" style="color:var(--navy)">—</strong>
+        <span style="color:var(--g400);font-size:11px;margin-left:8px" id="v_pmeta"></span>
+      </div>
+      <!-- Critical banner -->
+      <div class="crit" id="crit_banner">🚨 CRITICAL — IMMEDIATE INTERVENTION REQUIRED 🚨</div>
+      <!-- AI Result -->
+      <div class="res-card" id="res_card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div><div style="font-size:11px;font-weight:700;text-transform:uppercase;opacity:.7;margin-bottom:3px">Severity</div>
+            <div class="res-sev" id="res_sev">—</div></div>
+          <div style="text-align:right"><div style="font-size:11px;opacity:.7;margin-bottom:3px">Risk Score</div>
+            <div class="res-risk" id="res_risk">—%</div></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px" id="res_action">—</div>
+        <div id="res_probs"></div>
+        <div id="res_doc" style="display:none;margin-top:10px;padding:10px;background:rgba(255,255,255,.6);border-radius:8px">
+          <div style="font-size:11px;font-weight:700;margin-bottom:4px">👨‍⚕️ Assigned Doctor</div>
+          <div id="res_docname" style="font-size:13px;font-weight:600"></div>
+          <div id="res_docspec" style="font-size:11px;opacity:.7"></div>
+        </div>
+      </div>
+      <!-- Vitals -->
+      <div class="vtitle">Vital Signs</div>
+      <div class="vgrid">
+        <div class="vbox" id="vb_hr">
+          <label>Heart Rate</label>
+          <input type="number" id="v_hr" placeholder="—" oninput="chk('vb_hr','v_hr',60,100)">
+          <div class="vu">bpm</div><div class="vr">Normal: 60–100</div>
+        </div>
+        <div class="vbox" id="vb_o2">
+          <label>Oxygen SpO₂</label>
+          <input type="number" id="v_o2" placeholder="—" oninput="chk('vb_o2','v_o2',95,100)">
+          <div class="vu">%</div><div class="vr">Normal: 95–100</div>
+        </div>
+        <div class="vbox" id="vb_temp">
+          <label>Temperature</label>
+          <input type="number" step="0.1" id="v_temp" placeholder="—" oninput="chk('vb_temp','v_temp',97,99)">
+          <div class="vu">°F</div><div class="vr">Normal: 97–99</div>
+        </div>
+        <div class="vbox" id="vb_bp">
+          <label>Systolic BP</label>
+          <input type="number" id="v_bp" placeholder="—" oninput="chk('vb_bp','v_bp',90,140)">
+          <div class="vu">mmHg</div><div class="vr">Normal: 90–140</div>
+        </div>
+        <div class="vbox" id="vb_rr" style="grid-column:1/-1">
+          <label>Respiratory Rate</label>
+          <input type="number" id="v_rr" placeholder="—" oninput="chk('vb_rr','v_rr',12,20)">
+          <div class="vu">breaths / min</div><div class="vr">Normal: 12–20</div>
+        </div>
+      </div>
+      <!-- Complaint -->
+      <div class="vtitle" style="margin-top:14px">Chief Complaint</div>
+      <input class="fi" id="v_complaint" placeholder="e.g. Chest pain since 2 hours…" style="margin-bottom:12px">
+      <!-- Symptoms -->
+      <div class="vtitle" style="margin-top:14px">Symptoms & History</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+
+          <label class="cc" onclick="tc(this)">
+            <input type="checkbox" id="v_cp">
+            <div class="cdot">✓</div>❤️ Chest Pain
+          </label>
+          <label class="cc" onclick="tc(this)">
+            <input type="checkbox" id="v_bp2">
+            <div class="cdot">✓</div>🫁 Breathing Problem
+          </label>
+          <label class="cc" onclick="tc(this)">
+            <input type="checkbox" id="v_fever">
+            <div class="cdot">✓</div>🌡️ Fever
+          </label>
+          <label class="cc" onclick="tc(this)">
+            <input type="checkbox" id="v_diabetes">
+            <div class="cdot">✓</div>🩸 Diabetes
+          </label>
+          <label class="cc" onclick="tc(this)" style="grid-column:1/-1">
+            <input type="checkbox" id="v_hd">
+            <div class="cdot">✓</div>💊 Heart Disease
+          </label>
+
+        </div>
+
+        <label class="cc" onclick="tc(this)" style="background:#fff7ed;border:2px solid #fed7aa;color:#b84500;padding:12px 14px;font-weight:600;font-size:13px;border-radius:10px;">
+          <input type="checkbox" id="v_trauma">
+          <div class="cdot" style="border-color:#b84500;">✓</div>
+          ⚠️ Trauma / Accident / Injury
+          <span style="font-size:11px;font-weight:400;opacity:.7;margin-left:4px">(forces YELLOW even if vitals normal)</span>
+        </label>
+
+      </div>
+      <div class="alert a-err" id="vitals_err"></div>
+      <button class="btn-p btn-teal" id="vitals_btn" onclick="submitVitals()">🔍 Run AI Triage Analysis</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /layout -->
+
+<script>
+const API="http://127.0.0.1:8000";
+let curPid=null, curData=null, allPts=[];
+const sevBg={RED:'#fff1f2',ORANGE:'#fff7ed',YELLOW:'#fffbeb',GREEN:'#f0fdf4'};
+const sevCl={RED:'#c0152c',ORANGE:'#b84500',YELLOW:'#92620a',GREEN:'#166534'};
+const sevBd={RED:'#fecdd3',ORANGE:'#fed7aa',YELLOW:'#fde68a',GREEN:'#bbf7d0'};
+const probCl={GREEN:'#16a34a',YELLOW:'#d97706',ORANGE:'#ea580c',RED:'#dc2626'};
+
+/* CLOCK */
+setInterval(()=>{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});},1000);
+
+window.onload=()=>loadPts();
+
+/* LOAD PATIENT LIST */
+async function loadPts(){
+  try{
+    const r=await fetch(`${API}/api/nurse/patients`);
+    const d=await r.json();
+    allPts=d.patients||[];
+    document.getElementById('t_pts').textContent=allPts.length;
+    document.getElementById('t_crit').textContent=allPts.filter(p=>p.severity==='RED').length;
+    document.getElementById('lsub').textContent=`${allPts.length} registered`;
+    renderList(allPts);
+  }catch{
+    document.getElementById('patList').innerHTML=`<div style="padding:16px;text-align:center;color:#dc2626;font-size:12px">❌ Backend offline</div>`;
+    document.getElementById('lsub').textContent='Cannot connect';
+  }
+}
+
+function renderList(pts){
+  if(!pts.length){
+    document.getElementById('patList').innerHTML=`<div style="padding:20px;text-align:center;color:var(--g400);font-size:12px">No patients yet</div>`;
+    return;
+  }
+  document.getElementById('patList').innerHTML=pts.map(p=>{
+    const sev=p.severity||'';
+    const ini=(p.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    return `<div class="pitem ${curPid===p.internal_id?'sel':''}"
+      onclick="pickPt('${p.uid||''}','${p.phone||''}')">
+      <div class="pav" style="background:${sevBg[sev]||'#f7f8fa'};color:${sevCl[sev]||'#6b7484'};border-color:${sevBd[sev]||'#dde1e9'}">${ini}</div>
+      <div class="pb">
+        <div class="pn">${p.name}</div>
+        <div class="pm">${p.age}y · ${p.gender} · ${p.phone}</div>
+        ${sev?`<span class="psev s${sev[0]}">${sev} ${p.risk_score?p.risk_score+'%':''}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterList(){
+  const q=document.getElementById('srch').value.toLowerCase();
+  renderList(allPts.filter(p=>(p.name+p.phone+(p.uid||'')).toLowerCase().includes(q)));
+}
+
+/* CLEAR FORM */
+function clearForm(){
+  curPid=null;curData=null;
+  ['r_name','r_phone','r_age','r_addr','r_emg','r_allergy','r_conditions'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('r_gender').value='';
+  document.getElementById('r_blood').value='';
+  ['reg_ok','reg_err'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('profile_empty').style.display='flex';
+  document.getElementById('profile_body').style.display='none';
+  document.getElementById('vitals_empty').style.display='flex';
+  document.getElementById('vitals_body').style.display='none';
+  rTab('profile',document.querySelectorAll('.rt')[0]);
+}
+
+/* REGISTER */
+async function registerPatient(){
+  const name=document.getElementById('r_name').value.trim();
+  const phone=document.getElementById('r_phone').value.trim();
+  const age=document.getElementById('r_age').value;
+  const gender=document.getElementById('r_gender').value;
+  const errEl=document.getElementById('reg_err');
+  const okEl=document.getElementById('reg_ok');
+  if(!name||!phone||!age||!gender){
+    errEl.textContent='Fill required fields: Name, Phone, Age, Gender.';
+    errEl.className='alert a-err';errEl.style.display='block';return;
+  }
+  errEl.style.display='none';
+  const btn=document.getElementById('reg_btn');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>&nbsp;Registering…';
+  try{
+    const r=await fetch(`${API}/api/patient/register`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,phone,age:parseInt(age),gender,
+        blood_group:document.getElementById('r_blood').value,
+        emergency_contact:document.getElementById('r_emg').value.trim(),
+        address:document.getElementById('r_addr').value.trim(),
+        allergies:document.getElementById('r_allergy').value.trim(),
+        existing_conditions:document.getElementById('r_conditions').value.trim()
+      })
+    });
+    const d=await r.json();
+    if(!r.ok){
+      if(r.status===409){
+        okEl.textContent=`ℹ️ ${d.detail} — Loading their profile…`;
+        okEl.className='alert a-warn';okEl.style.display='block';
+        document.getElementById('f_phone').value=phone;
+        setTimeout(findPatient,600);
+      }else{
+        errEl.textContent=d.detail||'Registration failed.';
+        errEl.className='alert a-err';errEl.style.display='block';
+      }
+    }else{
+      okEl.textContent=`✅ Registered! Patient ID: #${d.patient_id} · UID: ${d.uid} — Click "Enter Vitals" tab.`;
+      okEl.className='alert a-ok';okEl.style.display='block';
+      curPid=d.patient_id;
+      await loadProfile(d.patient_id);
+      loadPts();
+    }
+  }catch{
+    errEl.textContent='❌ Cannot connect to backend.';
+    errEl.className='alert a-err';errEl.style.display='block';
+  }finally{btn.disabled=false;btn.innerHTML='Register Patient →';}
+}
+
+/* FIND EXISTING */
+async function findPatient(){
+  const phone=document.getElementById('f_phone').value.trim();
+  const name=document.getElementById('f_name').value.trim();
+  const errEl=document.getElementById('find_err');
+  if(!phone&&!name){errEl.textContent='Enter phone or name.';errEl.className='alert a-err';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  try{
+    const r=await fetch(`${API}/api/patient/lookup`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({phone:phone||'',name:name||''})
+    });
+    const d=await r.json();
+    if(!r.ok||!d.found){
+      errEl.textContent='Patient not found. Please register above.';
+      errEl.className='alert a-err';errEl.style.display='block';return;
+    }
+    curPid=d.internal_id;errEl.style.display='none';
+    document.getElementById('f_phone').value='';
+    document.getElementById('f_name').value='';
+    await loadProfile(d.internal_id);
+  }catch{errEl.textContent='❌ Cannot connect.';errEl.className='alert a-err';errEl.style.display='block';}
+}
+
+/* PICK FROM LIST */
+async function pickPt(uid,phone){
+  try{
+    const r=await fetch(`${API}/api/patient/lookup`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({uid:uid||'',phone:phone||''})
+    });
+    const d=await r.json();
+    if(d.found){curPid=d.internal_id;await loadProfile(d.internal_id);}
+  }catch{}
+}
+
+/* LOAD PROFILE */
+async function loadProfile(pid){
+  document.getElementById('profile_empty').style.display='none';
+  document.getElementById('profile_body').style.display='block';
+  document.getElementById('profile_body').innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:20px;color:var(--g400)"><div class="spd"></div>&nbsp;Loading…</div>`;
+  rTab('profile',document.querySelectorAll('.rt')[0]);
+  try{
+    const r=await fetch(`${API}/api/doctor/patient/${pid}`);
+    const d=await r.json();
+    curData=d;
+    renderProfile(d);
+    setupVitals(d);
+  }catch{document.getElementById('profile_body').innerHTML=`<div style="color:var(--red);font-size:13px;padding:10px">❌ Failed to load.</div>`;}
+}
+
+/* RENDER PROFILE */
+function renderProfile(d){
+  const p=d.patient,v=d.vitals,n=d.notes;
+  const ini=(p.name||'').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
+  const sev=v?.severity||'';
+  let html=`<div class="ph">
+    <div class="phav" style="background:${sevBg[sev]||'#eff6ff'};color:${sevCl[sev]||'#1d4ed8'};border:1px solid ${sevBd[sev]||'#bfdbfe'}">${ini}</div>
+    <div style="flex:1">
+      <div class="phname">${p.name}</div>
+      <div class="phmeta">${p.age}y · ${p.gender}${p.blood_group?' · 🩸 '+p.blood_group:''}</div>
+      <div class="phuid">UID: ${p.uid||'—'} · ID #${p.id}</div>
+    </div>
+    ${sev?`<div style="text-align:right"><span class="pvsev s${sev[0]}">${sev}</span><div style="font-family:var(--mono);font-size:16px;font-weight:700;color:${sevCl[sev]}">${v.risk_score}%</div></div>`:''}
+  </div>`;
+  html+=`<table class="info-t">
+    <tr><td>Phone</td><td>${p.phone}</td></tr>
+    ${p.address?`<tr><td>Address</td><td>${p.address}</td></tr>`:''}
+    ${p.emergency_contact?`<tr><td>Emergency</td><td>${p.emergency_contact}</td></tr>`:''}
+    ${p.existing_conditions?`<tr><td>Conditions</td><td>${p.existing_conditions}</td></tr>`:''}
+    ${p.allergies?`<tr><td>Allergies</td><td style="color:var(--red)">${p.allergies}</td></tr>`:''}
+    <tr><td>Status</td><td>${p.status}</td></tr>
+  </table>`;
+
+  if(v&&v.heart_rate){
+    html+=`<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g500);margin-bottom:8px">Previous Vitals</div>
+    <div class="pvcard">
+      <div class="pvhead">
+        <span class="pvsev s${sev[0]}">${sev}</span>
+        <span class="pvtime">${v.recorded_at?new Date(v.recorded_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'—'}</span>
+      </div>
+      <div class="pvgrid">
+        <div class="pvi"><div class="pvv">${v.heart_rate}</div><div class="pvl">HR (bpm)</div></div>
+        <div class="pvi"><div class="pvv">${v.oxygen}%</div><div class="pvl">SpO₂</div></div>
+        <div class="pvi"><div class="pvv">${v.temperature}°F</div><div class="pvl">Temp</div></div>
+        <div class="pvi"><div class="pvv">${v.systolic_bp}</div><div class="pvl">Sys BP</div></div>
+        <div class="pvi"><div class="pvv">${v.respiratory_rate}</div><div class="pvl">Resp Rate</div></div>
+        <div class="pvi"><div class="pvv" style="color:${sevCl[sev]||'#6b7484'}">${v.risk_score}%</div><div class="pvl">Risk</div></div>
+      </div>
+      ${v.chief_complaint?`<div style="margin-top:8px;font-size:12px;color:var(--g500)">💬 ${v.chief_complaint}</div>`:''}
+    </div>`;
+  }else{
+    html+=`<div style="padding:11px;background:var(--yellow-bg);border:1px solid var(--yellow-bd);border-radius:8px;font-size:13px;color:var(--yellow)">⚠️ No vitals recorded yet.</div>`;
+  }
+  if(n&&n.recommended_tests){
+    html+=`<div class="dnote" style="margin-top:12px">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);margin-bottom:6px">Doctor Instructions</div>
+      <div><strong>Tests:</strong> ${n.recommended_tests}</div>
+      ${n.diagnosis?`<div style="margin-top:4px"><strong>Diagnosis:</strong> ${n.diagnosis}</div>`:''}
+      ${n.appointment_time?`<div style="margin-top:4px"><strong>Appointment:</strong> ${n.appointment_time}</div>`:''}
+    </div>`;
+  }
+  html+=`<button class="btn-p btn-teal" onclick="rTab('vitals',document.querySelectorAll('.rt')[1])" style="margin-top:14px">→ Enter / Update Vitals</button>`;
+  document.getElementById('profile_body').innerHTML=html;
+}
+
+/* SETUP VITALS FORM */
+function setupVitals(d){
+  const p=d.patient;
+  document.getElementById('vitals_empty').style.display='none';
+  document.getElementById('vitals_body').style.display='block';
+  document.getElementById('v_pname').textContent=p.name;
+  document.getElementById('v_pmeta').textContent=`${p.age}y · ${p.gender}${p.blood_group?' · 🩸'+p.blood_group:''}`;
+  ['v_hr','v_o2','v_temp','v_bp','v_rr','v_complaint'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['v_cp','v_bp2','v_fever','v_diabetes','v_hd','v_trauma'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.checked=false;el.closest('.cc')?.classList.remove('on');}
+  });
+  ['vb_hr','vb_o2','vb_temp','vb_bp','vb_rr'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove('ok','warn');}
+  });
+  document.getElementById('crit_banner').style.display='none';
+  document.getElementById('res_card').style.display='none';
+  document.getElementById('vitals_err').style.display='none';
+}
+
+/* LIVE VITAL CHECK */
+function chk(boxId,inputId,lo,hi){
+  const val=parseFloat(document.getElementById(inputId).value);
+  const box=document.getElementById(boxId);
+  if(!val){box.classList.remove('ok','warn');return;}
+  if(val<lo||val>hi){box.classList.add('warn');box.classList.remove('ok');}
+  else{box.classList.add('ok');box.classList.remove('warn');}
+}
+
+/* CHECKBOX TOGGLE */
+function tc(el){
+  event.preventDefault();
+  el.classList.toggle('on');
+  el.querySelector('input').checked=el.classList.contains('on');
+}
+/* SUBMIT VITALS */
+async function submitVitals(){
+  if(!curPid){alert('No patient selected.');return;}
+  const hr=document.getElementById('v_hr').value;
+  const o2=document.getElementById('v_o2').value;
+  const temp=document.getElementById('v_temp').value;
+  const bp=document.getElementById('v_bp').value;
+  const rr=document.getElementById('v_rr').value;
+  const errEl=document.getElementById('vitals_err');
+  if(!hr||!o2||!temp||!bp||!rr){errEl.textContent='Enter all 5 vital signs.';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  const btn=document.getElementById('vitals_btn');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>&nbsp;Analysing…';
+  try{
+    const r=await fetch(`${API}/api/nurse/vitals`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        patient_id:curPid,
+        heart_rate:parseInt(hr),oxygen:parseInt(o2),
+        temperature:parseFloat(temp),systolic_bp:parseInt(bp),
+        respiratory_rate:parseInt(rr),
+        chest_pain:document.getElementById('v_cp').checked?1:0,
+        breath_problem:document.getElementById('v_bp2').checked?1:0,
+        fever:document.getElementById('v_fever').checked?1:0,
+        diabetes:document.getElementById('v_diabetes').checked?1:0,
+        trauma:document.getElementById('v_trauma').checked?1:0,
+        chief_complaint:document.getElementById('v_complaint').value
+      })
+    });
+    const d=await r.json();
+    showResult(d);
+    loadPts();
+    setTimeout(()=>loadProfile(curPid),800);
+  }catch{errEl.textContent='❌ Cannot connect to backend.';errEl.style.display='block';}
+  finally{btn.disabled=false;btn.innerHTML='🔍 Run AI Triage Analysis';}
+}
+
+/* SHOW RESULT */
+function showResult(data){
+  const sev=data.severity;
+  const isGreen=sev==='GREEN';
+  const c={bg:sevBg[sev]||'#f7f8fa',bd:sevBd[sev]||'#dde1e9',cl:sevCl[sev]||'#6b7484'};
+  const rc=document.getElementById('res_card');
+  rc.style.cssText=`display:block;background:${c.bg};border:2px solid ${c.bd};color:${c.cl};border-radius:12px;padding:16px;margin-bottom:12px;`;
+  document.getElementById('res_sev').textContent=isGreen?'🟢 SAFE':sev;
+  document.getElementById('res_risk').textContent=isGreen?'0% — No Risk':data.risk_score+'%';
+  document.getElementById('res_action').textContent=data.action||'';
+  document.getElementById('res_probs').innerHTML=['GREEN','YELLOW','ORANGE','RED'].map(l=>{
+    const pct=(data.probabilities||{})[l]||0;
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+      <div style="width:58px;font-size:11px;font-weight:600;color:${probCl[l]}">${l}</div>
+      <div style="flex:1;background:rgba(255,255,255,.4);border-radius:99px;height:6px">
+        <div style="width:${pct}%;height:6px;border-radius:99px;background:${probCl[l]};transition:width .6s"></div>
+      </div>
+      <div style="font-size:11px;font-weight:700;min-width:34px;text-align:right">${pct}%</div>
+    </div>`;
+  }).join('');
+  if(data.assigned_doctor){
+    const doc=data.assigned_doctor;
+    const did=(doc.doctor_id||'').toLowerCase();
+    const fname=doc.name.replace(/Dr\.?\s*/i,'').trim().split(' ')[0].toLowerCase();
+    const last4=did.slice(-4);
+    const uname=fname+'.'+did;
+    const pwd=fname+last4;
+    const now=new Date();
+    now.setMinutes(now.getMinutes()+(isGreen?30:15));
+    const slot=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    const today=now.toLocaleDateString('en-IN',{dateStyle:'medium'});
+    document.getElementById('res_doc').style.display='block';
+    document.getElementById('res_docname').innerHTML=`<strong>${doc.name}</strong> · ${doc.specialization} · Room ${doc.room||'—'}`;
+    document.getElementById('res_docspec').innerHTML=`
+      <div style="margin-top:8px;padding:10px;background:rgba(0,0,0,.1);border-radius:7px;font-family:monospace;font-size:12px;line-height:1.9">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.7;margin-bottom:4px">🔑 Doctor Login</div>
+        <div><strong>Username:</strong> ${uname}</div>
+        <div><strong>Password:</strong> ${pwd}</div>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.2)">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.7;margin-bottom:3px">🕐 Suggested Appointment</div>
+          <div><strong>Date:</strong> ${today}</div>
+          <div><strong>Time:</strong> ${slot}</div>
+          ${isGreen?'<div style="margin-top:3px;opacity:.7;font-size:11px">✅ Routine checkup — patient is safe</div>':''}
+        </div>
+      </div>`;
+  }else document.getElementById('res_doc').style.display='none';
+  document.getElementById('crit_banner').style.display=data.is_critical?'block':'none';
+  rc.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+/* RIGHT TAB */
+function rTab(t,btn){
+  document.querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('rt-profile').style.display=t==='profile'?'block':'none';
+  document.getElementById('rt-vitals').style.display=t==='vitals'?'block':'none';
+}
+
+setInterval(loadPts,30000);
+</script>
+</body>
+</html>

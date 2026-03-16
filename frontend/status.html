@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediTriage — Patient Status</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#fff;--g50:#f7f8fa;--g100:#eef0f4;--g200:#dde1e9;--g300:#c4cad6;
+  --g400:#9aa3b2;--g500:#6b7484;--g600:#4a5163;--g700:#333a4a;--g900:#111827;
+  --navy:#0f2044;--blue:#1d4ed8;--blue-lt:#eff4ff;--blue-mid:#bfdbfe;
+  --red:#c0152c;--red-bg:#fff1f2;--red-bd:#fecdd3;
+  --orange:#b84500;--orange-bg:#fff7ed;--orange-bd:#fed7aa;
+  --yellow:#92620a;--yellow-bg:#fffbeb;--yellow-bd:#fde68a;
+  --green:#166534;--green-bg:#f0fdf4;--green-bd:#bbf7d0;
+  --teal:#0e7490;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--g50);color:var(--g700);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* TOPBAR */
+.topbar{height:52px;background:var(--navy);display:flex;align-items:center;padding:0 20px;gap:12px;}
+.logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#fff;text-decoration:none;}
+.logo-m{width:26px;height:26px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:13px;font-weight:700;}
+.tback{margin-left:auto;padding:5px 14px;border-radius:4px;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.7);font-family:var(--font);font-size:12px;cursor:pointer;text-decoration:none;}
+
+/* HERO SEARCH */
+.hero{background:var(--navy);padding:32px 20px 40px;text-align:center;}
+.hero h1{font-size:22px;font-weight:600;color:#fff;margin-bottom:6px;}
+.hero p{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:28px;}
+
+/* SEARCH CARD */
+.search-card{background:var(--white);border-radius:14px;padding:24px;max-width:540px;margin:0 auto;box-shadow:0 8px 32px rgba(0,0,0,.2);}
+.sc-title{font-size:13px;font-weight:700;color:var(--g600);margin-bottom:16px;display:flex;align-items:center;gap:7px;}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+label.fl{font-size:10.5px;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.4px;}
+input.fi{padding:10px 12px;border:1px solid var(--g200);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--g700);background:var(--white);outline:none;transition:.15s;width:100%;}
+input.fi:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(147,197,253,.15);}
+input.fi::placeholder{color:var(--g300);}
+
+.btn-search{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-search:hover{background:#162a58;}
+.btn-search:disabled{background:var(--g300);cursor:not-allowed;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:10px;color:var(--g400);font-size:11px;font-weight:600;margin:16px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--g100);}
+
+/* ID FALLBACK */
+.id-row{display:flex;gap:10px;align-items:flex-end;}
+.id-row .fg{flex:1;}
+.id-row button{padding:10px 18px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+
+/* ALERT */
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid;margin-top:12px;display:none;}
+.a-err{background:var(--red-bg);border-color:var(--red-bd);color:var(--red);}
+.a-ok{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+
+/* STATUS RESULT */
+.result{max-width:640px;margin:0 auto;padding:20px;}
+.card{background:var(--white);border:1px solid var(--g200);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.card-head{padding:12px 16px;border-bottom:1px solid var(--g100);display:flex;align-items:center;gap:8px;}
+.card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g500);}
+
+/* PATIENT BANNER */
+.pt-banner{padding:16px;}
+.pt-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.pt-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;border:2px solid;flex-shrink:0;}
+.pt-name{font-size:18px;font-weight:600;color:var(--g900);}
+.pt-meta{font-size:12px;color:var(--g400);margin-top:2px;}
+.pt-uid{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:3px;}
+
+/* SEV BADGE */
+.sev-big{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:99px;font-size:13px;font-weight:700;margin-bottom:4px;}
+.sR{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);}
+.sO{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd);}
+.sY{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-bd);}
+.sG{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd);}
+
+/* RISK BAR */
+.risk-row{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.risk-bar{flex:1;height:6px;background:var(--g100);border-radius:3px;overflow:hidden;}
+.risk-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.risk-val{font-family:var(--mono);font-size:16px;font-weight:700;}
+
+/* INFO TABLE */
+.info-t{width:100%;border-collapse:collapse;font-size:13px;padding:14px 16px;}
+.info-t td{padding:5px 0;vertical-align:top;}
+.info-t td:first-child{color:var(--g400);font-size:11px;font-weight:600;text-transform:uppercase;width:130px;}
+
+/* DOCTOR CARD */
+.doc-card{margin:0 16px 16px;padding:12px;background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:10px;}
+.doc-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);margin-bottom:8px;}
+.doc-name{font-size:15px;font-weight:600;color:var(--g900);}
+.doc-spec{font-size:12px;color:var(--g500);margin-top:2px;}
+.doc-room{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:4px;}
+
+/* MESSAGES */
+.msg-item{padding:12px 16px;border-bottom:1px solid var(--g100);}
+.msg-item:last-child{border-bottom:none;}
+.msg-subj{font-size:13px;font-weight:600;color:var(--g900);}
+.msg-body{font-size:12px;color:var(--g600);margin-top:4px;line-height:1.6;}
+.msg-time{font-family:var(--mono);font-size:10px;color:var(--g300);margin-top:4px;}
+.msg-type{display:inline-flex;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:600;margin-left:6px;}
+.mt-specialist_referral{background:#ede9fe;color:#6d28d9;}
+.mt-triage_complete{background:var(--green-bg);color:var(--green);}
+.mt-instruction{background:var(--blue-lt);color:var(--blue);}
+.mt-appointment{background:var(--yellow-bg);color:var(--yellow);}
+
+/* NOTE CARD */
+.note-block{padding:14px 16px;}
+.note-row{display:flex;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--g50);}
+.note-row:last-child{border-bottom:none;}
+.note-lbl{color:var(--g400);font-size:11px;font-weight:600;text-transform:uppercase;min-width:110px;}
+
+/* UPLOAD */
+.upload-body{padding:14px 16px;}
+.upload-body select,.upload-body input[type=file]{width:100%;padding:9px 12px;border:1px solid var(--g200);border-radius:8px;font-family:var(--font);font-size:13px;margin-bottom:10px;outline:none;background:var(--white);}
+.btn-upload{width:100%;padding:10px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;}
+.btn-upload:hover{background:#0c6280;}
+
+/* SPINNER */
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block;}
+.spd{width:13px;height:13px;border:2px solid var(--g200);border-top-color:var(--blue);border-radius:50%;animation:sp .7s linear infinite;display:inline-block;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.empty-msg{padding:24px;text-align:center;color:var(--g400);font-size:13px;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-m">M</div>MediTriage</a>
+  <a class="tback" href="index.html">← Back to Portal</a>
+</div>
+
+<!-- HERO SEARCH -->
+<div class="hero">
+  <h1>🏥 Check Your Status</h1>
+  <p>Enter your name or phone number to see your triage result and doctor's instructions</p>
+
+  <div class="search-card">
+    <div class="sc-title">🔍 Find My Record</div>
+
+    <!-- PRIMARY: Name + Phone -->
+    <div class="g2">
+      <div class="fg">
+        <label class="fl">Your Name</label>
+        <input class="fi" id="s_name" placeholder="e.g. Rahul Sharma" onkeydown="if(event.key==='Enter')searchByInfo()">
+      </div>
+      <div class="fg">
+        <label class="fl">Phone Number</label>
+        <input class="fi" id="s_phone" type="tel" placeholder="e.g. 9876543210" onkeydown="if(event.key==='Enter')searchByInfo()">
+      </div>
+    </div>
+
+    <button class="btn-search" id="searchBtn" onclick="searchByInfo()">
+      <span id="searchBtnTxt">🔍 Find My Status</span>
+    </button>
+
+    <div class="alert a-err" id="search_err"></div>
+
+    <!-- DIVIDER -->
+    <div class="divider">Already have your Patient ID?</div>
+
+    <!-- FALLBACK: Patient ID -->
+    <div class="id-row">
+      <div class="fg">
+        <label class="fl">Patient ID (Optional)</label>
+        <input class="fi" id="s_id" type="number" placeholder="e.g. 5" onkeydown="if(event.key==='Enter')searchById()">
+      </div>
+      <button onclick="searchById()">Go →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT AREA -->
+<div class="result" id="resultArea" style="display:none"></div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+let curPid = null;
+
+/* ── SEARCH BY NAME / PHONE ── */
+async function searchByInfo(){
+  const name  = document.getElementById('s_name').value.trim();
+  const phone = document.getElementById('s_phone').value.trim();
+  const errEl = document.getElementById('search_err');
+  errEl.style.display = 'none';
+
+  if(!name && !phone){
+    errEl.textContent = '⚠️ Please enter your name or phone number.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('searchBtn');
+  document.getElementById('searchBtnTxt').innerHTML = '<span class="spin"></span>&nbsp;Searching…';
+  btn.disabled = true;
+
+  try{
+    const r = await fetch(`${API}/api/patient/lookup`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name: name||'', phone: phone||''})
+    });
+    const d = await r.json();
+    if(!r.ok || !d.found){
+      errEl.textContent = '❌ No record found. Please check your name or phone number.';
+      errEl.style.display = 'block';
+    } else {
+      curPid = d.internal_id;
+      await loadStatus(d.internal_id);
+    }
+  }catch{
+    errEl.textContent = '❌ Cannot connect to server.';
+    errEl.style.display = 'block';
+  }finally{
+    document.getElementById('searchBtnTxt').textContent = '🔍 Find My Status';
+    btn.disabled = false;
+  }
+}
+
+/* ── SEARCH BY PATIENT ID ── */
+async function searchById(){
+  const pid = document.getElementById('s_id').value.trim();
+  const errEl = document.getElementById('search_err');
+  errEl.style.display = 'none';
+  if(!pid){ errEl.textContent = '⚠️ Enter your Patient ID.'; errEl.style.display='block'; return; }
+  curPid = parseInt(pid);
+  await loadStatus(curPid);
+}
+
+/* ── LOAD STATUS ── */
+async function loadStatus(pid){
+  const area = document.getElementById('resultArea');
+  area.style.display = 'block';
+  area.innerHTML = `<div style="text-align:center;padding:40px;color:var(--g400)"><div class="spd" style="margin:0 auto 10px"></div>Loading your record…</div>`;
+  area.scrollIntoView({behavior:'smooth', block:'start'});
+
+  try{
+    const r = await fetch(`${API}/api/patient/status/${pid}`);
+    if(!r.ok) throw new Error('not found');
+    const d = await r.json();
+    renderStatus(d, pid);
+  }catch{
+    area.innerHTML = `<div class="card"><div style="padding:24px;text-align:center;color:var(--red)">❌ Record not found. Please check your details.</div></div>`;
+  }
+}
+
+/* ── RENDER STATUS ── */
+function renderStatus(d, pid){
+  const p   = d.patient;
+  const v   = d.vitals;
+  const n   = d.notes;
+  const msgs= d.messages||[];
+  const sev = v?.severity||'';
+  const rs  = v?.risk_score||0;
+
+  const sevBg={RED:'var(--red-bg)',ORANGE:'var(--orange-bg)',YELLOW:'var(--yellow-bg)',GREEN:'var(--green-bg)'};
+  const sevCl={RED:'var(--red)',ORANGE:'var(--orange)',YELLOW:'var(--yellow)',GREEN:'var(--green)'};
+  const sevBd={RED:'var(--red-bd)',ORANGE:'var(--orange-bd)',YELLOW:'var(--yellow-bd)',GREEN:'var(--green-bd)'};
+  const rc = rs>=80?'#c0152c':rs>=60?'#b84500':rs>=40?'#92620a':'#166534';
+  const ini = (p.name||'').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
+  const sevClass = {RED:'sR',ORANGE:'sO',YELLOW:'sY',GREEN:'sG'}[sev]||'';
+
+  const statusLabel = {
+    waiting:'⏳ Waiting for Doctor',
+    red:'🔴 Critical — Emergency',
+    orange:'🟠 Urgent — Specialist',
+    yellow:'🟡 Moderate — Under Review',
+    green:'🟢 Routine',
+    under_review:'📋 Under Review',
+    solved:'✅ Case Resolved',
+    report_uploaded:'📎 Report Received'
+  }[p.status] || p.status;
+
+  let html = '';
+
+  /* ── PATIENT BANNER ── */
+  html += `<div class="card">
+    <div class="pt-banner">
+      <div class="pt-top">
+        <div class="pt-av" style="background:${sevBg[sev]||'var(--blue-lt)'};color:${sevCl[sev]||'var(--blue)'};border-color:${sevBd[sev]||'var(--blue-mid)'}">${ini}</div>
+        <div>
+          <div class="pt-name">${p.name}</div>
+          <div class="pt-meta">${p.age}y · ${p.gender}${p.blood_group?' · 🩸 '+p.blood_group:''}</div>
+          <div class="pt-uid">Patient ID: #${p.id} · UID: ${p.uid||'—'}</div>
+        </div>
+      </div>
+      ${v ? `
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <div>
+          <span class="sev-big ${sevClass}">${sev}</span>
+          <div style="font-size:12px;color:var(--g400);margin-top:2px">${statusLabel}</div>
+        </div>
+        <div style="flex:1;min-width:160px">
+          <div style="font-size:11px;color:var(--g400);margin-bottom:4px">Risk Score</div>
+          <div class="risk-row">
+            <div class="risk-bar"><div class="risk-fill" style="width:${rs}%;background:${rc}"></div></div>
+            <div class="risk-val" style="color:${rc}">${rs}%</div>
+          </div>
+        </div>
+      </div>
+      ${v.chief_complaint?`<div style="margin-top:10px;padding:9px 12px;background:var(--g50);border-radius:6px;font-size:13px"><strong>Your complaint:</strong> ${v.chief_complaint}</div>`:''}
+      ` : `<div style="padding:10px;background:var(--yellow-bg);border:1px solid var(--yellow-bd);border-radius:8px;font-size:13px;color:var(--yellow)">⚠️ Vitals not recorded yet.</div>`}
+    </div>
+  </div>`;
+
+  /* ── ASSIGNED DOCTOR (only for ORANGE/RED) ── */
+  if(d.is_high_risk && d.specialist_info){
+    const doc = d.specialist_info;
+    html += `<div class="card">
+      <div class="card-head"><div class="card-title">👨‍⚕️ Your Assigned Specialist</div></div>
+      <div class="doc-card" style="margin:16px">
+        <div class="doc-head">Assigned Doctor</div>
+        <div class="doc-name">${doc.name}</div>
+        <div class="doc-spec">${doc.specialization} · ${doc.department}</div>
+        <div class="doc-room">🚪 Room: ${doc.room_number||'—'} · ID: ${doc.doctor_id}</div>
+        <div style="margin-top:8px;padding:6px 10px;background:rgba(29,78,216,.08);border-radius:6px;font-size:11px;color:var(--blue)">
+          ${doc.availability==='Available'?'✅ Doctor is Available':'⏳ Doctor is with another patient'}
+        </div>
+      </div>
+      ${d.slot_info?`<div style="margin:0 16px 16px;padding:10px 14px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:8px;font-size:13px;color:var(--green)">
+        📅 <strong>Appointment:</strong> ${d.slot_info.slot_date} at ${d.slot_info.slot_time}
+        ${d.slot_info.notes?`<br><span style="color:var(--g500)">${d.slot_info.notes}</span>`:''}
+      </div>`:''}
+    </div>`;
+  }
+
+  /* ── DOCTOR NOTES ── */
+  if(n && (n.recommended_tests||n.diagnosis||n.prescription)){
+    html += `<div class="card">
+      <div class="card-head"><div class="card-title">📋 Doctor's Instructions</div></div>
+      <div class="note-block">
+        ${n.recommended_tests?`<div class="note-row"><div class="note-lbl">Tests</div><div>${n.recommended_tests}</div></div>`:''}
+        ${n.diagnosis?`<div class="note-row"><div class="note-lbl">Diagnosis</div><div>${n.diagnosis}</div></div>`:''}
+        ${n.prescription?`<div class="note-row"><div class="note-lbl">Prescription</div><div>${n.prescription}</div></div>`:''}
+        ${n.appointment_time?`<div class="note-row"><div class="note-lbl">Appointment</div><div>${n.appointment_time}</div></div>`:''}
+      </div>
+    </div>`;
+  }
+
+  /* ── MESSAGES ── */
+  if(msgs.length){
+    html += `<div class="card">
+      <div class="card-head"><div class="card-title">💬 Messages from Hospital</div></div>
+      ${msgs.map(m=>`
+        <div class="msg-item">
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+            <div class="msg-subj">${m.subject||'Message'}</div>
+            <span class="msg-type mt-${m.message_type||'instruction'}">${(m.message_type||'').replace(/_/g,' ')}</span>
+          </div>
+          <div class="msg-body">${m.body||''}</div>
+          ${m.doctor_name?`<div style="font-size:11px;color:var(--blue);margin-top:4px">From: ${m.doctor_name} · ${m.specialization||''}</div>`:''}
+          <div class="msg-time">${m.sent_at?new Date(m.sent_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):''}</div>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  /* ── VITALS SUMMARY ── */
+  if(v && v.heart_rate){
+    html += `<div class="card">
+      <div class="card-head"><div class="card-title">💉 Your Vitals</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px;">
+        ${[
+          ['Heart Rate', v.heart_rate, 'bpm'],
+          ['SpO₂', v.oxygen, '%'],
+          ['Temperature', v.temperature, '°F'],
+          ['Blood Pressure', v.systolic_bp, 'mmHg'],
+          ['Resp. Rate', v.respiratory_rate, '/min'],
+          v.blood_glucose?['Glucose', v.blood_glucose, 'mg/dL']:null
+        ].filter(Boolean).map(([l,val,u])=>`
+          <div style="background:var(--g50);border:1px solid var(--g100);border-radius:8px;padding:10px;text-align:center">
+            <div style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--g900)">${val}</div>
+            <div style="font-size:9px;color:var(--g400);margin-top:2px;text-transform:uppercase">${l}</div>
+            <div style="font-size:9px;color:var(--g300)">${u}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  /* ── UPLOAD REPORT ── */
+  html += `<div class="card">
+    <div class="card-head"><div class="card-title">📎 Upload Report to Doctor</div></div>
+    <div class="upload-body">
+      <p style="font-size:13px;color:var(--g500);margin-bottom:12px;">Upload your test report (PDF or photo) — your doctor will be notified.</p>
+      <select id="doc_type">
+        <option value="report">Lab Report</option>
+        <option value="xray">X-Ray / Scan</option>
+        <option value="prescription">Old Prescription</option>
+        <option value="other">Other Document</option>
+      </select>
+      <input type="file" id="doc_file" accept=".pdf,.jpg,.jpeg,.png">
+      <button class="btn-upload" onclick="uploadDoc(${p.id})">📤 Upload to Doctor</button>
+      <div id="doc_ok" style="display:none;margin-top:10px;padding:9px 14px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:7px;font-size:13px;color:var(--green)">✅ Uploaded! Doctor will review shortly.</div>
+      <div id="doc_err" style="display:none;margin-top:10px;padding:9px 14px;background:var(--red-bg);border:1px solid var(--red-bd);border-radius:7px;font-size:13px;color:var(--red)"></div>
+    </div>
+  </div>`;
+
+  document.getElementById('resultArea').innerHTML = html;
+}
+
+/* ── UPLOAD DOC ── */
+async function uploadDoc(pid){
+  const fileInput = document.getElementById('doc_file');
+  const docType   = document.getElementById('doc_type').value;
+  const okEl      = document.getElementById('doc_ok');
+  const errEl     = document.getElementById('doc_err');
+  okEl.style.display='none'; errEl.style.display='none';
+
+  if(!fileInput.files[0]){ errEl.textContent='⚠️ Please select a file first.'; errEl.style.display='block'; return; }
+  const ext = fileInput.files[0].name.split('.').pop().toLowerCase();
+  if(!['pdf','jpg','jpeg','png'].includes(ext)){ errEl.textContent='❌ Only PDF, JPG, PNG allowed.'; errEl.style.display='block'; return; }
+
+  const formData = new FormData();
+  formData.append('patient_id', pid);
+  formData.append('doc_type', docType);
+  formData.append('file', fileInput.files[0]);
+
+  try{
+    const r = await fetch(`${API}/api/patient/upload-doc`,{method:'POST',body:formData});
+    const d = await r.json();
+    if(d.success){ okEl.style.display='block'; fileInput.value=''; setTimeout(()=>okEl.style.display='none',5000); }
+    else{ errEl.textContent='❌ Upload failed.'; errEl.style.display='block'; }
+  }catch{ errEl.textContent='❌ Cannot connect to server.'; errEl.style.display='block'; }
+}
+</script>
+</body>
+</html>

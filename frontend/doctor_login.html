@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediTriage — Doctor Login</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#fff; --g50:#f7f8fa; --g100:#eef0f4; --g200:#dde1e9; --g300:#c4cad6;
+  --g400:#9aa3b2; --g500:#6b7484; --g600:#4a5163; --g700:#333a4a; --g900:#111827;
+  --navy:#0f2044; --navy2:#162a58; --blue:#1d4ed8; --blue-lt:#eff4ff; --blue-mid:#bfdbfe;
+  --red:#c0152c; --red-bg:#fff1f2; --red-bd:#fecdd3;
+  --green:#166534; --green-bg:#f0fdf4; --green-bd:#bbf7d0;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:var(--font);background:var(--navy);color:#fff;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+
+/* BG PATTERN */
+.bg-pattern{position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 800px 600px at 0% 100%, rgba(29,78,216,.25) 0%,transparent 60%),
+    radial-gradient(ellipse 600px 500px at 100% 0%, rgba(15,32,68,.8) 0%,transparent 70%);
+}
+.bg-grid{position:fixed;inset:0;z-index:0;opacity:.04;
+  background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+/* MAIN */
+.main{position:relative;z-index:1;height:100vh;display:grid;grid-template-columns:1fr 480px;overflow:hidden;}
+
+/* LEFT PANEL */
+.left{display:flex;flex-direction:column;justify-content:center;padding:60px 80px;border-right:1px solid rgba(255,255,255,.08);}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:64px;}
+.logo-mark{width:38px;height:38px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:16px;font-weight:700;}
+.logo-name{font-size:1.3rem;font-weight:600;color:#fff;letter-spacing:-.2px;}
+.l-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:rgba(96,165,250,.9);margin-bottom:18px;}
+h1{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:600;line-height:1.2;margin-bottom:18px;color:#fff;}
+h1 span{color:#60a5fa;}
+.l-desc{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:440px;margin-bottom:48px;}
+
+/* STATS STRIP */
+.stats{display:flex;gap:0;margin-bottom:48px;}
+.stat{flex:1;padding:18px 20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);}
+.stat:first-child{border-radius:9px 0 0 9px;}
+.stat:last-child{border-radius:0 9px 9px 0;}
+.stat+.stat{border-left:none;}
+.stat-n{font-family:var(--mono);font-size:1.8rem;font-weight:500;color:#fff;}
+.stat-l{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;text-transform:uppercase;letter-spacing:.4px;}
+
+/* FEATURES */
+.features{display:flex;flex-direction:column;gap:12px;}
+.feat{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;}
+.feat-icon{font-size:1.1rem;margin-top:1px;flex-shrink:0;}
+.feat strong{display:block;font-size:13px;color:#fff;margin-bottom:2px;}
+.feat p{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5;}
+
+/* RIGHT PANEL — LOGIN */
+.right{display:flex;flex-direction:column;justify-content:center;padding:48px 48px;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);}
+.login-box{background:var(--white);border-radius:14px;padding:36px 36px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.lb-header{margin-bottom:28px;}
+.lb-title{font-size:1.4rem;font-weight:600;color:var(--g900);margin-bottom:4px;}
+.lb-sub{font-size:13px;color:var(--g400);}
+
+/* FORM */
+.form-group{margin-bottom:18px;}
+.fl{display:block;font-size:11px;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.fi-wrap{position:relative;}
+.fi-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--g300);font-size:14px;}
+.fi{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--g200);border-radius:7px;font-family:var(--font);font-size:14px;color:var(--g900);background:var(--white);outline:none;transition:.15s;}
+.fi:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(147,197,253,.2);}
+.fi::placeholder{color:var(--g300);}
+.pw-toggle{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--g400);cursor:pointer;font-size:13px;padding:2px;}
+.pw-toggle:hover{color:var(--g600);}
+
+/* CREDENTIAL HINT */
+.cred-hint{padding:10px 14px;background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:7px;margin-bottom:20px;}
+.ch-title{font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;}
+.ch-row{font-family:var(--mono);font-size:11.5px;color:var(--g600);display:flex;gap:10px;margin-bottom:3px;}
+.ch-label{color:var(--g400);min-width:70px;}
+
+/* LOGIN BTN */
+.btn-login{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:.15s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-login:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(15,32,68,.4);}
+.btn-login:disabled{background:var(--g200);cursor:not-allowed;transform:none;box-shadow:none;}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:none;}
+.btn-login.loading .spin{display:block;}
+.btn-login.loading .btn-txt{display:none;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ALERTS */
+.alert{padding:11px 14px;border-radius:7px;font-size:13px;margin-top:14px;display:none;border:1px solid;}
+.alert.err{background:var(--red-bg);border-color:var(--red-bd);color:var(--red);}
+.alert.ok{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+
+/* FOOTER */
+.lb-footer{margin-top:20px;text-align:center;font-size:12px;color:var(--g400);}
+.lb-footer a{color:var(--blue);text-decoration:none;}
+.lb-footer a:hover{text-decoration:underline;}
+
+/* DOCTOR WELCOME CARD */
+.welcome-card{display:none;padding:16px;background:var(--g50);border:1px solid var(--g100);border-radius:8px;margin-top:16px;}
+.wc-name{font-size:15px;font-weight:600;color:var(--g900);}
+.wc-spec{font-size:12px;color:var(--g400);margin-top:2px;}
+.wc-id{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:4px;}
+.wc-btn{display:block;margin-top:12px;padding:10px;background:var(--blue);color:#fff;text-align:center;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:.15s;}
+.wc-btn:hover{background:#1e40af;}
+
+@media(max-width:900px){
+  .main{grid-template-columns:1fr;}
+  .left{display:none;}
+  .right{justify-content:flex-start;padding:32px 20px;overflow-y:auto;}
+  body{overflow:auto;}
+}
+</style>
+</head>
+<body>
+<div class="bg-pattern"></div>
+<div class="bg-grid"></div>
+
+<div class="main">
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="logo">
+      <div class="logo-mark">M</div>
+      <div class="logo-name">MediTriage</div>
+    </div>
+
+    <div class="l-tag">Doctor Portal</div>
+    <h1>Your patients,<br><span>intelligently assigned.</span></h1>
+    <p class="l-desc">
+      AI automatically routes patients to the right specialist based on triage severity.
+      Critical cases go to emergency specialists. Your queue is always prioritised.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="stDocs">—</div><div class="stat-l">Doctors</div></div>
+      <div class="stat"><div class="stat-n" id="stAvail">—</div><div class="stat-l">Available</div></div>
+      <div class="stat"><div class="stat-n" id="stPts">—</div><div class="stat-l">Patients</div></div>
+      <div class="stat"><div class="stat-n" id="stCrit">—</div><div class="stat-l">Critical</div></div>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon">🤖</div>
+        <div><strong>Smart Patient Assignment</strong>
+        <p>AI assigns patients by risk level — specialist for critical, general for routine</p></div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📊</div>
+        <div><strong>Risk-Categorised Queue</strong>
+        <p>Your dashboard shows Critical → Urgent → Moderate → Routine automatically</p></div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔔</div>
+        <div><strong>Only Your Patients</strong>
+        <p>Each doctor sees only their assigned patients — no noise from others</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — LOGIN -->
+  <div class="right">
+    <div class="login-box">
+      <div class="lb-header">
+        <div class="lb-title">Doctor Sign In</div>
+        <div class="lb-sub">Use your hospital credentials to access your dashboard</div>
+      </div>
+
+      <!-- Credential hint -->
+      <div class="cred-hint">
+        <div class="ch-title">🔑 Your Login Credentials</div>
+        <div class="ch-row"><span class="ch-label">Username:</span> firstname.doctorID &nbsp;(e.g. <strong>sanjay.d0001</strong>)</div>
+        <div class="ch-row"><span class="ch-label">Password:</span> firstname + last 4 digits &nbsp;(e.g. <strong>sanjay0001</strong>)</div>
+        <div style="font-size:11px;color:var(--g400);margin-top:4px">Check your doctor ID card for your ID number</div>
+      </div>
+
+      <div class="form-group">
+        <label class="fl" for="username">Username</label>
+        <div class="fi-wrap">
+          <span class="fi-icon">👤</span>
+          <input class="fi" id="username" type="text" placeholder="e.g. sanjay.d0001" autocomplete="username"
+            onkeydown="if(event.key==='Enter')login()">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="fl" for="password">Password</label>
+        <div class="fi-wrap">
+          <span class="fi-icon">🔒</span>
+          <input class="fi" id="password" type="password" placeholder="••••••••••" autocomplete="current-password"
+            onkeydown="if(event.key==='Enter')login()">
+          <button class="pw-toggle" onclick="togglePw()" title="Show/hide password">👁</button>
+        </div>
+      </div>
+
+      <button class="btn-login" id="loginBtn" onclick="login()">
+        <div class="spin"></div>
+        <span class="btn-txt">Sign In to Dashboard</span>
+      </button>
+
+      <div class="alert" id="alertBox"></div>
+
+      <!-- Success card -->
+      <div class="welcome-card" id="welcomeCard">
+        <div class="wc-name" id="wcName"></div>
+        <div class="wc-spec" id="wcSpec"></div>
+        <div class="wc-id"   id="wcId"></div>
+        <a class="wc-btn" href="doctor.html" id="wcLink">Open My Dashboard →</a>
+      </div>
+
+      <div class="lb-footer">
+        Not a doctor? &nbsp;
+        <a href="nurse.html">Nurse Station</a> &nbsp;·&nbsp;
+        <a href="index.html">Patient Portal</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+
+// Load live stats
+async function loadStats() {
+  try {
+    const [s, dr] = await Promise.all([
+      fetch(`${API}/api/stats`).then(r=>r.json()),
+      fetch(`${API}/api/stats`).then(r=>r.json())
+    ]);
+    document.getElementById('stPts').textContent   = s.total   || '—';
+    document.getElementById('stCrit').textContent  = s.critical|| '—';
+    document.getElementById('stAvail').textContent = s.doctors_available || '—';
+    document.getElementById('stDocs').textContent  = '1000';
+  } catch {}
+}
+loadStats();
+
+function togglePw() {
+  const f = document.getElementById('password');
+  f.type = f.type === 'password' ? 'text' : 'password';
+}
+
+function showAlert(msg, type='err') {
+  const a = document.getElementById('alertBox');
+  a.className = `alert ${type}`;
+  a.textContent = msg;
+  a.style.display = 'block';
+}
+
+async function login() {
+  const username = document.getElementById('username').value.trim().toLowerCase();
+  const password = document.getElementById('password').value;
+  if (!username || !password) { showAlert('⚠️ Please enter username and password.'); return; }
+
+  const btn = document.getElementById('loginBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(`${API}/api/doctor/login`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ username, password })
+    });
+    const d = await r.json();
+
+    if (!r.ok) {
+      showAlert(`❌ ${d.detail || 'Invalid credentials'}`);
+      btn.classList.remove('loading'); btn.disabled = false;
+      return;
+    }
+
+    // Save to localStorage
+    localStorage.setItem('doctor_name',     d.name);
+    localStorage.setItem('doctor_id',       d.doctor_id);
+    localStorage.setItem('doctor_db_id',    d.doctor_db_id);
+    localStorage.setItem('doctor_spec',     d.speciality);
+    localStorage.setItem('doctor_dept',     d.department);
+    localStorage.setItem('doctor_room',     d.room);
+    localStorage.setItem('doctor_username', username);
+
+    // Show welcome card
+    document.getElementById('alertBox').style.display = 'none';
+    const wc = document.getElementById('welcomeCard');
+    wc.style.display = 'block';
+    document.getElementById('wcName').textContent = `✅ ${d.name}`;
+    document.getElementById('wcSpec').textContent = `${d.speciality} · Room ${d.room}`;
+    document.getElementById('wcId').textContent   = `ID: ${d.doctor_id} · ${d.department}`;
+
+    // Redirect after short delay
+    setTimeout(() => { window.location.href = 'doctor.html'; }, 1000);
+
+  } catch (e) {
+    showAlert('❌ Cannot connect to server. Is backend running on port 8000?');
+    btn.classList.remove('loading'); btn.disabled = false;
+  }
+}
+
+// Auto-fill if already logged in
+window.onload = () => {
+  const dn = localStorage.getItem('doctor_username');
+  if (dn) document.getElementById('username').value = dn;
+  loadStats();
+};
+</script>
+</body>
+</html>

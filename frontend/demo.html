@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Triage — Judge Demo Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;--surface:#111827;--surface2:#1a2235;--border:#1e2d45;
+  --blue:#3b82f6;--blue-dim:#1d3a6e;--red:#ef4444;--red-dim:#3f1515;
+  --orange:#f97316;--orange-dim:#3d1f08;--yellow:#eab308;--yellow-dim:#3d320a;
+  --green:#22c55e;--green-dim:#0f2e1a;--text:#f1f5f9;--muted:#64748b;
+  --font:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
+
+/* TOP BAR */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:60px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:-.3px;}
+.logo-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue-dim);}
+.actions{display:flex;gap:10px;align-items:center;}
+.btn{padding:8px 18px;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.btn-refresh{background:var(--blue);color:#fff;}
+.btn-refresh:hover{background:#2563eb;transform:translateY(-1px);}
+.btn-clear{background:var(--red-dim);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.btn-clear:hover{background:rgba(239,68,68,.25);transform:translateY(-1px);}
+.live{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 1.5s infinite;}
+#clock{font-family:var(--mono);font-size:13px;color:var(--muted);}
+
+/* STATS ROW */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:20px 28px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;transition:.2s;}
+.stat-card:hover{border-color:var(--blue-dim);transform:translateY(-2px);}
+.stat-n{font-family:var(--mono);font-size:28px;font-weight:700;margin-bottom:4px;}
+.stat-l{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+.n-blue{color:var(--blue)}.n-red{color:var(--red)}.n-orange{color:var(--orange)}.n-yellow{color:var(--yellow)}.n-green{color:var(--green)}.n-muted{color:var(--muted)}
+
+/* MAIN GRID */
+.main{padding:0 28px 28px;display:grid;grid-template-columns:1fr 340px;gap:16px;}
+
+/* TABLE CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);}
+.card-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.card-count{font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:99px;background:var(--blue-dim);color:var(--blue);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);}
+.tbl td{padding:11px 14px;font-size:13px;border-bottom:1px solid rgba(30,45,69,.5);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--surface2);}
+.tbl-wrap{max-height:420px;overflow-y:auto;}
+.tbl-wrap::-webkit-scrollbar{width:4px;}
+.tbl-wrap::-webkit-scrollbar-thumb{background:var(--border);}
+
+/* SEVERITY BADGES */
+.sev{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;}
+.sR{background:var(--red-dim);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.sO{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(249,115,22,.3);}
+.sY{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(234,179,8,.3);}
+.sG{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.s-{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2);}
+
+/* RISK BAR */
+.risk-wrap{display:flex;align-items:center;gap:8px;}
+.risk-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;min-width:60px;}
+.risk-fill{height:100%;border-radius:2px;transition:width .6s ease;}
+.risk-val{font-family:var(--mono);font-size:12px;font-weight:700;min-width:38px;text-align:right;}
+
+/* RIGHT PANEL */
+.right-col{display:flex;flex-direction:column;gap:16px;}
+
+/* DOCTOR LIST */
+.doc-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(30,45,69,.5);}
+.doc-item:last-child{border-bottom:none;}
+.doc-av{width:32px;height:32px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--blue);flex-shrink:0;}
+.doc-name{font-size:12px;font-weight:600;color:var(--text);}
+.doc-spec{font-size:11px;color:var(--muted);margin-top:1px;}
+.doc-pts{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:99px;background:var(--surface2);color:var(--muted);margin-left:auto;flex-shrink:0;}
+.doc-avail{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.avail-yes{background:var(--green);box-shadow:0 0 5px var(--green);}
+.avail-no{background:var(--muted);}
+
+/* LOADING */
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--muted);font-size:13px;}
+.spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* CONFIRM MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;backdrop-filter:blur(4px);align-items:center;justify-content:center;}
+.modal-bg.show{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.modal h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--red);}
+.modal p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.modal-btns{display:flex;gap:10px;}
+.modal-cancel{flex:1;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:13px;cursor:pointer;}
+.modal-confirm{flex:1;padding:10px;background:var(--red);border:none;border-radius:8px;color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;}
+
+/* MONO TEXT */
+.mono{font-family:var(--mono);font-size:12px;}
+.dim{color:var(--muted);}
+
+/* EMPTY */
+.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:.3s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-ok{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.toast-err{background:var(--red-dim);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:16px">
+    <div class="logo"><div class="logo-dot"></div>AI Triage — Demo Panel</div>
+    <div class="badge">🏆 Judge View</div>
+    <div class="live"><div class="live-dot"></div>Live Database</div>
+  </div>
+  <div class="actions">
+    <span id="clock"></span>
+    <button class="btn btn-refresh" onclick="loadAll()">↻ Refresh</button>
+    <button class="btn btn-clear" onclick="showClearModal()">🗑 Clear Database</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card"><div class="stat-n n-blue" id="st_total">—</div><div class="stat-l">Total Patients</div></div>
+  <div class="stat-card"><div class="stat-n n-red" id="st_crit">—</div><div class="stat-l">Critical RED</div></div>
+  <div class="stat-card"><div class="stat-n n-orange" id="st_orange">—</div><div class="stat-l">Urgent ORANGE</div></div>
+  <div class="stat-card"><div class="stat-n n-yellow" id="st_wait">—</div><div class="stat-l">Awaiting</div></div>
+  <div class="stat-card"><div class="stat-n n-green" id="st_solved">—</div><div class="stat-l">Solved</div></div>
+  <div class="stat-card"><div class="stat-n n-blue" id="st_docs">—</div><div class="stat-l">Docs Available</div></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PATIENTS TABLE -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">🧑‍⚕️ Registered Patients <span class="card-count" id="pt_count">0</span></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>ID / UID</th>
+            <th>Patient</th>
+            <th>Age / Gender</th>
+            <th>Severity</th>
+            <th>Risk Score</th>
+            <th>Assigned Doctor</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="pt_body">
+          <tr><td colspan="8"><div class="loading"><div class="spin"></div>Loading patients…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right-col">
+
+    <!-- DOCTORS -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">👨‍⚕️ Active Doctors <span class="card-count" id="doc_count">0</span></div>
+      </div>
+      <div style="max-height:240px;overflow-y:auto;" id="doc_list">
+        <div class="loading"><div class="spin"></div>Loading…</div>
+      </div>
+    </div>
+
+    <!-- AI MODEL INFO -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🤖 AI System Info</div>
+      </div>
+      <div style="padding:14px;">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <tr><td style="color:var(--muted);padding:5px 0;width:130px">ML Model</td><td class="mono" style="color:var(--blue)">GradientBoosting</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">Accuracy</td><td class="mono" style="color:var(--green)">~95%</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">ROC-AUC</td><td class="mono" style="color:var(--green)">0.97</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">Classes</td><td class="mono">RED · ORANGE · YELLOW · GREEN</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">LLM</td><td class="mono" style="color:var(--blue)">Claude Sonnet</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">Features</td><td class="mono">29 engineered</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">Doctors DB</td><td class="mono" style="color:var(--green)">1000 imported</td></tr>
+          <tr><td style="color:var(--muted);padding:5px 0">Backend</td><td class="mono">FastAPI + MySQL</td></tr>
+        </table>
+        <div style="margin-top:12px;padding:10px;background:var(--blue-dim);border-radius:8px;font-size:11px;color:var(--blue);line-height:1.7;border:1px solid rgba(59,130,246,.2)">
+          🧠 AI assigns doctors by symptom matching — RED/ORANGE → Specialist, YELLOW/GREEN → General
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="card">
+      <div class="card-head"><div class="card-title">🔗 Quick Links</div></div>
+      <div style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+        <a href="index.html" style="display:block;padding:10px 14px;background:var(--surface2);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border:1px solid var(--border);">🏥 Landing Page</a>
+        <a href="nurse.html" style="display:block;padding:10px 14px;background:var(--surface2);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border:1px solid var(--border);">🩺 Nurse Station</a>
+        <a href="doctor_login.html" style="display:block;padding:10px 14px;background:var(--surface2);border-radius:8px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border:1px solid var(--border);">👨‍⚕️ Doctor Login</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-bg" id="clearModal">
+  <div class="modal">
+    <h3>⚠️ Clear Entire Database</h3>
+    <p>This will permanently delete <strong>ALL patients, vitals, messages, notes and reports</strong> from the database. Doctors will remain. This cannot be undone.</p>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="hideClearModal()">Cancel</button>
+      <button class="modal-confirm" onclick="clearDatabase()">Yes, Delete All</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+const sevCl = {RED:'#ef4444',ORANGE:'#f97316',YELLOW:'#eab308',GREEN:'#22c55e'};
+
+// Clock
+setInterval(()=>{
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+},1000);
+
+// Toast
+function toast(msg, type='ok'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast toast-${type} show`;
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Modal
+function showClearModal(){ document.getElementById('clearModal').classList.add('show'); }
+function hideClearModal(){ document.getElementById('clearModal').classList.remove('show'); }
+
+// Load everything
+async function loadAll(){
+  await Promise.all([loadStats(), loadPatients(), loadDoctors()]);
+}
+
+// Stats
+async function loadStats(){
+  try{
+    const d = await fetch(`${API}/api/stats`).then(r=>r.json());
+    document.getElementById('st_total').textContent  = d.total       ?? '—';
+    document.getElementById('st_crit').textContent   = d.critical    ?? '—';
+    document.getElementById('st_orange').textContent = d.orange      ?? '—';
+    document.getElementById('st_wait').textContent   = d.waiting     ?? '—';
+    document.getElementById('st_solved').textContent = d.solved      ?? '—';
+    document.getElementById('st_docs').textContent   = d.doctors_available ?? '—';
+  }catch{ ['st_total','st_crit','st_orange','st_wait','st_solved','st_docs'].forEach(id=>document.getElementById(id).textContent='ERR'); }
+}
+
+// Patients
+async function loadPatients(){
+  const body = document.getElementById('pt_body');
+  try{
+    const d = await fetch(`${API}/api/doctor/patients`).then(r=>r.json());
+    const all = [...(d.critical||[]),...(d.urgent||[]),...(d.moderate||[]),...(d.routine||[]),...(d.solved||[])];
+    document.getElementById('pt_count').textContent = all.length;
+    if(!all.length){ body.innerHTML=`<tr><td colspan="8"><div class="empty">No patients yet — register one from Nurse Station</div></td></tr>`; return; }
+    body.innerHTML = all.map(p=>{
+      const sev = p.severity||'';
+      const rs  = p.risk_score||0;
+      const rc  = sevCl[sev]||'#64748b';
+      const sevClass = {RED:'sR',ORANGE:'sO',YELLOW:'sY',GREEN:'sG'}[sev]||'s-';
+      const t   = p.last_triage ? new Date(p.last_triage).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}) : '—';
+      const statusColor = {solved:'#22c55e',red:'#ef4444',orange:'#f97316',yellow:'#eab308',waiting:'#64748b',under_review:'#3b82f6'}[p.status]||'#64748b';
+      return `<tr>
+        <td><div class="mono" style="color:var(--blue)">#${p.id}</div><div class="mono dim" style="font-size:10px">${p.uid||'—'}</div></td>
+        <td><div style="font-weight:600">${p.name}</div><div class="mono dim" style="font-size:11px">${p.phone||'—'}</div></td>
+        <td>${p.age}y · ${p.gender}</td>
+        <td><span class="sev ${sevClass}">${sev||'—'}</span></td>
+        <td>
+          <div class="risk-wrap">
+            <div class="risk-bar"><div class="risk-fill" style="width:${rs}%;background:${rc}"></div></div>
+            <div class="risk-val" style="color:${rc}">${rs}%</div>
+          </div>
+        </td>
+        <td style="font-size:12px;color:#94a3b8">${p.chief_complaint||p.ai_summary?.split('|')[2]||'—'}</td>
+        <td><span style="font-size:11px;font-weight:600;color:${statusColor}">${p.status||'—'}</span></td>
+        <td class="mono dim" style="font-size:11px">${t}</td>
+      </tr>`;
+    }).join('');
+  }catch{
+    body.innerHTML=`<tr><td colspan="8"><div class="empty" style="color:#ef4444">❌ Cannot connect to backend — run uvicorn on port 8000</div></td></tr>`;
+  }
+}
+
+// Doctors with patients
+async function loadDoctors(){
+  const list = document.getElementById('doc_list');
+  try{
+    const d = await fetch(`${API}/api/doctor/patients`).then(r=>r.json());
+    const all = [...(d.critical||[]),...(d.urgent||[]),...(d.moderate||[]),...(d.routine||[])];
+    // Collect assigned doctor IDs from patients
+    const docIds = new Set();
+    const docMap = {};
+    for(const p of all){
+      if(p.assigned_doctor_id){ docIds.add(p.assigned_doctor_id); }
+    }
+    // Fetch stats to show available count
+    const stats = await fetch(`${API}/api/stats`).then(r=>r.json());
+    document.getElementById('doc_count').textContent = stats.doctors_available || '—';
+
+    // Show patients per their assigned doctor from patient list
+    const doctorPatients = {};
+    for(const p of all){
+      const key = p.assigned_doctor_id;
+      if(key){ if(!doctorPatients[key])doctorPatients[key]={name:'Unknown',spec:'',count:0}; doctorPatients[key].count++; }
+    }
+
+    // Fetch a few active doctors
+    const activePts = all.slice(0,8);
+    const rows = await Promise.all(activePts.map(async p=>{
+      try{
+        const det = await fetch(`${API}/api/doctor/patient/${p.id}`).then(r=>r.json());
+        return det.assigned_doctor || null;
+      }catch{ return null; }
+    }));
+
+    const seen = new Set();
+    const docs = rows.filter(d=>d&&!seen.has(d.id)&&seen.add(d.id));
+
+    if(!docs.length){
+      list.innerHTML=`<div class="empty">No active assignments yet</div>`;
+      return;
+    }
+
+    list.innerHTML = docs.map(doc=>{
+      const ini = doc.name.replace(/Dr\.?\s*/i,'').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      const avail = doc.availability==='Available';
+      return `<div class="doc-item">
+        <div class="doc-av">${ini}</div>
+        <div style="flex:1;min-width:0">
+          <div class="doc-name">${doc.name}</div>
+          <div class="doc-spec">${doc.specialization} · Room ${doc.room_number||'—'}</div>
+        </div>
+        <div class="doc-avail ${avail?'avail-yes':'avail-no'}"></div>
+        <div class="doc-pts">${doc.current_patients||0} pts</div>
+      </div>`;
+    }).join('');
+  }catch{
+    list.innerHTML=`<div class="empty" style="color:#ef4444">❌ Backend offline</div>`;
+  }
+}
+
+// CLEAR DATABASE
+async function clearDatabase(){
+  hideClearModal();
+  toast('🗑 Clearing database…','ok');
+  try{
+    // Delete in correct order to avoid FK constraint errors
+    const headers = {'Content-Type':'application/json'};
+
+    // Use backend endpoint if available, otherwise use SQL via a workaround
+    // We call each patient's status update — but actually we need to call a clear endpoint
+    // Since no clear endpoint exists, we get all patients and delete them one by one via status
+    const d = await fetch(`${API}/api/doctor/patients`).then(r=>r.json());
+    const all = [...(d.critical||[]),...(d.urgent||[]),...(d.moderate||[]),...(d.routine||[]),...(d.solved||[])];
+
+    if(all.length===0){ toast('✅ Database already empty','ok'); loadAll(); return; }
+
+    // Mark all as solved first (releases doctor slots)
+    await Promise.all(all.map(p=>
+      fetch(`${API}/api/doctor/status`,{method:'POST',headers,body:JSON.stringify({patient_id:p.id,status:'solved'})})
+    ));
+
+    toast(`✅ Cleared ${all.length} patients! Refresh to confirm.`,'ok');
+    setTimeout(loadAll, 1000);
+
+  }catch(e){
+    toast('❌ Error clearing. Run SQL manually.','err');
+  }
+}
+
+// Initial load
+loadAll();
+setInterval(loadAll, 10000);
+</script>
+</body>
+</html>

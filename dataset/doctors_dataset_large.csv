@@ -1,0 +1,1001 @@
+doctor_id,doctor_name,specialization,doctor_type,department,risk_level_handled,shift_start,shift_end,max_patients_per_hour,room_number,availability
+D0001,Dr Sanjay Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,5,353,Busy
+D0002,Dr Anil Singh,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,7,155,Available
+D0003,Dr Neha Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,446,Available
+D0004,Dr Anita Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,134,Available
+D0005,Dr Sanjay Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,5,341,On Leave
+D0006,Dr Neha Bansal,General Medicine,General,OPD,Low|Medium,08:00,14:00,5,308,Available
+D0007,Dr Meera Singh,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,290,On Leave
+D0008,Dr Nisha Bansal,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,248,Busy
+D0009,Dr Rohan Kumar,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,357,Busy
+D0010,Dr Amit Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,221,Available
+D0011,Dr Sanjay Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,117,Available
+D0012,Dr Rohan Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,187,Busy
+D0013,Dr Amit Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,6,362,On Leave
+D0014,Dr Nisha Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,8,386,Busy
+D0015,Dr Meera Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,6,294,On Leave
+D0016,Dr Anil Kapoor,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,194,Available
+D0017,Dr Neha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,246,On Leave
+D0018,Dr Nisha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,5,122,Available
+D0019,Dr Anita Bansal,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,107,Busy
+D0020,Dr Anil Bansal,General Medicine,General,OPD,Low|Medium,00:00,08:00,6,112,Busy
+D0021,Dr Anita Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,4,107,On Leave
+D0022,Dr Vikas Verma,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,4,193,Available
+D0023,Dr Anita Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,125,On Leave
+D0024,Dr Rahul Mehta,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,192,On Leave
+D0025,Dr Rohan Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,270,On Leave
+D0026,Dr Meera Kapoor,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,252,On Leave
+D0027,Dr Priya Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,140,On Leave
+D0028,Dr Arjun Nair,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,283,Busy
+D0029,Dr Meera Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,5,195,Available
+D0030,Dr Rohan Verma,General Medicine,General,OPD,Low|Medium,08:00,14:00,8,383,On Leave
+D0031,Dr Sanjay Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,7,383,On Leave
+D0032,Dr Sanjay Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,121,Available
+D0033,Dr Sneha Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,4,175,Busy
+D0034,Dr Anil Sharma,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,302,On Leave
+D0035,Dr Amit Gupta,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,4,362,Available
+D0036,Dr Anita Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,443,Busy
+D0037,Dr Sneha Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,332,Available
+D0038,Dr Rahul Mehta,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,116,Busy
+D0039,Dr Sanjay Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,161,On Leave
+D0040,Dr Anil Sharma,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,7,315,Available
+D0041,Dr Anita Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,160,On Leave
+D0042,Dr Rahul Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,290,Busy
+D0043,Dr Neha Kapoor,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,7,367,Busy
+D0044,Dr Priya Sharma,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,124,On Leave
+D0045,Dr Raj Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,324,Busy
+D0046,Dr Rohan Singh,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,269,On Leave
+D0047,Dr Vikas Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,8,233,On Leave
+D0048,Dr Neha Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,175,Busy
+D0049,Dr Vikas Verma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,441,Busy
+D0050,Dr Pooja Gupta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,341,Busy
+D0051,Dr Sanjay Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,7,131,Available
+D0052,Dr Meera Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,262,Available
+D0053,Dr Kavita Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,4,439,Busy
+D0054,Dr Kavita Gupta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,5,389,Available
+D0055,Dr Vikas Nair,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,6,101,Available
+D0056,Dr Amit Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,415,Available
+D0057,Dr Priya Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,299,On Leave
+D0058,Dr Kavita Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,109,Busy
+D0059,Dr Sneha Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,7,441,Available
+D0060,Dr Sneha Bansal,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,7,404,Busy
+D0061,Dr Priya Rao,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,8,416,Busy
+D0062,Dr Amit Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,5,364,Busy
+D0063,Dr Nisha Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,6,314,Busy
+D0064,Dr Nisha Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,4,277,Busy
+D0065,Dr Anil Iyer,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,323,Busy
+D0066,Dr Vikas Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,409,Available
+D0067,Dr Sneha Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,230,On Leave
+D0068,Dr Rahul Agarwal,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,4,259,Busy
+D0069,Dr Meera Patel,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,4,387,Busy
+D0070,Dr Meera Kapoor,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,8,102,Busy
+D0071,Dr Neha Bansal,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,6,220,On Leave
+D0072,Dr Vikas Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,7,261,Busy
+D0073,Dr Kavita Patel,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,8,136,Available
+D0074,Dr Raj Sharma,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,5,199,Busy
+D0075,Dr Priya Joshi,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,4,412,Available
+D0076,Dr Rohan Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,5,419,Available
+D0077,Dr Rohan Verma,General Medicine,General,OPD,Low|Medium,10:00,18:00,6,106,Available
+D0078,Dr Kavita Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,177,Available
+D0079,Dr Neha Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,287,Available
+D0080,Dr Pooja Nair,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,5,112,Busy
+D0081,Dr Arjun Kumar,General Medicine,General,OPD,Low|Medium,00:00,08:00,6,199,Busy
+D0082,Dr Arjun Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,6,269,On Leave
+D0083,Dr Rohan Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,7,154,Busy
+D0084,Dr Raj Kapoor,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,187,Available
+D0085,Dr Priya Kumar,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,8,215,Busy
+D0086,Dr Sanjay Sharma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,4,321,Available
+D0087,Dr Kavita Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,8,447,Busy
+D0088,Dr Pooja Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,4,438,On Leave
+D0089,Dr Amit Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,341,Available
+D0090,Dr Raj Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,414,On Leave
+D0091,Dr Anita Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,312,On Leave
+D0092,Dr Kavita Bansal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,259,Busy
+D0093,Dr Sanjay Rao,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,145,Busy
+D0094,Dr Kavita Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,214,Available
+D0095,Dr Neha Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,6,198,On Leave
+D0096,Dr Raj Verma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,6,412,Available
+D0097,Dr Vikas Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,4,308,Busy
+D0098,Dr Kavita Gupta,General Medicine,General,OPD,Low|Medium,08:00,14:00,8,415,Busy
+D0099,Dr Vikas Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,5,150,On Leave
+D0100,Dr Amit Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,447,On Leave
+D0101,Dr Anita Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,208,On Leave
+D0102,Dr Rahul Bansal,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,263,Busy
+D0103,Dr Sanjay Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,143,Available
+D0104,Dr Rohan Bansal,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,428,Available
+D0105,Dr Rahul Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,167,On Leave
+D0106,Dr Meera Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,6,150,Available
+D0107,Dr Rohan Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,434,Available
+D0108,Dr Anil Kapoor,General Medicine,General,OPD,Low|Medium,10:00,18:00,8,120,Busy
+D0109,Dr Arjun Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,5,190,Busy
+D0110,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,341,Available
+D0111,Dr Neha Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,122,Available
+D0112,Dr Vikas Bansal,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,7,149,Busy
+D0113,Dr Rohan Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,4,326,On Leave
+D0114,Dr Neha Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,396,Available
+D0115,Dr Sanjay Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,4,393,On Leave
+D0116,Dr Neha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,159,On Leave
+D0117,Dr Raj Rao,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,4,322,Busy
+D0118,Dr Raj Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,271,Busy
+D0119,Dr Neha Patel,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,264,On Leave
+D0120,Dr Raj Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,364,Busy
+D0121,Dr Sneha Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,208,Available
+D0122,Dr Neha Kumar,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,361,Busy
+D0123,Dr Kavita Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,6,447,On Leave
+D0124,Dr Neha Singh,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,6,208,On Leave
+D0125,Dr Neha Sharma,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,6,239,Busy
+D0126,Dr Rohan Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,7,304,Available
+D0127,Dr Anita Gupta,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,6,214,Available
+D0128,Dr Vikas Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,245,Available
+D0129,Dr Raj Kapoor,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,6,101,Available
+D0130,Dr Vikas Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,112,On Leave
+D0131,Dr Nisha Rao,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,8,278,On Leave
+D0132,Dr Pooja Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,396,Busy
+D0133,Dr Priya Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,4,221,Busy
+D0134,Dr Sanjay Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,6,334,Busy
+D0135,Dr Pooja Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,6,415,Available
+D0136,Dr Vikas Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,237,Available
+D0137,Dr Pooja Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,438,Busy
+D0138,Dr Arjun Iyer,General Medicine,General,OPD,Low|Medium,10:00,18:00,5,372,Available
+D0139,Dr Raj Nair,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,246,Busy
+D0140,Dr Meera Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,133,Busy
+D0141,Dr Kavita Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,4,366,Busy
+D0142,Dr Vikas Bansal,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,8,355,On Leave
+D0143,Dr Pooja Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,4,111,On Leave
+D0144,Dr Vikas Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,5,135,Busy
+D0145,Dr Anil Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,5,328,Busy
+D0146,Dr Sanjay Singh,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,7,449,On Leave
+D0147,Dr Neha Sharma,General Medicine,General,OPD,Low|Medium,09:00,17:00,8,356,On Leave
+D0148,Dr Kavita Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,4,325,On Leave
+D0149,Dr Pooja Mehta,General Medicine,General,OPD,Low|Medium,10:00,18:00,5,144,On Leave
+D0150,Dr Amit Patel,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,8,298,Available
+D0151,Dr Sneha Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,5,282,Available
+D0152,Dr Amit Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,5,169,Available
+D0153,Dr Anita Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,6,284,Busy
+D0154,Dr Nisha Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,174,Busy
+D0155,Dr Amit Verma,General Medicine,General,OPD,Low|Medium,08:00,14:00,8,195,Busy
+D0156,Dr Priya Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,5,292,Busy
+D0157,Dr Sanjay Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,5,117,On Leave
+D0158,Dr Kavita Kumar,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,296,On Leave
+D0159,Dr Kavita Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,301,Busy
+D0160,Dr Sanjay Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,236,Busy
+D0161,Dr Nisha Patel,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,7,385,Available
+D0162,Dr Sneha Verma,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,7,287,Busy
+D0163,Dr Rahul Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,109,On Leave
+D0164,Dr Pooja Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,423,On Leave
+D0165,Dr Neha Mehta,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,323,Busy
+D0166,Dr Raj Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,7,290,Busy
+D0167,Dr Raj Kapoor,General Medicine,General,OPD,Low|Medium,00:00,08:00,5,229,Busy
+D0168,Dr Meera Nair,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,252,Available
+D0169,Dr Sneha Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,278,On Leave
+D0170,Dr Sneha Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,4,231,Busy
+D0171,Dr Arjun Singh,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,439,Available
+D0172,Dr Raj Iyer,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,312,Busy
+D0173,Dr Pooja Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,7,221,On Leave
+D0174,Dr Priya Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,287,On Leave
+D0175,Dr Arjun Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,292,On Leave
+D0176,Dr Pooja Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,6,137,On Leave
+D0177,Dr Amit Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,5,144,On Leave
+D0178,Dr Amit Bansal,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,415,Available
+D0179,Dr Anil Singh,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,5,159,Busy
+D0180,Dr Vikas Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,4,132,Available
+D0181,Dr Sneha Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,260,Busy
+D0182,Dr Neha Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,404,Busy
+D0183,Dr Vikas Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,245,Busy
+D0184,Dr Vikas Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,7,350,Busy
+D0185,Dr Raj Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,5,259,Busy
+D0186,Dr Neha Kapoor,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,4,396,On Leave
+D0187,Dr Pooja Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,5,183,Available
+D0188,Dr Arjun Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,8,323,Available
+D0189,Dr Kavita Rao,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,378,Available
+D0190,Dr Kavita Rao,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,117,Busy
+D0191,Dr Anita Rao,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,5,190,Busy
+D0192,Dr Nisha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,419,Available
+D0193,Dr Meera Verma,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,381,On Leave
+D0194,Dr Kavita Patel,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,8,395,Busy
+D0195,Dr Pooja Joshi,General Medicine,General,OPD,Low|Medium,00:00,08:00,4,395,On Leave
+D0196,Dr Sneha Patel,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,435,On Leave
+D0197,Dr Rohan Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,6,387,On Leave
+D0198,Dr Rohan Nair,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,124,Busy
+D0199,Dr Pooja Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,408,On Leave
+D0200,Dr Amit Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,317,Busy
+D0201,Dr Amit Kumar,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,4,382,On Leave
+D0202,Dr Anil Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,5,405,Available
+D0203,Dr Pooja Patel,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,230,Busy
+D0204,Dr Raj Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,201,Available
+D0205,Dr Rahul Sharma,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,167,Busy
+D0206,Dr Raj Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,8,144,Available
+D0207,Dr Kavita Nair,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,300,Available
+D0208,Dr Nisha Kapoor,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,322,Busy
+D0209,Dr Kavita Bansal,General Medicine,General,OPD,Low|Medium,12:00,20:00,8,324,On Leave
+D0210,Dr Pooja Mehta,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,351,Available
+D0211,Dr Nisha Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,5,190,Busy
+D0212,Dr Neha Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,196,Busy
+D0213,Dr Nisha Mehta,General Medicine,General,OPD,Low|Medium,09:00,17:00,8,110,Busy
+D0214,Dr Pooja Nair,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,416,On Leave
+D0215,Dr Amit Rao,General Medicine,General,OPD,Low|Medium,08:00,14:00,8,273,Available
+D0216,Dr Vikas Verma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,184,Busy
+D0217,Dr Priya Nair,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,5,444,Busy
+D0218,Dr Meera Patel,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,8,349,On Leave
+D0219,Dr Raj Joshi,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,6,129,Busy
+D0220,Dr Arjun Singh,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,332,Busy
+D0221,Dr Vikas Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,8,138,On Leave
+D0222,Dr Vikas Kumar,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,8,118,Available
+D0223,Dr Nisha Nair,General Medicine,General,OPD,Low|Medium,12:00,20:00,4,146,On Leave
+D0224,Dr Pooja Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,8,226,Busy
+D0225,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,323,Available
+D0226,Dr Meera Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,6,396,On Leave
+D0227,Dr Rohan Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,312,On Leave
+D0228,Dr Meera Iyer,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,6,367,Available
+D0229,Dr Sanjay Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,5,129,Available
+D0230,Dr Arjun Iyer,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,275,Available
+D0231,Dr Anita Joshi,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,4,439,On Leave
+D0232,Dr Sneha Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,422,Available
+D0233,Dr Anita Singh,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,434,On Leave
+D0234,Dr Kavita Agarwal,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,372,On Leave
+D0235,Dr Rohan Iyer,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,8,104,Busy
+D0236,Dr Meera Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,192,Busy
+D0237,Dr Sanjay Singh,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,245,Busy
+D0238,Dr Sanjay Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,8,156,Available
+D0239,Dr Nisha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,6,447,On Leave
+D0240,Dr Rohan Nair,General Medicine,General,OPD,Low|Medium,09:00,17:00,7,170,Busy
+D0241,Dr Sanjay Verma,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,254,Available
+D0242,Dr Pooja Joshi,General Medicine,General,OPD,Low|Medium,00:00,08:00,5,190,Available
+D0243,Dr Anil Nair,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,368,Available
+D0244,Dr Rohan Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,244,Available
+D0245,Dr Anil Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,5,217,Available
+D0246,Dr Arjun Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,255,Available
+D0247,Dr Amit Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,235,Available
+D0248,Dr Anita Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,257,Available
+D0249,Dr Vikas Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,4,119,Busy
+D0250,Dr Sanjay Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,442,Available
+D0251,Dr Meera Patel,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,372,Busy
+D0252,Dr Meera Gupta,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,8,191,Available
+D0253,Dr Rahul Verma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,324,On Leave
+D0254,Dr Nisha Agarwal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,427,Available
+D0255,Dr Anita Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,398,On Leave
+D0256,Dr Kavita Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,5,309,On Leave
+D0257,Dr Sanjay Rao,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,4,117,Available
+D0258,Dr Arjun Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,5,423,Available
+D0259,Dr Rahul Rao,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,277,Available
+D0260,Dr Pooja Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,7,297,Available
+D0261,Dr Sneha Mehta,General Medicine,General,OPD,Low|Medium,10:00,18:00,6,345,On Leave
+D0262,Dr Raj Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,256,Available
+D0263,Dr Kavita Nair,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,200,On Leave
+D0264,Dr Pooja Gupta,General Medicine,General,OPD,Low|Medium,10:00,18:00,4,197,Available
+D0265,Dr Rohan Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,230,Available
+D0266,Dr Neha Sharma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,7,395,Busy
+D0267,Dr Rahul Singh,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,408,Busy
+D0268,Dr Anil Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,5,326,Available
+D0269,Dr Sneha Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,8,313,On Leave
+D0270,Dr Vikas Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,7,195,Busy
+D0271,Dr Amit Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,414,On Leave
+D0272,Dr Vikas Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,391,On Leave
+D0273,Dr Rohan Singh,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,314,Busy
+D0274,Dr Raj Verma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,323,Available
+D0275,Dr Vikas Bansal,General Medicine,General,OPD,Low|Medium,08:00,14:00,4,188,On Leave
+D0276,Dr Amit Nair,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,381,Busy
+D0277,Dr Kavita Verma,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,5,191,Available
+D0278,Dr Meera Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,134,Busy
+D0279,Dr Nisha Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,7,339,On Leave
+D0280,Dr Sanjay Verma,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,5,109,Available
+D0281,Dr Pooja Rao,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,305,Available
+D0282,Dr Priya Singh,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,212,Available
+D0283,Dr Raj Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,5,368,Busy
+D0284,Dr Rohan Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,4,222,Available
+D0285,Dr Anil Patel,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,8,434,On Leave
+D0286,Dr Nisha Rao,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,5,102,Busy
+D0287,Dr Rahul Singh,General Medicine,General,OPD,Low|Medium,00:00,08:00,8,170,Available
+D0288,Dr Arjun Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,6,290,On Leave
+D0289,Dr Rohan Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,324,Busy
+D0290,Dr Meera Bansal,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,156,On Leave
+D0291,Dr Anil Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,146,Busy
+D0292,Dr Sanjay Singh,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,7,190,Busy
+D0293,Dr Pooja Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,8,403,Busy
+D0294,Dr Anita Kapoor,General Medicine,General,OPD,Low|Medium,00:00,08:00,8,365,Busy
+D0295,Dr Meera Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,6,304,Busy
+D0296,Dr Amit Agarwal,General Medicine,General,OPD,Low|Medium,16:00,00:00,4,265,On Leave
+D0297,Dr Neha Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,282,Busy
+D0298,Dr Neha Bansal,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,324,Busy
+D0299,Dr Anil Rao,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,8,175,Available
+D0300,Dr Raj Rao,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,429,Available
+D0301,Dr Pooja Singh,General Medicine,General,OPD,Low|Medium,12:00,20:00,7,401,Available
+D0302,Dr Kavita Singh,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,433,On Leave
+D0303,Dr Sanjay Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,104,On Leave
+D0304,Dr Neha Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,250,Available
+D0305,Dr Raj Rao,General Medicine,General,OPD,Low|Medium,09:00,17:00,7,183,On Leave
+D0306,Dr Nisha Mehta,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,4,347,On Leave
+D0307,Dr Anita Kumar,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,4,180,On Leave
+D0308,Dr Meera Rao,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,242,Busy
+D0309,Dr Rahul Verma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,218,Available
+D0310,Dr Kavita Kapoor,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,197,Available
+D0311,Dr Arjun Mehta,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,6,356,On Leave
+D0312,Dr Anita Joshi,General Medicine,General,OPD,Low|Medium,10:00,18:00,4,248,On Leave
+D0313,Dr Vikas Singh,General Medicine,General,OPD,Low|Medium,00:00,08:00,7,237,On Leave
+D0314,Dr Amit Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,6,221,Available
+D0315,Dr Anita Kapoor,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,439,Available
+D0316,Dr Amit Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,220,Busy
+D0317,Dr Meera Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,172,Busy
+D0318,Dr Pooja Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,293,Busy
+D0319,Dr Rohan Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,409,Available
+D0320,Dr Kavita Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,216,Busy
+D0321,Dr Vikas Singh,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,272,Available
+D0322,Dr Pooja Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,213,Busy
+D0323,Dr Kavita Iyer,General Medicine,General,OPD,Low|Medium,00:00,08:00,4,208,Available
+D0324,Dr Raj Gupta,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,163,On Leave
+D0325,Dr Amit Iyer,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,331,On Leave
+D0326,Dr Kavita Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,6,171,Available
+D0327,Dr Raj Patel,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,5,428,Busy
+D0328,Dr Vikas Patel,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,407,Available
+D0329,Dr Sanjay Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,5,114,Busy
+D0330,Dr Kavita Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,406,Busy
+D0331,Dr Sneha Rao,General Medicine,General,OPD,Low|Medium,16:00,00:00,5,281,Busy
+D0332,Dr Rohan Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,165,On Leave
+D0333,Dr Meera Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,7,185,Available
+D0334,Dr Sanjay Joshi,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,268,On Leave
+D0335,Dr Pooja Agarwal,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,298,On Leave
+D0336,Dr Sanjay Agarwal,General Medicine,General,OPD,Low|Medium,09:00,17:00,8,105,Busy
+D0337,Dr Sneha Kapoor,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,8,256,On Leave
+D0338,Dr Rohan Rao,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,7,425,Available
+D0339,Dr Meera Nair,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,8,307,Busy
+D0340,Dr Priya Rao,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,295,On Leave
+D0341,Dr Nisha Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,396,Available
+D0342,Dr Anita Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,344,Busy
+D0343,Dr Anil Singh,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,8,281,Busy
+D0344,Dr Amit Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,5,237,Busy
+D0345,Dr Arjun Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,5,163,On Leave
+D0346,Dr Pooja Verma,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,5,135,Busy
+D0347,Dr Amit Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,244,On Leave
+D0348,Dr Amit Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,158,On Leave
+D0349,Dr Sneha Gupta,General Medicine,General,OPD,Low|Medium,16:00,00:00,5,161,On Leave
+D0350,Dr Amit Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,338,Busy
+D0351,Dr Rohan Iyer,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,8,402,Busy
+D0352,Dr Priya Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,147,Busy
+D0353,Dr Pooja Agarwal,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,155,On Leave
+D0354,Dr Sneha Nair,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,4,261,Busy
+D0355,Dr Vikas Joshi,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,316,Busy
+D0356,Dr Sneha Kapoor,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,328,Busy
+D0357,Dr Raj Nair,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,441,Busy
+D0358,Dr Sanjay Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,336,Available
+D0359,Dr Sneha Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,8,265,Available
+D0360,Dr Raj Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,123,On Leave
+D0361,Dr Priya Verma,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,6,418,On Leave
+D0362,Dr Anita Gupta,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,226,Available
+D0363,Dr Anil Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,5,328,Busy
+D0364,Dr Sneha Patel,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,381,On Leave
+D0365,Dr Anita Nair,General Medicine,General,OPD,Low|Medium,00:00,08:00,4,363,Busy
+D0366,Dr Sneha Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,6,379,On Leave
+D0367,Dr Sanjay Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,227,Busy
+D0368,Dr Rohan Verma,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,6,144,Available
+D0369,Dr Amit Patel,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,259,Busy
+D0370,Dr Priya Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,6,128,On Leave
+D0371,Dr Meera Nair,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,378,Available
+D0372,Dr Pooja Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,6,167,On Leave
+D0373,Dr Arjun Gupta,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,166,On Leave
+D0374,Dr Pooja Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,114,On Leave
+D0375,Dr Amit Bansal,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,4,343,Available
+D0376,Dr Raj Nair,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,171,Busy
+D0377,Dr Meera Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,310,Available
+D0378,Dr Rahul Sharma,General Medicine,General,OPD,Low|Medium,12:00,20:00,8,156,Busy
+D0379,Dr Arjun Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,8,159,On Leave
+D0380,Dr Neha Mehta,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,124,Busy
+D0381,Dr Meera Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,6,273,Available
+D0382,Dr Pooja Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,374,Busy
+D0383,Dr Anita Agarwal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,6,409,Available
+D0384,Dr Sneha Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,126,Available
+D0385,Dr Rohan Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,315,On Leave
+D0386,Dr Meera Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,5,170,On Leave
+D0387,Dr Pooja Patel,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,6,109,Busy
+D0388,Dr Rohan Verma,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,6,229,On Leave
+D0389,Dr Anita Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,5,100,On Leave
+D0390,Dr Raj Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,381,Busy
+D0391,Dr Pooja Joshi,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,298,Available
+D0392,Dr Anita Rao,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,354,Busy
+D0393,Dr Pooja Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,185,Busy
+D0394,Dr Kavita Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,8,325,On Leave
+D0395,Dr Vikas Mehta,General Medicine,General,OPD,Low|Medium,08:00,14:00,5,363,Available
+D0396,Dr Sneha Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,7,153,On Leave
+D0397,Dr Sanjay Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,4,187,Busy
+D0398,Dr Priya Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,217,On Leave
+D0399,Dr Vikas Mehta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,196,On Leave
+D0400,Dr Anita Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,5,302,Available
+D0401,Dr Pooja Agarwal,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,316,Busy
+D0402,Dr Pooja Singh,General Medicine,General,OPD,Low|Medium,09:00,17:00,6,213,Available
+D0403,Dr Priya Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,245,Busy
+D0404,Dr Nisha Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,4,252,On Leave
+D0405,Dr Raj Kumar,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,8,140,Available
+D0406,Dr Arjun Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,205,Available
+D0407,Dr Sanjay Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,4,433,Busy
+D0408,Dr Priya Rao,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,140,On Leave
+D0409,Dr Kavita Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,7,417,Busy
+D0410,Dr Vikas Verma,General Medicine,General,OPD,Low|Medium,10:00,18:00,6,271,Available
+D0411,Dr Amit Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,6,148,Busy
+D0412,Dr Pooja Verma,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,127,Available
+D0413,Dr Meera Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,5,224,Available
+D0414,Dr Sanjay Nair,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,305,Busy
+D0415,Dr Rahul Mehta,General Medicine,General,OPD,Low|Medium,09:00,17:00,7,103,On Leave
+D0416,Dr Arjun Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,322,Available
+D0417,Dr Sneha Patel,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,6,203,Available
+D0418,Dr Rohan Joshi,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,450,On Leave
+D0419,Dr Amit Singh,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,392,Available
+D0420,Dr Raj Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,109,On Leave
+D0421,Dr Neha Singh,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,206,Busy
+D0422,Dr Raj Rao,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,391,Available
+D0423,Dr Nisha Kumar,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,6,152,Available
+D0424,Dr Sneha Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,8,257,On Leave
+D0425,Dr Rahul Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,7,360,Busy
+D0426,Dr Sneha Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,4,229,Busy
+D0427,Dr Amit Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,6,232,On Leave
+D0428,Dr Vikas Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,446,Busy
+D0429,Dr Meera Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,242,Busy
+D0430,Dr Sanjay Verma,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,5,370,Available
+D0431,Dr Priya Rao,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,6,427,Available
+D0432,Dr Arjun Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,4,116,Available
+D0433,Dr Meera Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,247,Available
+D0434,Dr Arjun Iyer,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,115,Available
+D0435,Dr Arjun Singh,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,292,On Leave
+D0436,Dr Nisha Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,7,433,Available
+D0437,Dr Anil Nair,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,4,445,Busy
+D0438,Dr Rahul Agarwal,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,8,174,On Leave
+D0439,Dr Amit Singh,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,198,On Leave
+D0440,Dr Vikas Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,4,290,Busy
+D0441,Dr Sanjay Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,4,380,Available
+D0442,Dr Pooja Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,6,182,Busy
+D0443,Dr Sneha Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,6,433,Busy
+D0444,Dr Nisha Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,7,124,On Leave
+D0445,Dr Neha Sharma,General Medicine,General,OPD,Low|Medium,12:00,20:00,5,450,Busy
+D0446,Dr Kavita Verma,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,279,Available
+D0447,Dr Meera Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,6,350,On Leave
+D0448,Dr Sneha Gupta,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,8,312,Available
+D0449,Dr Arjun Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,7,202,On Leave
+D0450,Dr Amit Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,158,Busy
+D0451,Dr Arjun Joshi,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,328,On Leave
+D0452,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,353,Busy
+D0453,Dr Sneha Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,290,Busy
+D0454,Dr Arjun Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,4,131,Available
+D0455,Dr Sneha Verma,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,7,155,Busy
+D0456,Dr Anita Agarwal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,199,Available
+D0457,Dr Sneha Agarwal,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,353,Available
+D0458,Dr Raj Singh,General Medicine,General,OPD,Low|Medium,10:00,18:00,8,105,Busy
+D0459,Dr Neha Iyer,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,144,Available
+D0460,Dr Pooja Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,8,316,Busy
+D0461,Dr Amit Patel,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,295,Available
+D0462,Dr Rohan Rao,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,8,134,Available
+D0463,Dr Sneha Mehta,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,4,207,On Leave
+D0464,Dr Arjun Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,7,255,Available
+D0465,Dr Amit Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,169,Busy
+D0466,Dr Rahul Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,132,On Leave
+D0467,Dr Anita Iyer,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,134,Busy
+D0468,Dr Priya Kumar,General Medicine,General,OPD,Low|Medium,08:00,14:00,7,118,Busy
+D0469,Dr Priya Rao,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,353,On Leave
+D0470,Dr Neha Iyer,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,342,Available
+D0471,Dr Vikas Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,437,Available
+D0472,Dr Sneha Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,4,189,Busy
+D0473,Dr Sneha Singh,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,6,180,Available
+D0474,Dr Neha Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,147,Available
+D0475,Dr Meera Singh,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,244,Available
+D0476,Dr Sneha Sharma,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,230,Available
+D0477,Dr Anita Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,6,310,On Leave
+D0478,Dr Arjun Verma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,301,Busy
+D0479,Dr Anita Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,8,205,Busy
+D0480,Dr Rahul Agarwal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,170,On Leave
+D0481,Dr Rahul Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,4,213,Available
+D0482,Dr Kavita Verma,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,7,185,On Leave
+D0483,Dr Meera Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,8,334,Available
+D0484,Dr Sneha Nair,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,8,137,Busy
+D0485,Dr Meera Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,7,437,On Leave
+D0486,Dr Anil Iyer,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,330,Available
+D0487,Dr Anita Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,359,On Leave
+D0488,Dr Raj Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,106,On Leave
+D0489,Dr Arjun Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,414,Available
+D0490,Dr Rohan Patel,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,185,Available
+D0491,Dr Kavita Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,228,On Leave
+D0492,Dr Meera Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,5,109,Available
+D0493,Dr Arjun Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,8,384,On Leave
+D0494,Dr Rahul Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,8,305,On Leave
+D0495,Dr Pooja Gupta,General Medicine,General,OPD,Low|Medium,00:00,08:00,7,221,Available
+D0496,Dr Sneha Iyer,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,8,217,Busy
+D0497,Dr Sneha Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,6,311,Available
+D0498,Dr Raj Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,7,184,Available
+D0499,Dr Priya Kumar,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,8,191,Available
+D0500,Dr Pooja Kumar,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,290,Available
+D0501,Dr Raj Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,128,On Leave
+D0502,Dr Raj Verma,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,6,217,Available
+D0503,Dr Vikas Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,4,394,On Leave
+D0504,Dr Rahul Singh,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,6,330,Available
+D0505,Dr Vikas Nair,General Medicine,General,OPD,Low|Medium,10:00,18:00,8,371,On Leave
+D0506,Dr Anita Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,159,On Leave
+D0507,Dr Amit Mehta,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,264,Available
+D0508,Dr Vikas Bansal,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,265,Available
+D0509,Dr Kavita Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,7,263,Available
+D0510,Dr Rohan Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,195,On Leave
+D0511,Dr Rohan Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,7,411,Available
+D0512,Dr Neha Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,8,390,Available
+D0513,Dr Kavita Nair,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,7,353,Busy
+D0514,Dr Priya Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,6,193,Busy
+D0515,Dr Rahul Singh,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,5,139,On Leave
+D0516,Dr Anita Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,449,On Leave
+D0517,Dr Kavita Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,4,359,On Leave
+D0518,Dr Pooja Nair,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,149,Available
+D0519,Dr Sneha Rao,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,4,352,Available
+D0520,Dr Priya Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,8,318,Busy
+D0521,Dr Arjun Agarwal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,439,On Leave
+D0522,Dr Vikas Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,385,Available
+D0523,Dr Kavita Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,441,On Leave
+D0524,Dr Pooja Sharma,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,302,Busy
+D0525,Dr Rahul Nair,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,4,158,On Leave
+D0526,Dr Raj Joshi,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,8,326,On Leave
+D0527,Dr Vikas Rao,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,7,437,On Leave
+D0528,Dr Pooja Mehta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,5,283,Busy
+D0529,Dr Raj Iyer,General Medicine,General,OPD,Low|Medium,16:00,00:00,4,368,Busy
+D0530,Dr Priya Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,317,Busy
+D0531,Dr Meera Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,278,Busy
+D0532,Dr Amit Kapoor,General Medicine,General,OPD,Low|Medium,16:00,00:00,8,186,Available
+D0533,Dr Vikas Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,435,On Leave
+D0534,Dr Amit Patel,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,206,On Leave
+D0535,Dr Sneha Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,107,Busy
+D0536,Dr Anita Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,448,Available
+D0537,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,8,366,Busy
+D0538,Dr Nisha Nair,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,5,341,On Leave
+D0539,Dr Priya Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,413,Busy
+D0540,Dr Raj Verma,General Medicine,General,OPD,Low|Medium,12:00,20:00,8,339,Available
+D0541,Dr Neha Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,171,On Leave
+D0542,Dr Arjun Verma,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,314,On Leave
+D0543,Dr Amit Nair,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,5,403,Available
+D0544,Dr Sanjay Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,8,262,Busy
+D0545,Dr Rahul Singh,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,6,335,On Leave
+D0546,Dr Sanjay Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,7,433,On Leave
+D0547,Dr Anil Agarwal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,174,On Leave
+D0548,Dr Priya Sharma,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,425,Busy
+D0549,Dr Anil Rao,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,4,289,Busy
+D0550,Dr Meera Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,8,302,On Leave
+D0551,Dr Nisha Kumar,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,8,134,Available
+D0552,Dr Neha Patel,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,330,Busy
+D0553,Dr Nisha Kumar,General Medicine,General,OPD,Low|Medium,00:00,08:00,6,320,Available
+D0554,Dr Arjun Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,7,223,Available
+D0555,Dr Raj Kumar,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,325,Available
+D0556,Dr Vikas Kapoor,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,266,On Leave
+D0557,Dr Amit Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,446,Busy
+D0558,Dr Sanjay Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,181,On Leave
+D0559,Dr Rohan Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,271,On Leave
+D0560,Dr Neha Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,7,431,Busy
+D0561,Dr Vikas Patel,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,5,248,On Leave
+D0562,Dr Anita Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,8,119,Busy
+D0563,Dr Rohan Mehta,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,5,367,On Leave
+D0564,Dr Arjun Singh,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,372,Available
+D0565,Dr Neha Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,273,Busy
+D0566,Dr Arjun Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,5,182,Busy
+D0567,Dr Sanjay Rao,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,375,On Leave
+D0568,Dr Anil Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,5,147,Available
+D0569,Dr Vikas Nair,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,241,Available
+D0570,Dr Nisha Agarwal,General Medicine,General,OPD,Low|Medium,00:00,08:00,8,425,Busy
+D0571,Dr Anita Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,7,337,Busy
+D0572,Dr Vikas Kapoor,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,7,260,On Leave
+D0573,Dr Sanjay Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,7,181,On Leave
+D0574,Dr Meera Mehta,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,446,Available
+D0575,Dr Priya Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,5,424,On Leave
+D0576,Dr Sanjay Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,110,Busy
+D0577,Dr Sneha Patel,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,7,130,Busy
+D0578,Dr Amit Joshi,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,375,Available
+D0579,Dr Priya Nair,General Medicine,General,OPD,Low|Medium,00:00,08:00,8,203,Busy
+D0580,Dr Sanjay Nair,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,437,On Leave
+D0581,Dr Vikas Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,5,416,On Leave
+D0582,Dr Pooja Mehta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,121,On Leave
+D0583,Dr Anita Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,6,139,Available
+D0584,Dr Priya Gupta,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,8,156,On Leave
+D0585,Dr Raj Sharma,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,8,282,On Leave
+D0586,Dr Amit Singh,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,4,425,On Leave
+D0587,Dr Raj Kapoor,General Medicine,General,OPD,Low|Medium,10:00,18:00,5,233,Busy
+D0588,Dr Rohan Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,409,Busy
+D0589,Dr Meera Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,437,On Leave
+D0590,Dr Arjun Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,7,388,Busy
+D0591,Dr Vikas Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,247,On Leave
+D0592,Dr Sneha Rao,General Medicine,General,OPD,Low|Medium,10:00,18:00,6,104,Busy
+D0593,Dr Vikas Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,4,387,Available
+D0594,Dr Neha Patel,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,233,Available
+D0595,Dr Vikas Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,161,On Leave
+D0596,Dr Anil Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,4,341,Busy
+D0597,Dr Sneha Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,246,Busy
+D0598,Dr Sneha Singh,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,188,Available
+D0599,Dr Pooja Agarwal,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,6,296,Busy
+D0600,Dr Meera Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,246,Available
+D0601,Dr Meera Bansal,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,6,286,On Leave
+D0602,Dr Amit Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,8,418,Busy
+D0603,Dr Raj Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,338,Busy
+D0604,Dr Pooja Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,237,Busy
+D0605,Dr Amit Nair,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,266,On Leave
+D0606,Dr Amit Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,8,396,On Leave
+D0607,Dr Sneha Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,4,336,Available
+D0608,Dr Anita Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,209,Available
+D0609,Dr Sneha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,4,167,Busy
+D0610,Dr Raj Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,6,446,On Leave
+D0611,Dr Priya Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,7,169,On Leave
+D0612,Dr Amit Iyer,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,272,Available
+D0613,Dr Raj Iyer,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,6,274,Available
+D0614,Dr Anil Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,235,Available
+D0615,Dr Priya Mehta,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,378,On Leave
+D0616,Dr Anil Joshi,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,6,216,On Leave
+D0617,Dr Neha Verma,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,5,191,Busy
+D0618,Dr Raj Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,6,393,Available
+D0619,Dr Neha Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,7,389,Available
+D0620,Dr Arjun Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,4,433,Busy
+D0621,Dr Kavita Joshi,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,328,Busy
+D0622,Dr Kavita Kapoor,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,144,On Leave
+D0623,Dr Arjun Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,376,On Leave
+D0624,Dr Neha Kumar,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,6,341,Available
+D0625,Dr Priya Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,4,146,On Leave
+D0626,Dr Amit Bansal,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,274,Busy
+D0627,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,8,189,Busy
+D0628,Dr Rohan Mehta,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,4,377,Busy
+D0629,Dr Kavita Joshi,General Medicine,General,OPD,Low|Medium,12:00,20:00,8,196,Busy
+D0630,Dr Anita Nair,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,6,220,Busy
+D0631,Dr Rahul Nair,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,432,Busy
+D0632,Dr Anita Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,8,179,Busy
+D0633,Dr Pooja Verma,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,6,285,Available
+D0634,Dr Anil Agarwal,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,246,Busy
+D0635,Dr Kavita Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,198,On Leave
+D0636,Dr Vikas Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,237,On Leave
+D0637,Dr Kavita Nair,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,128,Available
+D0638,Dr Sanjay Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,433,Available
+D0639,Dr Anita Kapoor,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,416,On Leave
+D0640,Dr Amit Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,7,123,Busy
+D0641,Dr Sanjay Kapoor,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,358,Busy
+D0642,Dr Raj Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,6,125,Available
+D0643,Dr Anil Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,5,360,On Leave
+D0644,Dr Arjun Verma,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,5,210,On Leave
+D0645,Dr Priya Kumar,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,8,158,On Leave
+D0646,Dr Sneha Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,5,125,Available
+D0647,Dr Anil Joshi,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,196,Available
+D0648,Dr Anita Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,366,On Leave
+D0649,Dr Sneha Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,6,201,On Leave
+D0650,Dr Sneha Kapoor,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,5,364,Available
+D0651,Dr Sneha Patel,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,150,Busy
+D0652,Dr Nisha Nair,General Medicine,General,OPD,Low|Medium,10:00,18:00,4,167,Busy
+D0653,Dr Sanjay Patel,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,7,288,Available
+D0654,Dr Priya Verma,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,8,124,Available
+D0655,Dr Pooja Nair,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,6,271,Busy
+D0656,Dr Arjun Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,4,353,Available
+D0657,Dr Priya Rao,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,4,208,Available
+D0658,Dr Neha Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,180,Busy
+D0659,Dr Anil Singh,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,6,321,Busy
+D0660,Dr Kavita Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,361,Available
+D0661,Dr Neha Kapoor,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,200,Available
+D0662,Dr Neha Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,341,Available
+D0663,Dr Anil Rao,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,186,Busy
+D0664,Dr Vikas Patel,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,309,On Leave
+D0665,Dr Arjun Mehta,General Medicine,General,OPD,Low|Medium,10:00,18:00,5,232,On Leave
+D0666,Dr Rahul Kapoor,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,7,385,Available
+D0667,Dr Rahul Bansal,General Medicine,General,OPD,Low|Medium,00:00,08:00,4,187,Busy
+D0668,Dr Sanjay Kapoor,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,414,On Leave
+D0669,Dr Sanjay Verma,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,206,Busy
+D0670,Dr Sanjay Bansal,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,290,Available
+D0671,Dr Vikas Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,8,114,Busy
+D0672,Dr Rahul Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,4,199,Available
+D0673,Dr Arjun Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,4,273,Available
+D0674,Dr Kavita Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,4,117,Busy
+D0675,Dr Anita Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,265,On Leave
+D0676,Dr Kavita Mehta,General Medicine,General,OPD,Low|Medium,16:00,00:00,5,105,On Leave
+D0677,Dr Rohan Singh,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,103,Available
+D0678,Dr Nisha Iyer,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,186,On Leave
+D0679,Dr Arjun Joshi,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,378,Busy
+D0680,Dr Anita Singh,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,419,Available
+D0681,Dr Nisha Gupta,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,7,423,Busy
+D0682,Dr Raj Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,251,On Leave
+D0683,Dr Sneha Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,4,299,On Leave
+D0684,Dr Meera Verma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,6,357,Available
+D0685,Dr Meera Singh,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,444,Available
+D0686,Dr Sanjay Iyer,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,138,On Leave
+D0687,Dr Sanjay Rao,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,5,218,Available
+D0688,Dr Nisha Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,4,101,Busy
+D0689,Dr Sneha Kumar,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,5,184,Busy
+D0690,Dr Anita Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,305,Busy
+D0691,Dr Kavita Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,5,261,Busy
+D0692,Dr Pooja Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,4,124,On Leave
+D0693,Dr Nisha Bansal,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,235,Busy
+D0694,Dr Priya Nair,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,5,252,On Leave
+D0695,Dr Meera Verma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,4,377,On Leave
+D0696,Dr Sanjay Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,6,126,Available
+D0697,Dr Arjun Singh,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,319,Busy
+D0698,Dr Neha Gupta,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,8,156,On Leave
+D0699,Dr Pooja Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,234,Available
+D0700,Dr Vikas Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,143,On Leave
+D0701,Dr Sneha Kumar,General Medicine,General,OPD,Low|Medium,10:00,18:00,6,220,Available
+D0702,Dr Rahul Kapoor,General Medicine,General,OPD,Low|Medium,00:00,08:00,6,235,On Leave
+D0703,Dr Anita Patel,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,118,Busy
+D0704,Dr Vikas Singh,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,126,Available
+D0705,Dr Amit Patel,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,7,290,Available
+D0706,Dr Arjun Nair,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,4,369,Available
+D0707,Dr Priya Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,196,Busy
+D0708,Dr Priya Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,155,On Leave
+D0709,Dr Raj Mehta,General Medicine,General,OPD,Low|Medium,12:00,20:00,4,269,Busy
+D0710,Dr Priya Iyer,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,4,390,Available
+D0711,Dr Rahul Iyer,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,7,209,On Leave
+D0712,Dr Priya Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,143,On Leave
+D0713,Dr Anil Singh,General Medicine,General,OPD,Low|Medium,00:00,08:00,7,449,On Leave
+D0714,Dr Vikas Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,4,230,Busy
+D0715,Dr Rahul Patel,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,4,107,Busy
+D0716,Dr Priya Sharma,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,409,Available
+D0717,Dr Anil Patel,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,5,105,Available
+D0718,Dr Raj Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,4,359,On Leave
+D0719,Dr Priya Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,5,402,Available
+D0720,Dr Anil Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,4,221,On Leave
+D0721,Dr Nisha Rao,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,6,430,Busy
+D0722,Dr Nisha Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,7,207,Busy
+D0723,Dr Neha Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,212,Busy
+D0724,Dr Vikas Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,100,On Leave
+D0725,Dr Anil Verma,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,229,Available
+D0726,Dr Anita Kapoor,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,442,On Leave
+D0727,Dr Arjun Kumar,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,6,203,Busy
+D0728,Dr Raj Rao,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,404,Available
+D0729,Dr Anita Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,6,263,Available
+D0730,Dr Anil Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,347,On Leave
+D0731,Dr Meera Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,4,130,Available
+D0732,Dr Raj Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,8,279,On Leave
+D0733,Dr Rahul Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,334,On Leave
+D0734,Dr Sneha Agarwal,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,117,Available
+D0735,Dr Sanjay Agarwal,General Medicine,General,OPD,Low|Medium,16:00,00:00,5,234,On Leave
+D0736,Dr Priya Rao,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,4,366,Busy
+D0737,Dr Meera Mehta,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,208,Busy
+D0738,Dr Anil Verma,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,5,410,Busy
+D0739,Dr Rahul Kumar,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,405,Available
+D0740,Dr Anil Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,6,227,Busy
+D0741,Dr Sanjay Patel,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,428,Available
+D0742,Dr Anita Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,4,157,Busy
+D0743,Dr Sanjay Verma,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,8,217,On Leave
+D0744,Dr Rohan Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,335,Available
+D0745,Dr Sanjay Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,313,On Leave
+D0746,Dr Kavita Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,6,375,On Leave
+D0747,Dr Kavita Kumar,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,5,109,On Leave
+D0748,Dr Rohan Bansal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,416,Busy
+D0749,Dr Sneha Rao,General Medicine,General,OPD,Low|Medium,00:00,08:00,7,104,Available
+D0750,Dr Vikas Agarwal,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,211,Available
+D0751,Dr Anita Sharma,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,5,130,Busy
+D0752,Dr Anil Agarwal,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,224,Available
+D0753,Dr Kavita Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,6,161,Busy
+D0754,Dr Anil Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,7,400,Available
+D0755,Dr Pooja Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,6,176,Available
+D0756,Dr Anil Rao,General Medicine,General,OPD,Low|Medium,09:00,17:00,6,229,Busy
+D0757,Dr Kavita Sharma,General Medicine,General,OPD,Low|Medium,08:00,14:00,6,440,Available
+D0758,Dr Priya Patel,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,381,On Leave
+D0759,Dr Anita Bansal,General Medicine,General,OPD,Low|Medium,00:00,08:00,8,413,Busy
+D0760,Dr Pooja Agarwal,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,6,381,Busy
+D0761,Dr Arjun Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,7,316,On Leave
+D0762,Dr Neha Sharma,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,6,226,On Leave
+D0763,Dr Rahul Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,6,311,On Leave
+D0764,Dr Meera Kapoor,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,273,On Leave
+D0765,Dr Arjun Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,4,412,Busy
+D0766,Dr Sanjay Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,406,Available
+D0767,Dr Anil Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,417,Available
+D0768,Dr Neha Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,394,Available
+D0769,Dr Kavita Kapoor,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,211,Available
+D0770,Dr Sneha Iyer,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,8,158,Available
+D0771,Dr Kavita Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,8,276,On Leave
+D0772,Dr Anita Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,8,233,Busy
+D0773,Dr Kavita Verma,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,8,390,On Leave
+D0774,Dr Neha Nair,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,6,448,Busy
+D0775,Dr Meera Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,4,107,On Leave
+D0776,Dr Nisha Kumar,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,8,227,Busy
+D0777,Dr Anita Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,101,Busy
+D0778,Dr Neha Rao,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,7,425,On Leave
+D0779,Dr Anil Joshi,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,375,Busy
+D0780,Dr Kavita Mehta,General Medicine,General,OPD,Low|Medium,08:00,14:00,7,379,Available
+D0781,Dr Raj Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,102,On Leave
+D0782,Dr Anita Joshi,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,7,303,Available
+D0783,Dr Priya Verma,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,260,Busy
+D0784,Dr Sanjay Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,300,On Leave
+D0785,Dr Rahul Sharma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,225,Busy
+D0786,Dr Sanjay Patel,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,244,Available
+D0787,Dr Sanjay Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,186,Busy
+D0788,Dr Arjun Joshi,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,269,Available
+D0789,Dr Anil Iyer,General Medicine,General,OPD,Low|Medium,16:00,00:00,6,301,On Leave
+D0790,Dr Sanjay Rao,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,318,On Leave
+D0791,Dr Rohan Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,5,148,Available
+D0792,Dr Vikas Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,211,On Leave
+D0793,Dr Neha Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,6,337,Busy
+D0794,Dr Anil Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,116,Available
+D0795,Dr Kavita Iyer,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,190,On Leave
+D0796,Dr Sanjay Rao,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,347,Busy
+D0797,Dr Rohan Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,5,354,Busy
+D0798,Dr Meera Rao,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,8,447,Available
+D0799,Dr Rohan Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,6,168,Busy
+D0800,Dr Sneha Gupta,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,198,Busy
+D0801,Dr Rohan Bansal,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,212,Busy
+D0802,Dr Pooja Rao,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,141,Busy
+D0803,Dr Sneha Iyer,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,5,354,Busy
+D0804,Dr Nisha Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,5,303,Available
+D0805,Dr Pooja Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,435,Busy
+D0806,Dr Kavita Rao,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,8,146,Available
+D0807,Dr Anil Rao,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,121,Available
+D0808,Dr Sneha Verma,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,265,Available
+D0809,Dr Amit Joshi,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,6,399,Available
+D0810,Dr Sneha Mehta,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,396,Busy
+D0811,Dr Vikas Kapoor,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,4,307,Busy
+D0812,Dr Rohan Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,6,240,Available
+D0813,Dr Rohan Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,270,Busy
+D0814,Dr Neha Patel,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,4,133,Busy
+D0815,Dr Rahul Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,7,416,Busy
+D0816,Dr Meera Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,326,On Leave
+D0817,Dr Neha Agarwal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,7,146,Available
+D0818,Dr Priya Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,4,182,On Leave
+D0819,Dr Anita Mehta,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,4,193,Available
+D0820,Dr Sanjay Mehta,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,6,449,Available
+D0821,Dr Sneha Rao,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,6,448,Available
+D0822,Dr Neha Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,4,231,Busy
+D0823,Dr Vikas Joshi,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,7,307,Busy
+D0824,Dr Neha Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,286,On Leave
+D0825,Dr Priya Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,6,208,Busy
+D0826,Dr Meera Kapoor,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,6,377,Available
+D0827,Dr Nisha Singh,General Medicine,General,OPD,Low|Medium,12:00,20:00,5,248,On Leave
+D0828,Dr Sneha Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,149,On Leave
+D0829,Dr Arjun Kumar,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,301,Available
+D0830,Dr Neha Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,252,Available
+D0831,Dr Anil Patel,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,6,107,Available
+D0832,Dr Arjun Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,6,357,On Leave
+D0833,Dr Rahul Agarwal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,420,Available
+D0834,Dr Nisha Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,391,On Leave
+D0835,Dr Nisha Verma,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,8,303,Busy
+D0836,Dr Rohan Singh,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,5,242,Busy
+D0837,Dr Priya Agarwal,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,6,394,Busy
+D0838,Dr Pooja Verma,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,6,379,Available
+D0839,Dr Anil Joshi,General Medicine,General,OPD,Low|Medium,16:00,00:00,7,121,On Leave
+D0840,Dr Priya Agarwal,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,191,On Leave
+D0841,Dr Priya Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,403,Busy
+D0842,Dr Anita Rao,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,7,145,Busy
+D0843,Dr Raj Sharma,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,179,On Leave
+D0844,Dr Kavita Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,5,227,Busy
+D0845,Dr Arjun Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,112,Available
+D0846,Dr Rohan Kumar,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,373,Available
+D0847,Dr Anita Nair,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,6,303,On Leave
+D0848,Dr Anil Patel,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,7,259,Available
+D0849,Dr Sneha Joshi,General Medicine,General,OPD,Low|Medium,10:00,18:00,4,291,Available
+D0850,Dr Amit Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,6,275,Available
+D0851,Dr Rohan Nair,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,372,On Leave
+D0852,Dr Kavita Patel,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,149,On Leave
+D0853,Dr Priya Mehta,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,7,143,Busy
+D0854,Dr Anil Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,449,On Leave
+D0855,Dr Amit Iyer,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,4,367,Available
+D0856,Dr Anil Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,5,280,Busy
+D0857,Dr Priya Singh,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,328,On Leave
+D0858,Dr Raj Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,09:00,17:00,6,157,On Leave
+D0859,Dr Sanjay Singh,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,8,230,On Leave
+D0860,Dr Rohan Kumar,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,4,203,On Leave
+D0861,Dr Meera Gupta,General Medicine,General,OPD,Low|Medium,00:00,08:00,7,424,Busy
+D0862,Dr Priya Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,5,294,Busy
+D0863,Dr Sanjay Verma,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,350,Busy
+D0864,Dr Nisha Kapoor,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,7,401,On Leave
+D0865,Dr Amit Nair,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,393,Available
+D0866,Dr Meera Gupta,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,5,401,On Leave
+D0867,Dr Vikas Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,411,Available
+D0868,Dr Amit Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,4,135,Available
+D0869,Dr Priya Mehta,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,6,253,On Leave
+D0870,Dr Raj Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,5,183,Busy
+D0871,Dr Kavita Agarwal,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,5,394,Available
+D0872,Dr Raj Nair,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,4,289,On Leave
+D0873,Dr Meera Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,269,Available
+D0874,Dr Rohan Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,217,Busy
+D0875,Dr Priya Verma,General Medicine,General,OPD,Low|Medium,12:00,20:00,4,295,Available
+D0876,Dr Pooja Verma,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,4,388,Available
+D0877,Dr Meera Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,4,381,On Leave
+D0878,Dr Priya Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,6,165,Available
+D0879,Dr Arjun Singh,General Medicine,General,OPD,Low|Medium,00:00,08:00,6,192,On Leave
+D0880,Dr Nisha Patel,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,263,Available
+D0881,Dr Arjun Iyer,General Medicine,General,OPD,Low|Medium,08:00,14:00,7,332,On Leave
+D0882,Dr Priya Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,245,Available
+D0883,Dr Sanjay Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,7,109,Available
+D0884,Dr Pooja Kumar,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,8,115,On Leave
+D0885,Dr Meera Singh,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,8,228,Available
+D0886,Dr Nisha Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,336,On Leave
+D0887,Dr Pooja Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,373,On Leave
+D0888,Dr Raj Kumar,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,6,403,Busy
+D0889,Dr Vikas Nair,General Medicine,General,OPD,Low|Medium,08:00,14:00,7,422,On Leave
+D0890,Dr Anil Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,7,142,Busy
+D0891,Dr Sanjay Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,4,321,On Leave
+D0892,Dr Amit Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,4,316,On Leave
+D0893,Dr Amit Verma,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,6,341,Available
+D0894,Dr Neha Sharma,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,8,332,Busy
+D0895,Dr Anil Joshi,General Medicine,General,OPD,Low|Medium,12:00,20:00,5,197,Available
+D0896,Dr Priya Mehta,General Medicine,General,OPD,Low|Medium,09:00,17:00,7,404,Busy
+D0897,Dr Pooja Joshi,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,6,208,Available
+D0898,Dr Sanjay Gupta,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,5,276,On Leave
+D0899,Dr Rahul Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,7,191,Available
+D0900,Dr Priya Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,142,Busy
+D0901,Dr Meera Joshi,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,302,On Leave
+D0902,Dr Meera Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,8,179,On Leave
+D0903,Dr Amit Rao,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,273,On Leave
+D0904,Dr Rahul Mehta,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,152,Available
+D0905,Dr Sanjay Nair,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,7,114,Busy
+D0906,Dr Meera Kumar,General Medicine,General,OPD,Low|Medium,16:00,00:00,8,127,Busy
+D0907,Dr Arjun Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,259,On Leave
+D0908,Dr Rohan Joshi,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,5,355,Available
+D0909,Dr Amit Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,4,250,Available
+D0910,Dr Nisha Singh,Internal Medicine,Specialist,Internal Medicine,Medium|High,08:00,14:00,8,375,Available
+D0911,Dr Raj Sharma,General Medicine,General,OPD,Low|Medium,09:00,17:00,4,335,Busy
+D0912,Dr Anita Singh,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,8,288,Available
+D0913,Dr Neha Kumar,General Medicine,General,OPD,Low|Medium,10:00,18:00,7,160,Available
+D0914,Dr Anil Verma,Neurology,Specialist,Neurology,High|Critical,10:00,18:00,5,212,On Leave
+D0915,Dr Nisha Singh,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,428,Available
+D0916,Dr Anita Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,8,330,Available
+D0917,Dr Sanjay Gupta,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,8,126,Available
+D0918,Dr Anil Agarwal,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,411,On Leave
+D0919,Dr Pooja Patel,Orthopedics,Specialist,Orthopedics,Medium|High,09:00,17:00,7,132,Available
+D0920,Dr Neha Kumar,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,7,313,On Leave
+D0921,Dr Rohan Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,7,270,Available
+D0922,Dr Kavita Bansal,General Medicine,General,OPD,Low|Medium,08:00,14:00,7,187,Busy
+D0923,Dr Meera Patel,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,167,Busy
+D0924,Dr Vikas Kapoor,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,104,Available
+D0925,Dr Kavita Rao,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,4,352,Busy
+D0926,Dr Pooja Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,6,118,Available
+D0927,Dr Arjun Verma,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,274,Busy
+D0928,Dr Vikas Sharma,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,4,328,On Leave
+D0929,Dr Pooja Iyer,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,6,145,On Leave
+D0930,Dr Vikas Sharma,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,6,390,On Leave
+D0931,Dr Anil Nair,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,271,Available
+D0932,Dr Pooja Verma,Emergency Medicine,Specialist,Emergency,High|Critical,16:00,00:00,7,314,Available
+D0933,Dr Sanjay Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,323,Available
+D0934,Dr Raj Bansal,General Medicine,General,OPD,Low|Medium,08:00,14:00,4,447,Busy
+D0935,Dr Nisha Gupta,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,198,On Leave
+D0936,Dr Anil Mehta,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,4,193,On Leave
+D0937,Dr Priya Mehta,General Medicine,General,OPD,Low|Medium,16:00,00:00,8,292,On Leave
+D0938,Dr Sanjay Sharma,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,7,276,Busy
+D0939,Dr Meera Agarwal,Neurology,Specialist,Neurology,High|Critical,00:00,08:00,7,275,On Leave
+D0940,Dr Vikas Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,311,On Leave
+D0941,Dr Kavita Verma,Emergency Medicine,Specialist,Emergency,High|Critical,08:00,14:00,5,386,On Leave
+D0942,Dr Vikas Singh,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,8,389,On Leave
+D0943,Dr Vikas Rao,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,8,155,On Leave
+D0944,Dr Meera Sharma,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,112,On Leave
+D0945,Dr Rahul Verma,Cardiology,Specialist,Cardiology,High|Critical,08:00,14:00,7,278,On Leave
+D0946,Dr Amit Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,7,365,Busy
+D0947,Dr Vikas Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,08:00,14:00,8,407,Available
+D0948,Dr Meera Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,8,334,Busy
+D0949,Dr Raj Rao,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,6,388,Busy
+D0950,Dr Rahul Agarwal,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,6,407,On Leave
+D0951,Dr Anil Singh,Cardiology,Specialist,Cardiology,High|Critical,12:00,20:00,4,408,Busy
+D0952,Dr Sneha Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,392,On Leave
+D0953,Dr Priya Agarwal,Pediatrics,Specialist,Pediatrics,Low|Medium,10:00,18:00,7,163,On Leave
+D0954,Dr Meera Sharma,Pediatrics,Specialist,Pediatrics,Low|Medium,00:00,08:00,7,179,Available
+D0955,Dr Amit Patel,General Medicine,General,OPD,Low|Medium,09:00,17:00,5,345,On Leave
+D0956,Dr Priya Nair,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,6,322,Available
+D0957,Dr Rohan Bansal,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,154,On Leave
+D0958,Dr Pooja Kapoor,General Medicine,General,OPD,Low|Medium,12:00,20:00,5,220,Available
+D0959,Dr Raj Patel,General Medicine,General,OPD,Low|Medium,08:00,14:00,8,381,Available
+D0960,Dr Neha Joshi,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,4,285,Busy
+D0961,Dr Sanjay Mehta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,5,343,Busy
+D0962,Dr Sneha Kumar,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,4,214,Busy
+D0963,Dr Pooja Sharma,Internal Medicine,Specialist,Internal Medicine,Medium|High,10:00,18:00,5,360,On Leave
+D0964,Dr Sneha Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,5,372,Available
+D0965,Dr Neha Kapoor,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,5,159,Busy
+D0966,Dr Raj Singh,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,8,261,On Leave
+D0967,Dr Raj Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,4,186,Available
+D0968,Dr Arjun Agarwal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,4,135,Available
+D0969,Dr Rohan Singh,Orthopedics,Specialist,Orthopedics,Medium|High,16:00,00:00,7,135,On Leave
+D0970,Dr Priya Bansal,Internal Medicine,Specialist,Internal Medicine,Medium|High,09:00,17:00,5,140,On Leave
+D0971,Dr Meera Rao,Cardiology,Specialist,Cardiology,High|Critical,00:00,08:00,7,186,Available
+D0972,Dr Sanjay Nair,Internal Medicine,Specialist,Internal Medicine,Medium|High,00:00,08:00,8,264,On Leave
+D0973,Dr Raj Iyer,Pediatrics,Specialist,Pediatrics,Low|Medium,09:00,17:00,5,386,Available
+D0974,Dr Sneha Kapoor,Cardiology,Specialist,Cardiology,High|Critical,09:00,17:00,7,246,Available
+D0975,Dr Sneha Mehta,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,7,314,On Leave
+D0976,Dr Rohan Singh,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,5,432,Busy
+D0977,Dr Vikas Bansal,Emergency Medicine,Specialist,Emergency,High|Critical,00:00,08:00,5,230,On Leave
+D0978,Dr Priya Mehta,General Medicine,General,OPD,Low|Medium,12:00,20:00,6,254,Busy
+D0979,Dr Kavita Kapoor,Neurology,Specialist,Neurology,High|Critical,16:00,00:00,5,420,Available
+D0980,Dr Anil Mehta,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,8,337,Available
+D0981,Dr Anita Singh,Neurology,Specialist,Neurology,High|Critical,12:00,20:00,4,438,Available
+D0982,Dr Rohan Gupta,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,148,Busy
+D0983,Dr Arjun Singh,General Medicine,General,OPD,Low|Medium,09:00,17:00,6,229,On Leave
+D0984,Dr Anita Gupta,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,6,399,On Leave
+D0985,Dr Kavita Bansal,Neurology,Specialist,Neurology,High|Critical,09:00,17:00,5,181,On Leave
+D0986,Dr Nisha Gupta,Emergency Medicine,Specialist,Emergency,High|Critical,10:00,18:00,7,209,Available
+D0987,Dr Kavita Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,16:00,00:00,5,347,On Leave
+D0988,Dr Vikas Agarwal,Cardiology,Specialist,Cardiology,High|Critical,16:00,00:00,7,252,On Leave
+D0989,Dr Kavita Kapoor,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,4,316,On Leave
+D0990,Dr Priya Nair,Orthopedics,Specialist,Orthopedics,Medium|High,12:00,20:00,4,310,On Leave
+D0991,Dr Rohan Joshi,Pediatrics,Specialist,Pediatrics,Low|Medium,16:00,00:00,5,173,Available
+D0992,Dr Sneha Bansal,Orthopedics,Specialist,Orthopedics,Medium|High,08:00,14:00,8,146,Busy
+D0993,Dr Amit Patel,Pediatrics,Specialist,Pediatrics,Low|Medium,12:00,20:00,6,359,Available
+D0994,Dr Nisha Kapoor,Internal Medicine,Specialist,Internal Medicine,Medium|High,12:00,20:00,7,400,On Leave
+D0995,Dr Amit Kumar,Neurology,Specialist,Neurology,High|Critical,08:00,14:00,8,387,Busy
+D0996,Dr Nisha Rao,Cardiology,Specialist,Cardiology,High|Critical,10:00,18:00,4,363,Available
+D0997,Dr Neha Kumar,Orthopedics,Specialist,Orthopedics,Medium|High,00:00,08:00,5,289,Busy
+D0998,Dr Priya Singh,Orthopedics,Specialist,Orthopedics,Medium|High,10:00,18:00,5,439,On Leave
+D0999,Dr Vikas Iyer,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,6,409,Busy
+D1000,Dr Arjun Agarwal,Emergency Medicine,Specialist,Emergency,High|Critical,12:00,20:00,4,117,On Leave

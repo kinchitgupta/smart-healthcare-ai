@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediTriage — Doctor Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#fff;--g50:#f7f8fa;--g100:#eef0f4;--g200:#dde1e9;--g300:#c4cad6;
+  --g400:#9aa3b2;--g500:#6b7484;--g600:#4a5163;--g700:#333a4a;--g900:#111827;
+  --navy:#0f2044;--blue:#1d4ed8;--blue-lt:#eff4ff;--blue-mid:#bfdbfe;
+  --red:#c0152c;--red-bg:#fff1f2;--red-bd:#fecdd3;
+  --orange:#b84500;--orange-bg:#fff7ed;--orange-bd:#fed7aa;
+  --yellow:#92620a;--yellow-bg:#fffbeb;--yellow-bd:#fde68a;
+  --green:#166534;--green-bg:#f0fdf4;--green-bd:#bbf7d0;
+  --purple:#6d28d9;--purple-bg:#f5f3ff;--purple-bd:#ddd6fe;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:var(--font);background:var(--g50);color:var(--g700);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.topbar{height:52px;background:var(--navy);display:flex;align-items:center;padding:0 18px;z-index:200;position:relative;}
+.logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#fff;letter-spacing:-.2px;margin-right:24px;text-decoration:none;}
+.logo-m{width:26px;height:26px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:13px;font-weight:700;}
+.tnav{display:flex;align-items:center;height:100%;flex:1;}
+.tni{height:100%;display:flex;align-items:center;padding:0 14px;font-size:13px;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:.15s;text-decoration:none;}
+.tni:hover{color:rgba(255,255,255,.9);}
+.tni.on{color:#fff;border-bottom-color:#60a5fa;}
+.tright{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.chip{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;background:rgba(255,255,255,.09);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.12);}
+.sdot{width:6px;height:6px;border-radius:50%;}
+.dr{background:#f87171;}.do{background:#fb923c;}.dg{background:#4ade80;}
+.dpill{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 5px;border-radius:20px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);}
+.dav{width:26px;height:26px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;}
+.dnm{font-size:12px;font-weight:500;color:rgba(255,255,255,.88);}
+.tclock{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.35);min-width:68px;text-align:right;}
+.tbtn{padding:5px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.6);font-family:var(--font);font-size:12px;cursor:pointer;transition:.15s;}
+.tbtn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.layout{height:calc(100vh - 52px);display:grid;grid-template-columns:300px 1fr 320px;}
+.lpanel{background:var(--white);border-right:1px solid var(--g200);display:flex;flex-direction:column;overflow:hidden;}
+.lp-top{padding:12px 14px 10px;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.lp-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--g500);}
+.lp-sub{font-size:11px;color:var(--g400);margin-top:1px;font-family:var(--mono);}
+.lp-search{padding:8px 12px;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.sw{position:relative;}
+.sw input{width:100%;padding:6px 10px 6px 28px;border:1px solid var(--g200);border-radius:5px;font-family:var(--font);font-size:12px;color:var(--g700);background:var(--g50);outline:none;transition:.15s;}
+.sw input:focus{border-color:var(--blue-mid);background:var(--white);}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--g400);font-size:12px;}
+.vtabs{display:flex;padding:8px 12px 0;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.vt{padding:5px 10px;font-size:11.5px;font-weight:500;color:var(--g500);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.15s;font-family:var(--font);}
+.vt:hover{color:var(--g700);}
+.vt.on{color:var(--blue);border-bottom-color:var(--blue);}
+.lp-scroll{flex:1;overflow-y:auto;padding:8px;}
+.lp-scroll::-webkit-scrollbar{width:3px;}
+.lp-scroll::-webkit-scrollbar-thumb{background:var(--g200);}
+.qsh{display:flex;align-items:center;gap:7px;padding:8px 6px 5px;margin-top:4px;}
+.qsd{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.qsn{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--g500);}
+.qsc{font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;margin-left:auto;}
+.qsc.cr{background:var(--red-bg);color:var(--red);}
+.qsc.ur{background:var(--orange-bg);color:var(--orange);}
+.qsc.mo{background:var(--yellow-bg);color:var(--yellow);}
+.qsc.ro{background:var(--green-bg);color:var(--green);}
+.qsc.so{background:var(--g100);color:var(--g500);}
+.pcard{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border-radius:6px;border:1px solid transparent;margin-bottom:3px;cursor:pointer;transition:.12s;background:var(--white);}
+.pcard:hover{background:var(--g50);border-color:var(--g100);}
+.pcard.sel{background:var(--blue-lt);border-color:var(--blue-mid);}
+.pcard.sdim{opacity:.55;}
+.pcav{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border:1px solid;overflow:hidden;flex-shrink:0;}
+.pcav img{width:100%;height:100%;object-fit:cover;}
+.pcb{flex:1;min-width:0;}
+.pcn{font-size:12.5px;font-weight:600;color:var(--g900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pcm{font-size:11px;color:var(--g400);margin-top:1px;}
+.pcc{font-size:11px;color:var(--g500);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pct{font-size:10px;color:var(--g300);font-family:var(--mono);margin-top:2px;}
+.lp-foot{padding:10px 14px;border-top:1px solid var(--g100);flex-shrink:0;}
+.lp-ft{font-size:11px;color:var(--g400);}
+.cpanel{background:var(--g50);overflow-y:auto;display:flex;flex-direction:column;}
+.cpanel::-webkit-scrollbar{width:4px;}
+.cpanel::-webkit-scrollbar-thumb{background:var(--g200);}
+.empty-st{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--g300);text-align:center;padding:40px;}
+.empty-st p{font-size:13px;color:var(--g400);line-height:1.6;}
+.ptband{background:var(--white);border-bottom:1px solid var(--g200);padding:18px 22px 16px;flex-shrink:0;}
+.ptbtop{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;}
+.ptident{display:flex;align-items:center;gap:13px;}
+.ptphoto{width:52px;height:52px;border-radius:9px;overflow:hidden;flex-shrink:0;background:var(--g100);border:1px solid var(--g200);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--g400);}
+.ptphoto img{width:100%;height:100%;object-fit:cover;}
+.ptname{font-size:18px;font-weight:600;color:var(--g900);}
+.ptsub{font-size:12px;color:var(--g400);margin-top:2px;}
+.ptuid{font-family:var(--mono);font-size:11px;color:var(--blue);margin-top:3px;cursor:pointer;}
+.ptuid:hover{text-decoration:underline;}
+.ptacts{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
+.abtn{padding:6px 13px;border-radius:5px;font-family:var(--font);font-size:12px;font-weight:500;cursor:pointer;transition:.15s;border:1px solid;}
+.a-solve{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+.a-solve:hover{background:#dcfce7;}
+.a-open{background:var(--yellow-bg);border-color:var(--yellow-bd);color:var(--yellow);}
+.a-note{background:var(--blue-lt);border-color:var(--blue-mid);color:var(--blue);}
+.a-note:hover{background:#dbeafe;}
+.a-risk{background:#fffbeb;border-color:#fde68a;color:#92620a;}
+.a-risk:hover{background:#fef3c7;}
+.tbblock{text-align:center;flex-shrink:0;}
+.tbsev{font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;display:inline-block;}
+.tbR{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);}
+.tbO{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd);}
+.tbY{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-bd);}
+.tbG{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd);}
+.tbrisk{font-family:var(--mono);font-size:20px;font-weight:700;margin-top:4px;color:var(--g900);}
+.tbrl{font-size:10px;color:var(--g400);margin-top:1px;}
+.rbar-w{height:4px;background:var(--g100);border-radius:2px;overflow:hidden;margin-top:4px;width:80px;margin-left:auto;}
+.rbar{height:100%;border-radius:2px;transition:width .6s ease;}
+.vgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;}
+.vc{background:var(--g50);border:1px solid var(--g100);border-radius:6px;padding:8px 10px;text-align:center;}
+.vcv{font-family:var(--mono);font-size:14px;font-weight:500;}
+.vcl{font-size:9px;color:var(--g400);margin-top:2px;text-transform:uppercase;letter-spacing:.3px;}
+.vcs{font-size:9px;margin-top:2px;font-weight:600;}
+.ok{color:#16a34a;}.wa{color:#d97706;}.cr{color:#dc2626;}
+.cpad{padding:16px 22px;display:flex;flex-direction:column;gap:14px;}
+.panel{background:var(--white);border:1px solid var(--g200);border-radius:9px;overflow:hidden;}
+.phead{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--g100);cursor:pointer;user-select:none;transition:.1s;}
+.phead:hover{background:var(--g50);}
+.ptitle{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g600);}
+.pico{width:20px;height:20px;border-radius:4px;background:var(--g50);border:1px solid var(--g100);display:flex;align-items:center;justify-content:center;font-size:10px;}
+.ptog{font-size:10px;color:var(--g300);transition:.2s;}
+.panel.col .pbody{display:none;}
+.panel.col .ptog{transform:rotate(-90deg);}
+.pbody{padding:13px 14px;}
+.ai-sum{font-size:13px;line-height:1.75;color:var(--g700);border-left:3px solid var(--blue);padding:11px 14px;background:var(--blue-lt);border-radius:0 6px 6px 0;}
+.ldrow{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--g400);}
+.spin{width:13px;height:13px;border:2px solid var(--g200);border-top-color:var(--blue);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.etag{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid;margin:2px;}
+.es{background:var(--red-bg);border-color:var(--red-bd);color:var(--red);}
+.ed{background:var(--orange-bg);border-color:var(--orange-bd);color:var(--orange);}
+.ea{background:var(--purple-bg);border-color:var(--purple-bd);color:var(--purple);}
+.ev{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+.tl{display:flex;flex-direction:column;}
+.tli{display:flex;gap:10px;position:relative;}
+.tli:not(:last-child)::after{content:'';position:absolute;left:10px;top:22px;bottom:-4px;width:1px;background:var(--g100);}
+.tldot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:9px;background:var(--white);border:1px solid var(--g200);}
+.tlc{padding-bottom:14px;}
+.tlt{font-family:var(--mono);font-size:10px;color:var(--g400);}
+.tle{font-size:12px;font-weight:600;color:var(--g700);margin-top:1px;}
+.tln{font-size:11px;color:var(--g400);margin-top:1px;line-height:1.5;}
+.rop{background:#fffbeb;border:2px solid #fde68a;border-radius:10px;padding:16px;}
+.ro-title{font-size:12px;font-weight:700;color:#92620a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.ro-cur{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.ro-item{flex:1;min-width:90px;background:var(--white);border:1px solid var(--g200);border-radius:8px;padding:10px;text-align:center;}
+.ro-item .ril{font-size:10px;color:var(--g400);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+.ro-item .riv{font-family:var(--mono);font-size:16px;font-weight:700;}
+.ro-btns{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+.spick{padding:10px 6px;border-radius:8px;border:2px solid transparent;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:700;text-align:center;transition:.15s;}
+.spick:hover{transform:translateY(-1px);}
+.spick.picked{border-color:currentColor;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.sp-G{color:var(--green);background:var(--green-bg);}
+.sp-Y{color:var(--yellow);background:var(--yellow-bg);}
+.sp-O{color:var(--orange);background:var(--orange-bg);}
+.sp-R{color:var(--red);background:var(--red-bg);}
+.ro-reason{width:100%;padding:9px 12px;border:1px solid var(--g200);border-radius:7px;font-family:var(--font);font-size:13px;resize:none;outline:none;margin-bottom:10px;}
+.ro-reason:focus{border-color:#fbbf24;}
+.ro-acts{display:flex;gap:8px;}
+.ro-save{flex:1;padding:10px;background:#92620a;color:#fff;border:none;border-radius:7px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;}
+.ro-save:disabled{background:var(--g300);cursor:not-allowed;}
+.ro-cancel{padding:10px 18px;background:var(--white);border:1px solid var(--g200);border-radius:7px;font-family:var(--font);font-size:13px;cursor:pointer;}
+.ovr-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#fef3c7;color:#92620a;border:1px solid #fde68a;margin-left:8px;}
+.ro-ok{display:none;margin-top:8px;padding:8px 12px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:5px;font-size:12px;color:var(--green);}
+.rform{display:grid;gap:11px;}
+.rg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fl{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--g500);margin-bottom:4px;}
+.fi,.fta,.fs{width:100%;padding:7px 10px;border:1px solid var(--g200);border-radius:5px;font-family:var(--font);font-size:13px;color:var(--g700);background:var(--white);outline:none;transition:.15s;}
+.fi:focus,.fta:focus,.fs:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px rgba(147,197,253,.2);}
+.fta{resize:vertical;min-height:64px;}
+.btn-send{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:5px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;}
+.btn-send:hover{background:#1e40af;}
+.ok-msg{display:none;padding:8px 12px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:5px;font-size:12px;color:var(--green);}
+.solved-banner{background:var(--green-bg);border:1px solid var(--green-bd);border-radius:7px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--green);font-weight:500;margin-bottom:12px;}
+.rpanel{background:var(--white);border-left:1px solid var(--g200);display:flex;flex-direction:column;overflow:hidden;}
+.rph{padding:12px 14px 10px;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.rpt{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g500);}
+.rps{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:11px;color:var(--green);}
+.aonline{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.atabs{display:flex;padding:0 12px;border-bottom:1px solid var(--g100);flex-shrink:0;}
+.at{padding:9px 12px;font-size:12px;font-weight:500;color:var(--g500);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:var(--font);}
+.at.on{color:var(--blue);border-bottom-color:var(--blue);}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:12px;}
+.sbox{padding:10px;border-radius:7px;border:1px solid;text-align:center;}
+.sbR{background:var(--red-bg);border-color:var(--red-bd);}
+.sbO{background:var(--orange-bg);border-color:var(--orange-bd);}
+.sbY{background:var(--yellow-bg);border-color:var(--yellow-bd);}
+.sbG{background:var(--green-bg);border-color:var(--green-bd);}
+.sbS{background:var(--g50);border-color:var(--g200);}
+.sbT{background:var(--blue-lt);border-color:var(--blue-mid);}
+.sn{font-size:22px;font-weight:700;font-family:var(--mono);}
+.snR{color:var(--red);}.snO{color:var(--orange);}.snY{color:var(--yellow);}
+.snG{color:var(--green);}.snS{color:var(--g500);}.snT{color:var(--blue);}
+.sl{font-size:10px;color:var(--g500);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
+.wflist{padding:0 12px 12px;display:flex;flex-direction:column;gap:5px;}
+.wfrow{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:5px;background:var(--g50);border:1px solid var(--g100);}
+.wfl{font-size:12px;color:var(--g600);}
+.wfn{font-family:var(--mono);font-size:12px;font-weight:600;padding:1px 8px;border-radius:20px;}
+.wnW{background:var(--red-bg);color:var(--red);}
+.wnU{background:var(--yellow-bg);color:var(--yellow);}
+.wnD{background:var(--green-bg);color:var(--green);}
+.qagrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 12px 12px;}
+.qa{padding:9px 7px;border:1px solid var(--g200);border-radius:6px;background:var(--white);font-family:var(--font);font-size:11px;font-weight:500;color:var(--g600);cursor:pointer;text-align:center;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.qa:hover{border-color:var(--g300);background:var(--g50);color:var(--g900);}
+.rpst{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g400);padding:10px 12px 6px;border-bottom:1px solid var(--g100);}
+.rss{flex:1;overflow-y:auto;}
+.rss::-webkit-scrollbar{width:3px;}
+.rss::-webkit-scrollbar-thumb{background:var(--g200);}
+.ubox{margin:10px 12px;border-radius:7px;padding:12px 14px;border:1px solid;}
+.ul{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.7;}
+.uv{font-size:18px;font-weight:700;margin-top:3px;}
+.ud{font-size:11px;opacity:.75;margin-top:2px;}
+.uE{background:var(--red-bg);border-color:var(--red-bd);color:var(--red);}
+.uU{background:var(--orange-bg);border-color:var(--orange-bd);color:var(--orange);}
+.uR{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);}
+.uP{background:var(--g50);border-color:var(--g200);color:var(--g500);}
+.notes-area{margin:0 12px 8px;background:var(--g50);border:1px solid var(--g100);border-radius:6px;padding:10px;font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--g600);min-height:100px;white-space:pre-wrap;}
+.gbtn{width:calc(100% - 24px);margin:0 12px 6px;padding:8px;border-radius:5px;border:none;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;}
+.g-ai{background:#4f46e5;color:#fff;}
+.g-cp{background:var(--white);border:1px solid var(--g200);color:var(--g600);}
+.chat-msgs{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:10px;}
+.chat-msgs::-webkit-scrollbar{width:3px;}
+.msg{max-width:88%;font-size:12.5px;line-height:1.6;border-radius:10px;padding:9px 12px;}
+.msg-a{align-self:flex-start;background:var(--g50);border:1px solid var(--g100);color:var(--g700);border-radius:2px 10px 10px 10px;}
+.msg-u{align-self:flex-end;background:var(--blue);color:#fff;border-radius:10px 2px 10px 10px;}
+.mt{font-size:9px;color:var(--g400);margin-top:3px;}
+.msg-u .mt{color:rgba(255,255,255,.6);text-align:right;}
+.chat-input-wrap{padding:10px 12px;border-top:1px solid var(--g100);display:flex;gap:6px;flex-shrink:0;}
+.chat-input{flex:1;padding:8px 11px;border:1px solid var(--g200);border-radius:18px;font-family:var(--font);font-size:12.5px;color:var(--g700);background:var(--white);outline:none;transition:.15s;resize:none;max-height:80px;}
+.chat-input:focus{border-color:var(--blue-mid);}
+.chat-send{width:34px;height:34px;border-radius:50%;background:var(--blue);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chat-send:disabled{background:var(--g200);cursor:not-allowed;}
+.typing{align-self:flex-start;background:var(--g50);border:1px solid var(--g100);border-radius:2px 10px 10px 10px;padding:9px 14px;display:none;}
+.tdots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--g400);margin:0 2px;animation:td .8s infinite;}
+.tdots span:nth-child(2){animation-delay:.15s;}
+.tdots span:nth-child(3){animation-delay:.3s;}
+@keyframes td{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ani{animation:fi .25s ease;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-m">M</div>MediTriage</a>
+  <nav class="tnav">
+    <a class="tni on" href="doctor.html">Dashboard</a>
+    <a class="tni" href="nurse.html">Nurse Station</a>
+    <a class="tni" href="index.html">Portal</a>
+  </nav>
+  <div class="tright">
+    <div class="chip"><div class="sdot dr"></div><span id="nc">0</span>&nbsp;Critical</div>
+    <div class="chip"><div class="sdot do"></div><span id="no">0</span>&nbsp;Urgent</div>
+    <div class="chip"><div class="sdot dg"></div><span id="ns">0</span>&nbsp;Solved</div>
+    <div class="tclock" id="clk">--:--:--</div>
+    <div class="dpill"><div class="dav" id="dAv">DR</div><span class="dnm" id="dNm">Doctor</span></div>
+    <button class="tbtn" onclick="loadAll()">↻ Refresh</button>
+    <button class="tbtn" onclick="location.href='index.html'">← Portal</button>
+    <button class="tbtn" onclick="logout()" style="border-color:rgba(239,68,68,.4);color:#f87171">Sign Out</button>
+  </div>
+</div>
+
+<div class="layout">
+
+<div class="lpanel">
+  <div class="lp-top">
+    <div class="lp-title">Patient Queue</div>
+    <div class="lp-sub" id="qSub">Loading…</div>
+  </div>
+  <div class="lp-search">
+    <div class="sw"><span class="si">🔍</span>
+      <input type="text" id="srch" placeholder="Search patient…" oninput="doSearch()">
+    </div>
+  </div>
+  <div class="vtabs">
+    <button class="vt on" onclick="setView('active',this)">Active</button>
+    <button class="vt"    onclick="setView('solved',this)">Solved</button>
+    <button class="vt"    onclick="setView('all',this)">All</button>
+  </div>
+  <div class="lp-scroll" id="qList">
+    <div class="ldrow" style="padding:20px;justify-content:center"><div class="spin"></div>&nbsp;Loading…</div>
+  </div>
+  <div class="lp-foot"><span class="lp-ft" id="qFoot">0 patients</span></div>
+</div>
+
+<div class="cpanel" id="cpanel">
+  <div class="empty-st" id="empSt">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.25">
+      <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+    </svg>
+    <p><strong style="color:var(--g600)">No patient selected</strong><br>Select a patient from the queue to view their full clinical details, AI analysis, vitals, and send recommendations.</p>
+  </div>
+  <div id="ptDetail" style="display:none"></div>
+</div>
+
+<div class="rpanel">
+  <div class="rph">
+    <div class="rpt">AI Clinical Agent</div>
+    <div class="rps"><div class="aonline"></div>Online · Ready</div>
+  </div>
+  <div class="atabs">
+    <button class="at on">Overview</button>
+  </div>
+  <div id="at-ov" class="rss">
+    <div class="rpst">Urgency Assessment</div>
+    <div class="ubox uP" id="urgBox">
+      <div class="ul">AI Urgency</div>
+      <div class="uv" id="urgVal">—</div>
+      <div class="ud" id="urgDesc">Select a patient</div>
+    </div>
+    <div class="rpst" style="margin-top:6px">Case Statistics</div>
+    <div class="sgrid">
+      <div class="sbox sbR"><div class="sn snR" id="stCr">0</div><div class="sl">Critical</div></div>
+      <div class="sbox sbO"><div class="sn snO" id="stUr">0</div><div class="sl">Urgent</div></div>
+      <div class="sbox sbY"><div class="sn snY" id="stMo">0</div><div class="sl">Moderate</div></div>
+      <div class="sbox sbG"><div class="sn snG" id="stRo">0</div><div class="sl">Routine</div></div>
+      <div class="sbox sbS"><div class="sn snS" id="stSo">0</div><div class="sl">Solved</div></div>
+      <div class="sbox sbT"><div class="sn snT" id="stTo">0</div><div class="sl">Total</div></div>
+    </div>
+    <div class="rpst" style="margin-top:4px">Workflow</div>
+    <div class="wflist">
+      <div class="wfrow"><div class="wfl">🚨 Needs Attention</div><div class="wfn wnW" id="wfW">0</div></div>
+      <div class="wfrow"><div class="wfl">📋 Under Review</div><div class="wfn wnU" id="wfU">0</div></div>
+      <div class="wfrow"><div class="wfl">✅ Solved Today</div><div class="wfn wnD" id="wfD">0</div></div>
+    </div>
+    <div class="rpst" style="margin-top:4px">Quick Actions</div>
+    <div class="qagrid">
+      <div class="qa" onclick="scrollRec()"><div style="font-size:14px">📨</div>Send Rec.</div>
+      <div class="qa" onclick="markSolvedQ()"><div style="font-size:14px">✅</div>Mark Solved</div>
+      <div class="qa" onclick="genNotes()"><div style="font-size:14px">📝</div>Gen. Notes</div>
+      <div class="qa" onclick="scrollRisk()"><div style="font-size:14px">⚠️</div>Change Risk</div>
+    </div>
+  </div>
+  <div class="typing" id="typingInd"><div class="tdots"><span></span><span></span><span></span></div></div>
+  <div class="chat-input-wrap">
+    <textarea class="chat-input" id="chatInput" placeholder="Ask about this patient…" rows="1"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChat()">↑</button>
+  </div>
+  <div id="at-no" style="display:none;flex-direction:column;">
+    <div style="padding:10px 12px 4px;font-size:11px;color:var(--g500)">AI-generated SOAP consultation note</div>
+    <div class="notes-area" id="notesOut">Select a patient and click Generate…</div>
+    <button class="gbtn g-ai" onclick="genNotes()">🤖 Generate SOAP Note</button>
+    <button class="gbtn g-cp" onclick="copyNotes()">📋 Copy to Clipboard</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const API="http://127.0.0.1:8000";
+let data={critical:[],urgent:[],moderate:[],routine:[],solved:[]};
+let selId=null,selData=null,viewMode='active';
+let chatHistory=[],patientContext='',pickedSev=null;
+
+setInterval(()=>{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
+
+window.onload=()=>{
+  const dbId=localStorage.getItem('doctor_db_id');
+  if(!dbId){window.location.href='doctor_login.html';return;}
+  const dn=localStorage.getItem('doctor_name')||'Doctor';
+  document.getElementById('dNm').textContent=dn.replace(/Dr\.?\s*/i,'').split(' ')[0]||dn;
+  document.getElementById('dAv').textContent=dn.replace(/Dr\.?\s*/i,'').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'DR';
+  loadAll();
+};
+
+function logout(){
+  ['doctor_name','doctor_id','doctor_db_id','doctor_spec','doctor_dept','doctor_room','doctor_username'].forEach(k=>localStorage.removeItem(k));
+  window.location.href='doctor_login.html';
+}
+
+async function loadAll(){
+  try{
+    const dId=localStorage.getItem('doctor_db_id');
+    const url=dId?`${API}/api/doctor/patients?doctor_db_id=${dId}`:`${API}/api/doctor/patients`;
+    const r=await fetch(url);
+    if(!r.ok)throw new Error('api error');
+    data=await r.json();
+    const cr=data.critical?.length||0,ur=data.urgent?.length||0,mo=data.moderate?.length||0,ro=data.routine?.length||0,so=data.solved?.length||0,tot=data.total||0;
+    document.getElementById('nc').textContent=cr;
+    document.getElementById('no').textContent=ur;
+    document.getElementById('ns').textContent=so;
+    document.getElementById('stCr').textContent=cr;
+    document.getElementById('stUr').textContent=ur;
+    document.getElementById('stMo').textContent=mo;
+    document.getElementById('stRo').textContent=ro;
+    document.getElementById('stSo').textContent=so;
+    document.getElementById('stTo').textContent=tot;
+    document.getElementById('wfW').textContent=cr+ur;
+    document.getElementById('wfU').textContent=mo+ro;
+    document.getElementById('wfD').textContent=so;
+    document.getElementById('qSub').textContent=`${cr+ur+mo+ro} active · ${so} solved`;
+    renderQueue();
+  }catch(e){
+    document.getElementById('qList').innerHTML=`<div style="padding:20px;text-align:center;color:#dc2626;font-size:12px">❌ Cannot connect to backend.<br><code>cd backend → uvicorn main:app --reload --port 8000</code></div>`;
+    document.getElementById('qSub').textContent='Backend offline';
+  }
+}
+
+function renderQueue(){
+  const q=document.getElementById('srch').value.toLowerCase();
+  const secs=[];
+  if(viewMode!=='solved'){
+    secs.push(
+      {label:'🔴 Critical',color:'#dc2626',cc:'cr',pts:data.critical||[]},
+      {label:'🟠 Urgent',  color:'#ea580c',cc:'ur',pts:data.urgent||[]},
+      {label:'🟡 Moderate',color:'#ca8a04',cc:'mo',pts:data.moderate||[]},
+      {label:'🟢 Routine', color:'#16a34a',cc:'ro',pts:data.routine||[]},
+    );
+  }
+  if(viewMode!=='active') secs.push({label:'✅ Solved',color:'#6b7484',cc:'so',pts:data.solved||[]});
+  let html='',tot=0;
+  secs.forEach(s=>{
+    let pts=s.pts;
+    if(q)pts=pts.filter(p=>(p.name+p.phone+(p.uid||'')).toLowerCase().includes(q));
+    tot+=pts.length;
+    if(!pts.length)return;
+    html+=`<div class="qsh"><div class="qsd" style="background:${s.color}"></div><span class="qsn">${s.label}</span><span class="qsc ${s.cc}">${pts.length}</span></div>`;
+    pts.forEach(p=>{html+=buildPC(p,s.cc==='so');});
+  });
+  if(!html)html=`<div style="padding:30px;text-align:center;color:var(--g300);font-size:12px">No patients found</div>`;
+  document.getElementById('qList').innerHTML=html;
+  document.getElementById('qFoot').textContent=`${tot} patient${tot!==1?'s':''}`;
+}
+
+function buildPC(p,dim){
+  const rs=p.risk_score||0,sev=p.severity||'?';
+  const ini=(p.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  const t=p.last_triage?new Date(p.last_triage).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):'—';
+  const rc=rs>=80?'#dc2626':rs>=60?'#ea580c':rs>=40?'#ca8a04':'#16a34a';
+  const sb={RED:'#fff1f2',ORANGE:'#fff7ed',YELLOW:'#fffbeb',GREEN:'#f0fdf4'}[sev]||'#f7f8fa';
+  const sc={RED:'#c0152c',ORANGE:'#b84500',YELLOW:'#92620a',GREEN:'#166534'}[sev]||'#6b7484';
+  const sd={RED:'#fecdd3',ORANGE:'#fed7aa',YELLOW:'#fde68a',GREEN:'#bbf7d0'}[sev]||'#dde1e9';
+  return `<div class="pcard ${selId===p.id?'sel':''} ${dim?'sdim':''}" onclick="selP(${p.id})" id="pc-${p.id}">
+    <div class="pcav" style="background:${sb};color:${sc};border-color:${sd}">${p.photo_url?`<img src="${p.photo_url}" alt="">`:`${ini}`}</div>
+    <div class="pcb">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:4px">
+        <div class="pcn">${p.name}</div>
+        <div style="display:flex;align-items:center;gap:4px;flex-shrink:0">
+          <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${rc}">${rs}%</span>
+          <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;background:${sb};color:${sc};border:1px solid ${sd}">${sev}</span>
+        </div>
+      </div>
+      <div class="pcm">${p.age}y · ${p.gender}${p.blood_group?' · 🩸'+p.blood_group:''}</div>
+      <div class="pcc">${p.chief_complaint||p.ai_summary?.split('|')[2]||'—'}</div>
+      <div class="pct">🕐 ${t}</div>
+    </div>
+  </div>`;
+}
+
+function setView(v,btn){viewMode=v;document.querySelectorAll('.vt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderQueue();}
+function doSearch(){renderQueue();}
+
+async function selP(pid){
+  selId=pid;
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));
+  document.getElementById(`pc-${pid}`)?.classList.add('sel');
+  document.getElementById('empSt').style.display='none';
+  const det=document.getElementById('ptDetail');
+  det.style.display='block';
+  det.innerHTML=`<div style="padding:40px;text-align:center;color:var(--g400)"><div class="ldrow" style="justify-content:center"><div class="spin"></div>&nbsp;Loading patient record…</div></div>`;
+  try{
+    const r=await fetch(`${API}/api/doctor/patient/${pid}`);
+    if(!r.ok)throw new Error('not found');
+    selData=await r.json();
+    renderDetail(selData);
+    setUrgency(selData);
+    updateChatCtx(selData);
+  }catch(e){
+    det.innerHTML=`<div style="padding:40px;color:var(--red);font-size:13px">❌ Failed to load patient. Check backend connection.</div>`;
+  }
+}
+
+function renderDetail(d){
+  const p=d.patient,v=d.vitals,n=d.notes,rps=d.reports||[],docs=d.docs||[];
+  if(!p){document.getElementById('ptDetail').innerHTML=`<div style="padding:40px;color:var(--red)">Patient data missing.</div>`;return;}
+  const sev=v?.severity||'GREEN',rs=v?.risk_score||0;
+  const rc=rs>=80?'#dc2626':rs>=60?'#ea580c':rs>=40?'#ca8a04':'#16a34a';
+  const ini=(p.name||'').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
+  const isSolved=p.status==='solved';
+
+  function vs(val,lo,hi){if(val==null)return[val??'—',''];if(val<lo)return[val,'wa'];if(val>hi)return[val,'cr'];return[val,'ok'];}
+  const [hr,hrC]=vs(v?.heart_rate,60,100);
+  const [o2,o2C]=vs(v?.oxygen,95,100);
+  const [tp,tpC]=vs(v?.temperature,97,99);
+  const [bp,bpC]=vs(v?.systolic_bp,90,140);
+  const [rr,rrC]=vs(v?.respiratory_rate,12,20);
+  const [gl,glC]=vs(v?.blood_glucose,70,140);
+  const sym=[v?.chest_pain&&'Chest Pain',v?.breath_problem&&'Breathing Difficulty',v?.fever&&'Fever'].filter(Boolean);
+  const cnd=[v?.diabetes&&'Diabetes',v?.heart_disease&&'Heart Disease'].filter(Boolean);
+  const tls=[{t:p.registered_at?new Date(p.registered_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'—',i:'🏥',e:'Registered',n:`${p.name}, ${p.age}y`}];
+  if(v)tls.push({t:v.recorded_at?new Date(v.recorded_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'—',i:'💉',e:`Triage: ${sev} (${rs}%)`,n:`${sym.join(', ')||'No symptoms'}${v.chief_complaint?' · '+v.chief_complaint:''}`});
+  if(n)tls.push({t:n.note_at?new Date(n.note_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'—',i:'🩺',e:'Doctor Recommendation',n:(n.recommended_tests||'').slice(0,70)});
+  rps.forEach(rp=>tls.push({t:new Date(rp.uploaded_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}),i:'📋',e:'Report Uploaded',n:(rp.report_text||'').slice(0,70)}));
+
+  const sevColors={RED:'#c0152c',ORANGE:'#b84500',YELLOW:'#92620a',GREEN:'#166534'};
+
+  document.getElementById('ptDetail').className='ani';
+  document.getElementById('ptDetail').innerHTML=`
+  <div class="ptband">
+    ${isSolved?`<div class="solved-banner">✅ This case is marked as solved</div>`:''}
+    <div class="ptbtop">
+      <div class="ptident">
+        <div class="ptphoto">${p.photo_url?`<img src="${p.photo_url}" alt="">`:`${ini}`}</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="ptname">${p.name}</div>
+            ${p.manually_overridden?`<span class="ovr-badge">⚠️ Risk Overridden by Doctor</span>`:''}
+          </div>
+          <div class="ptsub">${p.age}y · ${p.gender} · ${p.phone}${p.blood_group?' · 🩸 '+p.blood_group:''}</div>
+          <div id="adocInfo" style="font-size:11px;color:var(--blue);margin-top:3px;font-family:var(--mono)">Loading assigned doctor…</div>
+          <div class="ptuid" onclick="navigator.clipboard.writeText('${p.uid||p.id}').then(()=>alert('ID copied!'))" title="Click to copy">
+            Patient #${p.id}${p.uid?' · UID: '+p.uid:''}
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        ${v?`<div class="tbblock">
+          <span class="tbsev tb${sev[0]}">${sev}</span>
+          <div class="tbrisk" style="color:${rc}">${rs}%</div>
+          <div class="tbrl">Risk Score</div>
+          <div class="rbar-w"><div class="rbar" style="width:${rs}%;background:${rc}"></div></div>
+        </div>`:''}
+        <div class="ptacts">
+          ${!isSolved
+            ?`<button class="abtn a-solve" onclick="markStatus(${p.id},'solved')">✅ Solved</button>`
+            :`<button class="abtn a-open" onclick="markStatus(${p.id},'waiting')">↩ Re-open</button>`}
+          <button class="abtn a-note" onclick="scrollRec()">📨 Recommend</button>
+          <button class="abtn a-risk" onclick="scrollRisk()">⚠️ Change Risk</button>
+        </div>
+      </div>
+    </div>
+    ${v?`<div class="vgrid">
+      <div class="vc"><div class="vcv" style="color:${hrC==='ok'?'#16a34a':hrC==='wa'?'#d97706':'#dc2626'}">${hr}</div><div class="vcl">HR (bpm)</div><div class="vcs ${hrC}">${hrC==='ok'?'Normal':hrC==='wa'?'Low':'High'}</div></div>
+      <div class="vc"><div class="vcv" style="color:${o2C==='ok'?'#16a34a':o2C==='wa'?'#d97706':'#dc2626'}">${o2}%</div><div class="vcl">SpO₂</div><div class="vcs ${o2C}">${o2C==='ok'?'Normal':'Low'}</div></div>
+      <div class="vc"><div class="vcv" style="color:${tpC==='ok'?'#16a34a':'#d97706'}">${tp}°F</div><div class="vcl">Temp</div><div class="vcs ${tpC}">${tpC==='ok'?'Normal':'Elevated'}</div></div>
+      <div class="vc"><div class="vcv" style="color:${bpC==='ok'?'#16a34a':bpC==='wa'?'#d97706':'#dc2626'}">${bp}</div><div class="vcl">Sys BP</div><div class="vcs ${bpC}">${bpC==='ok'?'Normal':bpC==='wa'?'Low':'High'}</div></div>
+      <div class="vc"><div class="vcv" style="color:${rrC==='ok'?'#16a34a':'#d97706'}">${rr}</div><div class="vcl">Resp Rate</div><div class="vcs ${rrC}">${rrC==='ok'?'Normal':'High'}</div></div>
+      ${v.blood_glucose?`<div class="vc"><div class="vcv" style="color:${glC==='ok'?'#16a34a':'#d97706'}">${gl}</div><div class="vcl">Glucose</div><div class="vcs ${glC}">${glC==='ok'?'Normal':'Abnormal'}</div></div>`:''}
+    </div>`:''}
+    ${v?.chief_complaint?`<div style="margin-top:10px;padding:9px 12px;background:var(--g50);border-radius:5px;border:1px solid var(--g100);font-size:13px;color:var(--g700)"><strong>Chief Complaint:</strong> ${v.chief_complaint}</div>`:''}
+  </div>
+
+  <div class="cpad">
+
+    <div class="panel" id="s-sum">
+      <div class="phead" onclick="tog('sum')"><div class="ptitle"><div class="pico">🤖</div>AI Patient Summary</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <div class="ldrow" id="aiSp"><div class="spin"></div>&nbsp;Generating AI clinical summary…</div>
+        <div class="ai-sum" id="aiTx" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="s-ent">
+      <div class="phead" onclick="tog('ent')"><div class="ptitle"><div class="pico">🏷️</div>Clinical Entities</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <div style="margin-bottom:10px"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g400);margin-bottom:5px">Symptoms</div>
+          ${sym.map(s=>`<span class="etag es">${s}</span>`).join('')||'<span style="font-size:11px;color:var(--g400)">None reported</span>'}</div>
+        <div style="margin-bottom:10px"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g400);margin-bottom:5px">Conditions</div>
+          ${cnd.map(c=>`<span class="etag ed">${c}</span>`).join('')||'<span style="font-size:11px;color:var(--g400)">None</span>'}</div>
+        <div style="margin-bottom:10px"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g400);margin-bottom:5px">Allergies</div>
+          ${p.allergies?p.allergies.split(',').map(a=>`<span class="etag ea">${a.trim()}</span>`).join(''):'<span style="font-size:11px;color:var(--g400)">NKDA</span>'}</div>
+        <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g400);margin-bottom:5px">Key Vitals</div>
+          ${v?[`HR:${v.heart_rate}`,`SpO₂:${v.oxygen}%`,`Temp:${v.temperature}°F`,`BP:${v.systolic_bp}`,`RR:${v.respiratory_rate}`].map(x=>`<span class="etag ev">${x}</span>`).join(''):'—'}</div>
+      </div>
+    </div>
+
+    <div class="panel" id="s-risk">
+      <div class="phead" onclick="tog('risk')"><div class="ptitle"><div class="pico">⚠️</div>Doctor Risk Level Override</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <div class="rop">
+          <div class="ro-title">⚠️ Manually Override AI Prediction</div>
+          <div class="ro-cur">
+            <div class="ro-item"><div class="ril">AI Predicted</div><div class="riv" style="color:${sevColors[sev]||'#6b7484'}">${sev}</div></div>
+            <div class="ro-item"><div class="ril">Risk Score</div><div class="riv" style="color:${rc}">${rs}%</div></div>
+            <div class="ro-item"><div class="ril">Override To</div><div class="riv" id="ro_picked" style="color:var(--g400)">—</div></div>
+          </div>
+          <div class="ro-btns">
+            <button class="spick sp-G" onclick="pickSev('GREEN',this)">🟢 GREEN<br><span style="font-size:10px;font-weight:400">Routine</span></button>
+            <button class="spick sp-Y" onclick="pickSev('YELLOW',this)">🟡 YELLOW<br><span style="font-size:10px;font-weight:400">Moderate</span></button>
+            <button class="spick sp-O" onclick="pickSev('ORANGE',this)">🟠 ORANGE<br><span style="font-size:10px;font-weight:400">Urgent</span></button>
+            <button class="spick sp-R" onclick="pickSev('RED',this)">🔴 RED<br><span style="font-size:10px;font-weight:400">Critical</span></button>
+          </div>
+          <label class="fl">Reason for Override (Required)</label>
+          <textarea class="ro-reason" id="ro_reason" rows="2" placeholder="e.g. Patient showing clinical signs not captured in vitals…"></textarea>
+          <div class="ro-acts">
+            <button class="ro-save" id="ro_save_btn" onclick="saveOverride(${p.id})" disabled>Apply Override</button>
+            <button class="ro-cancel" onclick="cancelOverride()">Cancel</button>
+          </div>
+          <div class="ro-ok" id="ro_ok">✅ Risk level updated — refreshing queue…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="s-info">
+      <div class="phead" onclick="tog('info')"><div class="ptitle"><div class="pico">👤</div>Patient Information</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase;width:130px">Name</td><td>${p.name}</td></tr>
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Age / Gender</td><td>${p.age} years / ${p.gender}</td></tr>
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Phone</td><td>${p.phone}</td></tr>
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Address</td><td>${p.address||'—'}</td></tr>
+          ${p.blood_group?`<tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Blood Group</td><td>🩸 ${p.blood_group}</td></tr>`:''}
+          ${p.emergency_contact?`<tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Emergency</td><td>${p.emergency_contact}</td></tr>`:''}
+          ${p.existing_conditions?`<tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Conditions</td><td>${p.existing_conditions}</td></tr>`:''}
+          ${p.allergies?`<tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Allergies</td><td>${p.allergies}</td></tr>`:''}
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Status</td><td>${p.status}</td></tr>
+          <tr><td style="color:var(--g400);font-size:11px;padding:5px 0;text-transform:uppercase">Registered</td><td>${p.registered_at||'—'}</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" id="s-tl">
+      <div class="phead" onclick="tog('tl')"><div class="ptitle"><div class="pico">📅</div>Patient Timeline</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <div class="tl">
+          ${tls.map(i=>`<div class="tli"><div class="tldot">${i.i}</div><div class="tlc"><div class="tlt">${i.t}</div><div class="tle">${i.e}</div><div class="tln">${i.n||''}</div></div></div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    ${docs.length?`<div class="panel" id="s-docs">
+      <div class="phead" onclick="tog('docs')"><div class="ptitle"><div class="pico">📎</div>Uploaded Documents (${docs.length})</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        ${docs.map(doc=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--g50);border-radius:7px;border:1px solid var(--g100);margin-bottom:7px">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--g700)">${doc.file_name||'Document'}</div>
+            <div style="font-size:11px;color:var(--g400);margin-top:2px">${doc.doc_type} · ${doc.uploaded_at?new Date(doc.uploaded_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):''}</div>
+          </div>
+          <a href="http://127.0.0.1:8000${doc.file_url}" target="_blank" style="padding:6px 14px;background:var(--blue);color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;">View →</a>
+        </div>`).join('')}
+      </div>
+    </div>`:''}
+
+    ${rps.length?`<div class="panel" id="s-rp">
+      <div class="phead" onclick="tog('rp')"><div class="ptitle"><div class="pico">📋</div>Patient Reports (${rps.length})</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        ${rps.map(r=>`<div style="padding:9px 12px;background:var(--g50);border-radius:6px;border:1px solid var(--g100);margin-bottom:7px">
+          <div style="font-size:13px;color:var(--g700)">${r.report_text}</div>
+          <div style="font-size:10px;color:var(--g400);margin-top:4px;font-family:var(--mono)">${r.uploaded_at||''}</div>
+        </div>`).join('')}
+      </div>
+    </div>`:''}
+
+    <div class="panel" id="s-rec">
+      <div class="phead" onclick="tog('rec')"><div class="ptitle"><div class="pico">📨</div>Send Recommendation to Patient</div><span class="ptog">▾</span></div>
+      <div class="pbody">
+        <div class="rform">
+          <div><label class="fl">Recommended Tests</label><textarea class="fta" id="rTe" placeholder="ECG, Blood CBC, Chest X-Ray…">${n?.recommended_tests||''}</textarea></div>
+          <div><label class="fl">Diagnosis / Notes</label><textarea class="fta" id="rDi" placeholder="Clinical impression…">${n?.diagnosis||''}</textarea></div>
+          <div><label class="fl">Prescription</label><textarea class="fta" id="rRx" placeholder="Medicines, dosage…" style="min-height:50px">${n?.prescription||''}</textarea></div>
+          <div class="rg2">
+            <div><label class="fl">Appointment Time</label><input class="fi" id="rTi" placeholder="e.g. Tomorrow 10 AM" value="${n?.appointment_time||''}"></div>
+            <div><label class="fl">Priority</label>
+              <select class="fs" id="rPr"><option>Immediate</option><option>Within 2 hours</option><option>Today</option><option>3 days</option></select>
+            </div>
+          </div>
+          <button class="btn-send" onclick="sendRec()">📤 Send Recommendation to Patient</button>
+          <div class="ok-msg" id="rOk">✅ Recommendation sent! Patient can view on their status page.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>`;
+
+  loadAISummary(p,v,sev,sym,cnd);
+  loadAssignedDoc(p.id);
+}
+
+async function loadAssignedDoc(pid){
+  const el=document.getElementById('adocInfo');
+  if(!el)return;
+  try{
+    const r=await fetch(`${API}/api/doctor/patient/${pid}`);
+    const d=await r.json();
+    if(d.assigned_doctor){
+      const doc=d.assigned_doctor;
+      el.innerHTML=`👨‍⚕️ Assigned: <strong>${doc.name}</strong> · ${doc.specialization} · Room ${doc.room_number||'—'}`;
+      el.style.color='var(--blue)';
+    }else{el.textContent='No doctor assigned yet';el.style.color='var(--g400)';}
+  }catch{el.textContent='';}
+}
+
+async function loadAISummary(p,v,sev,sym,cnd){
+  if(!v){
+    document.getElementById('aiSp').style.display='none';
+    document.getElementById('aiTx').style.display='block';
+    document.getElementById('aiTx').textContent='No vitals recorded yet.';
+    return;
+  }
+  document.getElementById('aiSp').style.display='none';
+  document.getElementById('aiTx').style.display='block';
+  document.getElementById('aiTx').textContent='Generating…';
+
+  const prompt=`You are a clinical AI in a hospital triage system. Write a concise 3-4 sentence clinical summary for the attending doctor.
+Patient: ${p.name}, ${p.age}y ${p.gender}. Triage: ${sev} (Risk: ${v.risk_score}%).
+Vitals: HR=${v.heart_rate}bpm SpO₂=${v.oxygen}% Temp=${v.temperature}°F BP=${v.systolic_bp}mmHg RR=${v.respiratory_rate}.
+Symptoms: ${sym.join(', ')||'none'}. Conditions: ${cnd.join(', ')||'none'}. Allergies: ${p.allergies||'NKDA'}. Chief complaint: ${v.chief_complaint||'not specified'}.
+Start "Patient ${p.name}:" then cover: 1) Chief complaint & symptoms 2) Abnormal vitals 3) Most likely diagnosis with ICD-10 code 4) Immediate action required. Clinical and direct.`;
+
+  const timeout=new Promise((_,reject)=>setTimeout(()=>reject('timeout'),4000));
+  try{
+    const fetchCall=fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:400,messages:[{role:"user",content:prompt}]})
+    }).then(r=>r.json());
+    const data=await Promise.race([fetchCall,timeout]);
+    const txt=data?.content?.map(c=>c.text||'').join('')||buildFB(p,v,sev,sym,cnd);
+    document.getElementById('aiTx').textContent=txt;
+    if(selData)selData._sum=txt;
+  }catch{
+    document.getElementById('aiTx').textContent=buildFB(p,v,sev,sym,cnd);
+  }
+}
+
+function buildFB(p,v,sev,sym,cnd){
+  const acts={RED:'Immediate emergency intervention required.',ORANGE:'Urgent specialist consultation today.',YELLOW:'Doctor review within 2 hours.',GREEN:'Routine monitoring.'};
+  return `Patient ${p.name}: ${p.age}y ${p.gender.toLowerCase()}${sym.length?' presenting with '+sym.join(' and '):''}. Vitals: HR ${v.heart_rate}bpm, SpO₂ ${v.oxygen}%, Temp ${v.temperature}°F, BP ${v.systolic_bp}mmHg. Risk score ${v.risk_score}%${cnd.length?'; known '+cnd.join(', '):'. '}${acts[sev]||''}`;
+}
+
+function setUrgency(d){
+  const s=d.vitals?.severity;
+  let cls,val,desc;
+  if(!d.vitals){cls='uP';val='PENDING';desc='No vitals on record';}
+  else if(s==='RED'){cls='uE';val='EMERGENCY';desc='Immediate intervention required';}
+  else if(s==='ORANGE'){cls='uU';val='URGENT';desc='Specialist consultation today';}
+  else if(s==='YELLOW'){cls='uU';val='URGENT';desc='Doctor review within 2 hours';}
+  else{cls='uR';val='ROUTINE';desc='Standard monitoring protocol';}
+  document.getElementById('urgBox').className=`ubox ${cls}`;
+  document.getElementById('urgVal').textContent=val;
+  document.getElementById('urgDesc').textContent=desc;
+}
+
+function pickSev(sev,btn){
+  pickedSev=sev;
+  document.querySelectorAll('.spick').forEach(b=>b.classList.remove('picked'));
+  btn.classList.add('picked');
+  const c={GREEN:'#166534',YELLOW:'#92620a',ORANGE:'#b84500',RED:'#c0152c'};
+  const el=document.getElementById('ro_picked');
+  if(el){el.textContent=sev;el.style.color=c[sev];}
+  document.getElementById('ro_save_btn').disabled=false;
+}
+function cancelOverride(){
+  pickedSev=null;
+  document.querySelectorAll('.spick').forEach(b=>b.classList.remove('picked'));
+  const el=document.getElementById('ro_picked');
+  if(el){el.textContent='—';el.style.color='var(--g400)';}
+  const btn=document.getElementById('ro_save_btn');
+  if(btn)btn.disabled=true;
+  const rr=document.getElementById('ro_reason');
+  if(rr)rr.value='';
+}
+async function saveOverride(pid){
+  if(!pickedSev){alert('Select a severity level first.');return;}
+  const reason=document.getElementById('ro_reason').value.trim();
+  if(!reason){alert('Please enter a reason for the override.');return;}
+  const btn=document.getElementById('ro_save_btn');
+  btn.disabled=true;btn.textContent='Saving…';
+  try{
+    await fetch(`${API}/api/doctor/recommend`,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        patient_id:pid,
+        recommended_tests:document.getElementById('rTe')?.value||'Pending assessment',
+        diagnosis:`[DOCTOR RISK OVERRIDE] AI predicted ${selData?.vitals?.severity||'—'} → Doctor changed to ${pickedSev}. Reason: ${reason}`,
+        appointment_time:''
+      })
+    });
+    await fetch(`${API}/api/doctor/status`,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({patient_id:pid,status:pickedSev.toLowerCase()})
+    });
+    document.getElementById('ro_ok').style.display='block';
+    btn.textContent='Applied ✅';
+    setTimeout(async()=>{await loadAll();await selP(pid);cancelOverride();},1500);
+  }catch(e){
+    alert('Failed to save override. Check backend connection.');
+    btn.disabled=false;btn.textContent='Apply Override';
+  }
+}
+
+async function markStatus(pid,status){
+  try{
+    await fetch(`${API}/api/doctor/status`,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({patient_id:pid,status})});
+    await loadAll();
+    if(selId===pid)selP(pid);
+  }catch{alert('Error updating status');}
+}
+function markSolvedQ(){if(!selId){alert('Select a patient first.');return;}markStatus(selId,'solved');}
+
+async function sendRec(){
+  if(!selId){alert('No patient selected.');return;}
+  try{
+    const r=await fetch(`${API}/api/doctor/recommend`,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        patient_id:selId,
+        recommended_tests:document.getElementById('rTe').value,
+        diagnosis:document.getElementById('rDi').value,
+        appointment_time:document.getElementById('rTi').value,
+        prescription:document.getElementById('rRx').value
+      })});
+    const d=await r.json();
+    if(d.success){const ok=document.getElementById('rOk');ok.style.display='block';setTimeout(()=>ok.style.display='none',5000);loadAll();}
+  }catch{alert('Error sending recommendation.');}
+}
+
+async function genNotes(){
+  if(!selData){document.getElementById('notesOut').textContent='Select a patient first.';return;}
+  const d=selData,p=d.patient,v=d.vitals,n=d.notes;
+  const out=document.getElementById('notesOut');out.textContent='Generating SOAP note…';
+  const sym=[v?.chest_pain&&'chest pain',v?.breath_problem&&'breathing difficulty',v?.fever&&'fever'].filter(Boolean);
+  const prompt=`Generate a professional SOAP medical consultation note.
+Patient: ${p.name}, ${p.age}y ${p.gender} | Blood: ${p.blood_group||'Unknown'} | Allergies: ${p.allergies||'NKDA'}
+Conditions: ${p.existing_conditions||'None'} | Triage: ${v?.severity} (Risk: ${v?.risk_score}%)
+Vitals: HR:${v?.heart_rate} O2:${v?.oxygen}% Temp:${v?.temperature}°F BP:${v?.systolic_bp} RR:${v?.respiratory_rate}
+Symptoms: ${sym.join(', ')||'none'} | Chief complaint: ${v?.chief_complaint||'not specified'}
+Format with S/O/A/P headings. Include ICD-10 code. Professional and concise.`;
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:500,messages:[{role:"user",content:prompt}]})});
+    const data=await r.json();
+    out.textContent=data.content?.map(c=>c.text||'').join('')||'Generation failed.';
+  }catch{
+    out.textContent=`SOAP NOTE — ${new Date().toLocaleDateString('en-IN')}\nPatient: ${p.name} | ${p.age}y ${p.gender}\n\nS: ${sym.join(', ')||'No chief complaint'}.\nO: HR:${v?.heart_rate||'—'} SpO₂:${v?.oxygen||'—'}% Temp:${v?.temperature||'—'}°F BP:${v?.systolic_bp||'—'} RR:${v?.respiratory_rate||'—'}.\nA: ${{RED:'Critical.',ORANGE:'Urgent.',YELLOW:'Moderate.',GREEN:'Stable.'}[v?.severity]||'Pending.'}\nP: ${n?.recommended_tests||'Pending.'} Follow-up: ${n?.appointment_time||'TBD'}`;
+  }
+}
+function copyNotes(){navigator.clipboard.writeText(document.getElementById('notesOut').textContent).then(()=>alert('Copied!')).catch(()=>alert('Copy manually.'));}
+
+function updateChatCtx(d){
+  const p=d.patient,v=d.vitals;
+  const sym=[v?.chest_pain&&'chest pain',v?.breath_problem&&'breathing',v?.fever&&'fever'].filter(Boolean);
+  patientContext=v?`Current patient: ${p.name}, ${p.age}y ${p.gender}. Triage: ${v.severity} (Risk:${v.risk_score}%). Vitals: HR=${v.heart_rate} SpO₂=${v.oxygen}% Temp=${v.temperature}°F BP=${v.systolic_bp} RR=${v.respiratory_rate}. Symptoms: ${sym.join(', ')||'none'}. Conditions: ${p.existing_conditions||'none'}.`:`Patient: ${p.name}, ${p.age}y. No vitals.`;
+}
+async function sendChat(){
+  const input=document.getElementById('chatInput');
+  const msg=input.value.trim();
+  if(!msg||document.getElementById('chatSendBtn').disabled)return;
+  input.value='';
+  appendMsg(msg,'u');
+  document.getElementById('chatSendBtn').disabled=true;
+  document.getElementById('typingInd').style.display='block';
+  chatHistory.push({role:'user',content:msg});
+  const sys=`You are an expert AI clinical assistant helping a doctor in a hospital triage system. ${patientContext?'\n\n'+patientContext:'No patient selected.'}\n\nBe brief (2-4 sentences), clinical, practical.`;
+  try{
+    const msgs=chatHistory.slice(-8).map(m=>({role:m.role,content:m.content}));
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:350,system:sys,messages:msgs})});
+    const data=await r.json();
+    const reply=data.content?.map(c=>c.text||'').join('')||'Unable to respond.';
+    chatHistory.push({role:'assistant',content:reply});
+    document.getElementById('typingInd').style.display='none';
+    appendMsg(reply,'a');
+  }catch{document.getElementById('typingInd').style.display='none';appendMsg("Connection error.","a");}
+  document.getElementById('chatSendBtn').disabled=false;
+}
+function appendMsg(text,role){
+  const msgs=document.getElementById('chatMsgs');
+  if(!msgs)return;
+  const time=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement('div');
+  div.className=`msg msg-${role}`;
+  div.innerHTML=`${text.replace(/\n/g,'<br>')}<div class="mt">${time}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function aTab(t,btn){
+  ['ov','ch','no'].forEach(id=>{const el=document.getElementById('at-'+id);if(el)el.style.display='none';});
+  document.querySelectorAll('.at').forEach(b=>b.classList.remove('on'));
+  const el=document.getElementById('at-'+t);
+  if(el)el.style.display=t==='ch'?'flex':'block';
+  if(btn)btn.classList.add('on');
+}
+
+function tog(id){document.getElementById('s-'+id)?.classList.toggle('col');}
+function scrollRec(){if(!selId){alert('Select a patient first.');return;}document.getElementById('s-rec')?.classList.remove('col');document.getElementById('s-rec')?.scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollRisk(){if(!selId){alert('Select a patient first.');return;}document.getElementById('s-risk')?.classList.remove('col');document.getElementById('s-risk')?.scrollIntoView({behavior:'smooth',block:'start'});}
+
+setInterval(loadAll,5000);
+</script>
+</body>
+</html>

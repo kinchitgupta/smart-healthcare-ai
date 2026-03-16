@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bug Slayers — AI Triage System</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #0f172a; overflow-x: hidden; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 64px;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid #e2e8f0;
+  backdrop-filter: blur(10px);
+}
+.logo {
+  font-family: 'Space Grotesque', sans-serif; font-weight: 800;
+  font-size: 15px; letter-spacing: 2.5px;
+  color: #0f172a; text-transform: uppercase;
+  display: flex; align-items: center; gap: 9px;
+}
+.logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #3b82f6; box-shadow: 0 0 10px #3b82f6;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+.nav-right { display: flex; align-items: center; gap: 1.8rem; }
+.nav-link { font-size: 13px; font-weight: 500; color: #64748b; text-decoration: none; transition: color .2s; }
+.nav-link:hover { color: #1d4ed8; }
+.nav-btn {
+  padding: 9px 22px; border-radius: 99px;
+  background: #1d4ed8; color: #fff;
+  font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .2s; box-shadow: 0 4px 14px rgba(29,78,216,0.3);
+}
+.nav-btn:hover { background: #1e40af; transform: translateY(-1px); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+
+/* Grid lines */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.45;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* Blue glow */
+.hero-glow {
+  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 280px;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.09) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.hero-inner { position: relative; z-index: 1; max-width: 700px; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: #eff6ff; border: 1px solid #bfdbfe;
+  color: #1d4ed8; font-size: 11px; font-weight: 700;
+  padding: 6px 16px; border-radius: 99px;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  animation: up .6s ease both;
+}
+
+.hero-h1 {
+  font-family: 'Space Grotesque', sans-serif;
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 800; line-height: 1.05;
+  margin-bottom: 1.2rem;
+  animation: up .6s ease .1s both;
+}
+.hero-h1 .grad {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  font-size: 16px; color: #64748b; line-height: 1.75;
+  max-width: 480px; margin: 0 auto 2.5rem;
+  animation: up .6s ease .2s both;
+}
+
+/* Portal buttons */
+.portals {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+  animation: up .6s ease .3s both;
+}
+.pcard {
+  display: flex; align-items: center; gap: 11px;
+  padding: 14px 24px; border-radius: 14px;
+  text-decoration: none; transition: all .25s;
+  border: 1.5px solid #e2e8f0; background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  min-width: 190px;
+}
+.pcard:hover { transform: translateY(-3px); }
+.pcard-icon { font-size: 24px; flex-shrink: 0; }
+.pcard-text .t { font-size: 14px; font-weight: 700; color: #0f172a; display: block; }
+.pcard-text .s { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+
+.pcard.blue {
+  background: #1d4ed8; border-color: #1d4ed8;
+  box-shadow: 0 6px 22px rgba(29,78,216,0.28);
+}
+.pcard.blue .pcard-text .t { color: #fff; }
+.pcard.blue .pcard-text .s { color: #bfdbfe; }
+.pcard.blue:hover { background: #1e40af; box-shadow: 0 10px 30px rgba(29,78,216,0.35); }
+.pcard.white:hover { border-color: #93c5fd; box-shadow: 0 8px 24px rgba(59,130,246,0.1); }
+
+/* Stats */
+.stats {
+  display: flex; gap: 2.5rem; justify-content: center;
+  flex-wrap: wrap; animation: up .6s ease .4s both;
+}
+.stat .n {
+  font-family: 'Space Grotesque', sans-serif; font-size: 30px;
+  font-weight: 800; display: block;
+}
+.stat .l { font-size: 11px; color: #94a3b8; margin-top: 2px; letter-spacing: 0.3px; }
+.sdiv { width: 1px; background: #e2e8f0; align-self: stretch; }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  color: #cbd5e1; font-size: 9px; letter-spacing: 2px; z-index: 1;
+  animation: up .6s ease .6s both;
+}
+.sbar { width: 1px; height: 40px; background: linear-gradient(to bottom, #cbd5e1, transparent); animation: sa 2s ease infinite; }
+@keyframes sa { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ── Features ── */
+.sec { padding: 5rem 2rem; }
+.slabel { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #1d4ed8; text-align: center; margin-bottom: 8px; }
+.stitle { font-family: 'Syne', sans-serif; font-size: clamp(24px,3.5vw,36px); font-weight: 800; text-align: center; margin-bottom: 8px; }
+.ssub   { text-align: center; color: #64748b; font-size: 15px; max-width: 440px; margin: 0 auto 3rem; line-height: 1.75; }
+
+.feat-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr));
+  gap: 1.2rem; max-width: 900px; margin: 0 auto;
+}
+.fc {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 16px;
+  padding: 1.6rem; transition: all .3s;
+}
+.fc:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.07); border-color: #bfdbfe; }
+.fi { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: .9rem; }
+.fc h3 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+.fc p  { font-size: 13px; color: #64748b; line-height: 1.65; }
+
+/* ── Workflow ── */
+.flow-wrap { max-width: 860px; margin: 0 auto; position: relative; }
+.flow-wrap::before { content:''; position:absolute; top:27px; left:9%; right:9%; height:1px; background: linear-gradient(90deg,transparent,#e2e8f0,transparent); }
+.flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 1.2rem; }
+.fs { text-align: center; }
+.fsn {
+  width: 54px; height: 54px; border-radius: 50%;
+  border: 1.5px solid #e2e8f0; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto .9rem; font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 800; color: #1d4ed8;
+  position: relative; z-index: 1;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+.fs h4 { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.fs p  { font-size: 11px; color: #94a3b8; line-height: 1.55; }
+
+/* ── Team ── */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 1.2rem; max-width: 760px; margin: 0 auto; }
+.tc { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.4rem; text-align: center; transition: all .25s; }
+.tc:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.av { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg,#1d4ed8,#3b82f6); display: flex; align-items: center; justify-content: center; font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#fff; margin:0 auto 10px; }
+.tc h4 { font-size: 13px; font-weight: 700; }
+.tc p  { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.chip { display:inline-block; margin-top:7px; background:#eff6ff; color:#1d4ed8; font-size:10px; font-weight:700; padding:3px 10px; border-radius:99px; }
+
+/* ── Footer ── */
+footer { background: #0f172a; color: #475569; text-align: center; padding: 2rem; font-size: 13px; }
+footer b { color: #94a3b8; }
+.flinks { display:flex; gap:2rem; justify-content:center; margin-bottom:.8rem; }
+.flinks a { color:#334155; text-decoration:none; transition:color .2s; font-size:13px; }
+.flinks a:hover { color:#fff; }
+
+/* Reveal */
+@keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+.reveal { opacity:0; transform:translateY(20px); transition:all .6s cubic-bezier(.23,1,.32,1); }
+.reveal.in { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="logo"><div class="logo-dot"></div>Bug Slayers</div>
+  <div class="nav-right">
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#workflow">Workflow</a>
+    <a class="nav-link" href="#team">Team</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+    <div class="tag">⚡ Next Generation Triage</div>
+
+    <h1 class="hero-h1">
+      Smart Healthcare<br>
+      <span class="grad">Powered by AI.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Automated symptom analysis and clinical decision support
+      for a faster, safer emergency response.
+    </p>
+
+    <!-- Only 2 portals -->
+    <div class="portals">
+      <a class="pcard blue" href="doctor_login.html">
+        <span class="pcard-icon">👨‍⚕️</span>
+        <span class="pcard-text">
+          <span class="t">For Doctors</span>
+          <span class="s">Login to dashboard</span>
+        </span>
+      </a>
+      <a class="pcard white" href="nurse.html">
+        <span class="pcard-icon">🩺</span>
+        <span class="pcard-text">
+          <span class="t">For Nurses</span>
+          <span class="s">Enter patient vitals</span>
+        </span>
+      </a>
+    </div>
+
+
+  <div class="scroll-hint"><div class="sbar"></div>SCROLL</div>
+</section>
+
+<!-- Features -->
+<section class="sec reveal" id="features" style="background:#f8fafc; border-top:1px solid #e2e8f0;">
+  <div class="slabel">What We Built</div>
+  <h2 class="stitle">Why AI Triage?</h2>
+  <p class="ssub">Reduces triage decision time from 18 minutes to under 2 seconds.</p>
+  <div class="feat-grid">
+    <div class="fc"><div class="fi" style="background:#eff6ff">🤖</div><h3>AI Severity Prediction</h3><p>Gradient Boosting model trained on 2000 records. 95% accuracy, 0.97 ROC-AUC.</p></div>
+    <div class="fc"><div class="fi" style="background:#ecfdf5">⚡</div><h3>Real-Time Analysis</h3><p>Vitals analyzed instantly — GREEN, YELLOW, ORANGE, or RED in milliseconds.</p></div>
+    <div class="fc"><div class="fi" style="background:#fff7ed">🏥</div><h3>Doctor Dashboard</h3><p>Patient queue sorted by severity with one-click recommendations and specialist referrals.</p></div>
+    <div class="fc"><div class="fi" style="background:#f5f3ff">🔒</div><h3>MySQL Database</h3><p>All records stored securely. Only authorized hospital staff can access patient data.</p></div>
+  </div>
+</section>
+
+<!-- Workflow -->
+<section class="sec reveal" id="workflow" style="background:#fff;">
+  <div class="slabel">How It Works</div>
+  <h2 class="stitle">From Registration to Treatment</h2>
+  <p class="ssub">Complete end-to-end hospital triage workflow.</p>
+  <div class="flow-wrap">
+    <div class="flow-grid">
+      <div class="fs"><div class="fsn">01</div><h4>Patient Registers</h4><p>Gets unique patient ID</p></div>
+      <div class="fs"><div class="fsn">02</div><h4>Nurse Enters Vitals</h4><p>HR, BP, SpO₂, Temp, RR</p></div>
+      <div class="fs"><div class="fsn">03</div><h4>AI Analyzes</h4><p>Severity + risk score instantly</p></div>
+      <div class="fs"><div class="fsn">04</div><h4>Doctor Reviews</h4><p>Dashboard notified</p></div>
+      <div class="fs"><div class="fsn">05</div><h4>Tests Recommended</h4><p>Doctor sends instructions</p></div>
+      <div class="fs"><div class="fsn">06</div><h4>Specialist Referral</h4><p>Critical cases redirected</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="sec reveal" id="team" style="background:#f8fafc; border-top:1px solid #e2e8f0;">
+  <div class="slabel">Our Team</div>
+  <h2 class="stitle">Bug Slayers</h2>
+  <p class="ssub" style="margin-bottom:2.5rem;">B.Tech Students — Academic Year 2025–26</p>
+  <div class="team-grid">
+    <div class="tc"><div class="av">KM</div><h4>Kartikey Meghwal</h4><p>Computer Science</p><span class="chip">CS</span></div>
+    <div class="tc"><div class="av">KG</div><h4>Kinchit Gupta</h4><p>Information Technology</p><span class="chip">IT</span></div>
+    <div class="tc"><div class="av">NK</div><h4>Neel Kamal</h4><p>Computer Science</p><span class="chip">CS</span></div>
+    <div class="tc"><div class="av">MM</div><h4>Manish Meena</h4><p>Computer Science</p><span class="chip">CS</span></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="flinks">
+    <a href="doctor_login.html">Doctor Login</a>
+    <a href="nurse.html">Nurse Portal</a>
+    <a href="doctor.html">Dashboard</a>
+  </div>
+  🏥 <b>AI-Powered Intelligent Triage & Decision Support System</b>
+  &nbsp;·&nbsp; Bug Slayers Team &nbsp;·&nbsp; 2025–26
+</footer>
+
+<script>
+const API = "http://localhost:8000";
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
+
