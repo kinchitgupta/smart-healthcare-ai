@@ -4,17 +4,17 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, classification_report, confusion_matrix
 
-# ── Load everything ───────────────────────────────────────────────────────────
+
 model      = pickle.load(open("model/model.pkl",     "rb"))
 scaler     = pickle.load(open("model/scaler.pkl",    "rb"))
 features   = pickle.load(open("model/features.pkl",  "rb"))
 model_name = pickle.load(open("model/model_name.pkl","rb"))
 label_map  = pickle.load(open("model/label_map.pkl", "rb"))
 
-# Reverse map: 0→GREEN, 1→YELLOW, 2→ORANGE, 3→RED
+
 idx_to_label = {v: k for k, v in label_map.items()}
 
-# ── Rebuild test set (same seed = same split every time) ──────────────────────
+
 df = pd.read_csv("dataset/triage_dataset_2000_rows.csv")
 df["severity"] = df["TriageLevel"].map(label_map)
 
@@ -37,7 +37,7 @@ y_prob = model.predict_proba(X_input)
 
 LABELS = ["GREEN", "YELLOW", "ORANGE", "RED"]
 
-# ── Results ───────────────────────────────────────────────────────────────────
+
 print("\n" + "="*55)
 print(f"  Model   : {model_name}")
 print(f"  Samples : {len(y_test)}")
@@ -57,7 +57,7 @@ print(header)
 for i, row in enumerate(cm):
     print(f"{LABELS[i]:10}" + "".join(f"{v:>10}" for v in row))
 
-# ── Feature importance ────────────────────────────────────────────────────────
+
 if hasattr(model, "feature_importances_"):
     print("\nFeature Importance:")
     pairs = sorted(zip(features, model.feature_importances_), key=lambda x: -x[1])
@@ -65,13 +65,13 @@ if hasattr(model, "feature_importances_"):
         bar = "█" * int(imp * 50)
         print(f"  {feat:<22} {bar} {imp:.4f}")
 
-# ── Manual patient tests ──────────────────────────────────────────────────────
+
 print("\n" + "="*55)
 print("  Manual Prediction — 4 Custom Patients")
 print("="*55)
 
 # Format: Age, HeartRate, Oxygen, Temperature, SystolicBP,
-#         RespiratoryRate, ChestPain, BreathProblem, Fever, Diabetes, HeartDisease
+# RespiratoryRate, ChestPain, BreathProblem, Fever, Diabetes, HeartDisease
 test_patients = [
     {"label": "Expected GREEN",  "vals": [25, 70,  98, 98.6, 120, 16, 0, 0, 0, 0, 0]},
     {"label": "Expected YELLOW", "vals": [45, 100, 94, 100.4, 105, 22, 0, 1, 1, 0, 0]},
@@ -81,7 +81,6 @@ test_patients = [
 
 for p in test_patients:
     v = p["vals"]
-    # Base features + engineered
     row = np.array([[
         v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10],
         v[1] / v[4],   # shock_index
