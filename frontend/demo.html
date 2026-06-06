@@ -465,7 +465,7 @@ tbody tr:hover td { background: #fafaf8; }
 <div class="toast" id="toast"></div>
 
 <script>
-const API = "http://127.0.0.1:8000";
+const API = "http://127.0.0.1:8001";
 const SEV_COLORS = { RED: '#c0392b', ORANGE: '#d4620a', YELLOW: '#b58900', GREEN: '#1a7a4a' };
 const SEV_CLASS  = { RED: 'sR', ORANGE: 'sO', YELLOW: 'sY', GREEN: 'sG' };
 
@@ -563,7 +563,7 @@ async function loadPatients() {
       </tr>`;
     }).join('');
   } catch {
-    body.innerHTML = `<tr><td colspan="9"><div class="empty" style="color:var(--red)">❌ Cannot connect to backend — run uvicorn on port 8000</div></td></tr>`;
+    body.innerHTML = `<tr><td colspan="9"><div class="empty" style="color:var(--red)">❌ Cannot connect to backend — run uvicorn on port 8001</div></td></tr>`;
   }
 }
 

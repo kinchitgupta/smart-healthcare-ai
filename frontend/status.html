@@ -138,9 +138,12 @@ input.fi::placeholder{color:var(--g300);}
 <!-- TOPBAR -->
 <div class="topbar">
   <a class="logo" href="index.html"><div class="logo-m">M</div>MediTriage</a>
-  <a class="tback" href="index.html">← Back to Portal</a>
+  <div style="display:flex;gap:10px;margin-left:auto;align-items:center;">
+    <a class="tback" href="nurse.html">🩺 Nurse Portal</a>
+    <a class="tback" href="doctor_login.html">👨‍⚕️ Doctor Login</a>
+    <a class="tback" href="index.html">🏠 Home</a>
+  </div>
 </div>
-
 <!-- HERO SEARCH -->
 <div class="hero">
   <h1>🏥 Check Your Status</h1>
@@ -185,7 +188,7 @@ input.fi::placeholder{color:var(--g300);}
 <div class="result" id="resultArea" style="display:none"></div>
 
 <script>
-const API = "http://127.0.0.1:8000";
+const API = "http://127.0.0.1:8001";
 let curPid = null;
 
 /* ── SEARCH BY NAME / PHONE ── */

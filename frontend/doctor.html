@@ -351,7 +351,7 @@ body{font-family:var(--font);background:var(--g50);color:var(--g700);font-size:1
 </div>
 
 <script>
-const API="http://127.0.0.1:8000";
+const API="http://127.0.0.1:8001";
 let data={critical:[],urgent:[],moderate:[],routine:[],solved:[]};
 let selId=null,selData=null,viewMode='active';
 let chatHistory=[],patientContext='',pickedSev=null;
@@ -395,7 +395,7 @@ async function loadAll(){
     document.getElementById('qSub').textContent=`${cr+ur+mo+ro} active · ${so} solved`;
     renderQueue();
   }catch(e){
-    document.getElementById('qList').innerHTML=`<div style="padding:20px;text-align:center;color:#dc2626;font-size:12px">❌ Cannot connect to backend.<br><code>cd backend → uvicorn main:app --reload --port 8000</code></div>`;
+    document.getElementById('qList').innerHTML=`<div style="padding:20px;text-align:center;color:#dc2626;font-size:12px">❌ Cannot connect to backend.<br><code>cd backend → uvicorn main:app --reload --port 8001</code></div>`;
     document.getElementById('qSub').textContent='Backend offline';
   }
 }
@@ -630,7 +630,7 @@ function renderDetail(d){
             <div style="font-size:13px;font-weight:600;color:var(--g700)">${doc.file_name||'Document'}</div>
             <div style="font-size:11px;color:var(--g400);margin-top:2px">${doc.doc_type} · ${doc.uploaded_at?new Date(doc.uploaded_at).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):''}</div>
           </div>
-          <a href="http://127.0.0.1:8000${doc.file_url}" target="_blank" style="padding:6px 14px;background:var(--blue);color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;">View →</a>
+          <a href="http://127.0.0.1:8001${doc.file_url}" target="_blank" style="padding:6px 14px;background:var(--blue);color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;">View →</a>
         </div>`).join('')}
       </div>
     </div>`:''}

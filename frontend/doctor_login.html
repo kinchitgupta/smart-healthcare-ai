@@ -223,7 +223,7 @@ h1 span{color:#60a5fa;}
 </div>
 
 <script>
-const API = "http://127.0.0.1:8000";
+const API = "http://127.0.0.1:8001";
 
 // Load live stats
 async function loadStats() {
@@ -296,7 +296,7 @@ async function login() {
     setTimeout(() => { window.location.href = 'doctor.html'; }, 1000);
 
   } catch (e) {
-    showAlert('❌ Cannot connect to server. Is backend running on port 8000?');
+    showAlert('❌ Cannot connect to server. Is backend running on port 8001?');
     btn.classList.remove('loading'); btn.disabled = false;
   }
 }
