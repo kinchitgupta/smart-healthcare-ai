@@ -1,24 +1,24 @@
 # 🏥 Smart Healthcare AI — Intelligent Triage & Decision Support System
 
-> Built for a Hackathon | B.Tech Final Year Project | 2025–26
+> Built by me for a Hackathon | B.Tech Final Year Project | 2025–26
 
-An end-to-end AI-powered hospital triage system that analyzes patient vitals in real time, predicts severity using a trained ML model, and routes patients to the right doctor — all in under 2 seconds.
+I designed and built this end-to-end AI-powered hospital triage system myself — from the ML model to the backend to the frontend. It analyzes patient vitals in real time, predicts severity using a model I trained, and routes patients to the right doctor — all in under 2 seconds.
 
 ---
 
 ## 🎯 What It Does
 
-Hospitals waste critical minutes manually triaging patients. This system automates that:
+Hospitals waste critical minutes manually triaging patients. I built this system to automate that:
 
 1. Nurse enters patient vitals
-2. AI predicts severity — **GREEN / YELLOW / ORANGE / RED**
+2. My AI model predicts severity — **GREEN / YELLOW / ORANGE / RED**
 3. System auto-assigns the right specialist doctor
 4. Doctor reviews patients on a priority dashboard
 5. Patient checks their own status and receives doctor instructions
 
 ---
 
-## 🤖 AI Model
+## 🤖 AI Model (Trained by Me)
 
 | Metric | Score |
 |--------|-------|
@@ -28,7 +28,7 @@ Hospitals waste critical minutes manually triaging patients. This system automat
 | Training Data | 2000 patient records |
 | Features | 29 engineered features |
 
-**Key features used:** Heart Rate, SpO₂, Blood Pressure, Temperature, Respiratory Rate, Chest Pain, Diabetes, Heart Disease history + engineered ratios (Shock Index, HR/Oxygen ratio, Danger Score, etc.)
+I engineered the features myself, including: Heart Rate, SpO₂, Blood Pressure, Temperature, Respiratory Rate, Chest Pain, Diabetes, Heart Disease history, plus custom-engineered ratios (Shock Index, HR/Oxygen ratio, Danger Score, etc.)
 
 ---
 
@@ -171,10 +171,13 @@ Full API docs available at: `http://localhost:8001/docs` (Swagger UI auto-genera
 
 **Kinchit Gupta**
 B.Tech — Information Technology | 2025–26
+
+I built this entire project — the AI model, backend, frontend, and database — solo for my hackathon submission.
+
 [GitHub](https://github.com/kinchitgupta)
 
 ---
 
 ## 📄 License
 
-This project was built for Hackathon purposes and Personal Growth.
+This project was built By AI for Hackathon purposes and Personal Growth.
