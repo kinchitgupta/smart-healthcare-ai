@@ -5,13 +5,13 @@ DB_CONFIG = {
     "host":     "localhost",
     "port":     3306,
     "user":     "root",
-    "password": "",          # change if you have a MySQL password
+    "password": "",
     "database": "ai_triage_db"
 }
 
 pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_name="triage_pool",
-    pool_size=10,            # increased: handles concurrent requests
+    pool_size=10,
     **DB_CONFIG
 )
 

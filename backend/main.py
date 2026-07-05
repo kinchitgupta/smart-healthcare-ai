@@ -1,5 +1,5 @@
 import pickle, numpy as np, os, sys, random, string, shutil
-import pandas as pd
+
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -190,6 +190,18 @@ def release_doctor_slot(patient_id: int):
         execute("UPDATE doctors SET current_patients=GREATEST(0,current_patients-1) WHERE id=%s",
                 (p["assigned_doctor_id"],))
 
+def public_doctor_info(doc: Optional[dict]) -> Optional[dict]:
+    """Return only non-sensitive doctor fields for API responses (never expose password)."""
+    if not doc:
+        return None
+    return {
+        "name":           doc.get("name"),
+        "specialization": doc.get("specialization"),
+        "room":           doc.get("room_number"),
+        "doctor_id":      doc.get("doctor_id"),
+        "availability":   doc.get("availability"),
+    }
+
 @app.get("/")
 def root(): return {"status": "AI Triage System v5.0.0 OK"}
 
@@ -210,6 +222,8 @@ def doctor_login(data: DoctorLogin):
 def doctor_profile(doctor_db_id: int):
     doc = fetch_one("SELECT * FROM doctors WHERE id=%s", (doctor_db_id,))
     if not doc: raise HTTPException(404, "Doctor not found")
+    doc = dict(doc)
+    doc.pop("password", None)
     return doc
 
 @app.post("/api/patient/register")
@@ -282,15 +296,7 @@ def vitals(v: VitalsIn):
             "success": True, "severity": "GREEN", "risk_score": 0,
             "action": "Patient is SAFE. All vitals are normal. Not stored in database.",
             "probabilities": prob_dict, "is_high_risk": False, "is_critical": False,
-            "assigned_doctor": {
-                "name":           green_doc["name"]           if green_doc else None,
-                "specialization": green_doc["specialization"] if green_doc else None,
-                "room":           green_doc["room_number"]    if green_doc else None,
-                "doctor_id":      green_doc["doctor_id"]      if green_doc else None,
-                "availability":   green_doc["availability"]   if green_doc else None,
-                "username":       green_doc["username"]       if green_doc else None,
-                "password":       green_doc["password"]       if green_doc else None,
-            } if green_doc else None
+            "assigned_doctor": public_doctor_info(green_doc)
         }
 
     ai_summary = f"{severity}|{risk_score}|{action}"
@@ -326,15 +332,7 @@ def vitals(v: VitalsIn):
         "success": True, "severity": severity, "risk_score": risk_score, "action": action,
         "probabilities": prob_dict, "is_high_risk": is_high_risk,
         "is_critical": severity in ("RED","ORANGE"),
-        "assigned_doctor": {
-            "name":           assigned_doc["name"]           if assigned_doc else None,
-            "specialization": assigned_doc["specialization"] if assigned_doc else None,
-            "room":           assigned_doc["room_number"]    if assigned_doc else None,
-            "doctor_id":      assigned_doc["doctor_id"]      if assigned_doc else None,
-            "availability":   assigned_doc["availability"]   if assigned_doc else None,
-            "username":       assigned_doc["username"]       if assigned_doc else None,
-            "password":       assigned_doc["password"]       if assigned_doc else None,
-        } if assigned_doc else None
+        "assigned_doctor": public_doctor_info(assigned_doc)
     }
 
 @app.get("/api/doctor/patients")
@@ -386,6 +384,9 @@ def doctor_patient(pid: int):
     ds = fetch_all("SELECT * FROM patient_docs WHERE patient_id=%s ORDER BY uploaded_at DESC", (pid,))
     assigned_doc = fetch_one("SELECT * FROM doctors WHERE id=%s", (p["assigned_doctor_id"],)) \
                    if p.get("assigned_doctor_id") else None
+    if assigned_doc:
+        assigned_doc = dict(assigned_doc)
+        assigned_doc.pop("password", None)
     return {"patient": p, "vitals": v, "notes": n, "reports": rs, "docs": ds, "assigned_doctor": assigned_doc}
 
 @app.post("/api/doctor/status")
@@ -504,4 +505,4 @@ def stats():
             "waiting": waiting, "solved": solved, "doctors_available": doc_avail}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
